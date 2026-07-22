@@ -14,10 +14,10 @@
 //  marcado como DEPRECADO y se retirará en una versión mayor
 //  cuando ya no queden productos migrando desde Gaia.
 //
-//  Deliberadamente EXCLUIDO: los botones de mapa específicos de
-//  la Fundación Gaia Amazonas (gaia-amazonia, gaia-panamazonia,
-//  gaia-macroterritorio). Son contenido de marca de Gaia, no
-//  estilo transversal, y no tienen sentido en CEICOL.
+//  Los botones de mapa de región (gaia-amazonia, gaia-panamazonia,
+//  gaia-macroterritorio) SÍ se incluyen, recoloreados a la gama
+//  CEICOL, porque hay productos (el geovisor) que los consumen.
+//  Ver createMapButtonVariant en theme.ts.
 // ============================================================
 
 import { CSSProperties } from 'react';

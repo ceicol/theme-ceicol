@@ -51,11 +51,11 @@ export const brandColors = {
   },
 
   // ─── Compat theme-gaia (deprecado) ───
-  // Gaia usaba `cta` como su acento dorado. Rol = acento secundario →
-  // en CEICOL es el turquesa (accent), coherente con la paleta del tema.
+  // Gaia usaba `cta` como su acento dorado. Se traduce al AZUL de marca
+  // de CEICOL (decisión de marca: máxima cohesión en azul, como la landing).
   cta: {
-    main: '#0d9488',
-    light: '#2dd4bf',
+    main: '#007298',
+    light: '#0391b2',
   },
   // Gaia expone `link` como token crudo. En CEICOL el link es el azul de marca.
   link: {

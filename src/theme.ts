@@ -28,6 +28,102 @@ const easeOut = animations.easing.out;
 const durNormal = animations.duration.normal;
 const durFast = animations.duration.fast;
 
+// ─── Compat theme-gaia: botones de mapa (regiones) ───
+// Botón circular con gradiente radial y etiqueta flotante (data-label).
+// Se reexponen los nombres que usa Gaia (gaia-amazonia/panamazonia/
+// macroterritorio) pero recoloreados a la gama CEICOL, para que un producto
+// que los usa (p.ej. el geovisor) conserve la barra de regiones sin cambios.
+const createMapButtonVariant = (
+  variantName: string,
+  config: {
+    gradient: { center: string; edge: string };
+    labelBg: string;
+    active: { border: string; background: string };
+  }
+) => {
+  const radial = `radial-gradient(54.15% 54.15% at 46% 46%, ${config.gradient.center} 76.92%, ${config.gradient.edge} 100%)`;
+  const anim = `opacity ${durNormal}ms ${easeOut}, transform ${durNormal}ms ${easeOut}`;
+  return {
+    props: { variant: variantName as any },
+    style: {
+      width: '50px',
+      height: '50px',
+      minWidth: '50px',
+      borderRadius: borderRadius.round,
+      padding: spacingConstants.xs,
+      position: 'relative' as const,
+      overflow: 'visible' as const,
+      background: radial,
+      border: '1px solid transparent',
+      boxShadow: 'none',
+      color: brandColors.text.white,
+      '& .MuiSvgIcon-root, & svg': {
+        color: 'inherit',
+        fill: 'currentColor',
+        width: '100%',
+        height: '100%',
+      },
+      '&::after': {
+        content: 'attr(data-label)',
+        position: 'absolute' as const,
+        left: '100%',
+        marginLeft: 0,
+        top: 0,
+        width: 'max-content',
+        maxWidth: '160px',
+        backgroundColor: config.labelBg,
+        color: brandColors.text.white,
+        padding: '6px 12px',
+        borderRadius: borderRadius.sm,
+        borderBottomLeftRadius: 0,
+        textWrap: 'balance' as const,
+        overflowWrap: 'break-word' as const,
+        textAlign: 'start' as const,
+        pointerEvents: 'none' as const,
+        fontFamily: fontFamilies.body,
+        fontSize: '14px',
+        fontWeight: 500,
+        boxShadow: shadows.sm,
+        zIndex: 10,
+        opacity: 0,
+        transform: 'translateY(-100%) translateX(-10px)',
+        transition: anim,
+      },
+      '&::before': {
+        content: '""',
+        position: 'absolute' as const,
+        left: '100%',
+        marginLeft: '2px',
+        top: '6px',
+        borderTop: '6px solid transparent',
+        borderBottom: '6px solid transparent',
+        borderRight: `10px solid ${config.labelBg}`,
+        zIndex: 10,
+        pointerEvents: 'none' as const,
+        opacity: 0,
+        transform: 'translateY(-100%) translateX(-10px)',
+        transition: anim,
+      },
+      '&:hover': {
+        boxShadow: shadows.sm,
+        background: radial,
+        border: '1px solid transparent',
+        '&::after': { opacity: 1, transform: 'translateY(-100%) translateX(0)' },
+        '&::before': { opacity: 1, transform: 'translateY(-100%) translateX(0)' },
+      },
+      '&:active, &.Mui-active': {
+        background: config.active.background,
+        borderColor: config.active.border,
+        boxShadow: 'none',
+        '&::after, &::before': {
+          opacity: 0,
+          transform: 'translateY(-100%) translateX(-5px)',
+        },
+      },
+    },
+  };
+};
+
 const themeOptions: ThemeOptions = {
   palette: {
     primary: {
@@ -93,12 +189,12 @@ const themeOptions: ThemeOptions = {
       glass: 'rgba(15, 23, 42, 0.10)',
       contrastText: brandColors.text.white,
     },
-    // Gaia usaba `cta` como su ACENTO dorado (títulos, bordes, "gold").
-    // Rol = acento secundario → en CEICOL es el turquesa (accent).
+    // Gaia usaba `cta` como su acento dorado (títulos, bordes, "gold").
+    // Decisión de marca: se traduce al AZUL de marca de CEICOL.
     cta: {
-      main: brandColors.accent.main,
-      light: brandColors.accent.light,
-      glass: 'rgba(13, 148, 136, 0.12)',
+      main: brandColors.primary.main,
+      light: brandColors.primary.light,
+      glass: 'rgba(0, 114, 152, 0.12)',
       contrastText: brandColors.text.white,
     },
     // Gaia usaba `green` como su color de MARCA/ACTIVO (green.button = estado
@@ -324,6 +420,23 @@ const themeOptions: ThemeOptions = {
             },
           },
         },
+
+        // Botones de región (gama CEICOL, tres colores distinguibles)
+        createMapButtonVariant('gaia-amazonia', {
+          gradient: { center: '#2dd4bf', edge: '#0d9488' }, // turquesa
+          labelBg: brandColors.accent.main,
+          active: { border: brandColors.accent.main, background: 'rgba(13, 148, 136, 0.12)' },
+        }),
+        createMapButtonVariant('gaia-panamazonia', {
+          gradient: { center: '#0391b2', edge: '#007298' }, // azul de marca
+          labelBg: brandColors.primary.main,
+          active: { border: brandColors.primary.main, background: 'rgba(0, 114, 152, 0.12)' },
+        }),
+        createMapButtonVariant('gaia-macroterritorio', {
+          gradient: { center: '#f59e0b', edge: '#d97706' }, // ámbar (acento cálido, como el dorado original)
+          labelBg: brandColors.warning.main,
+          active: { border: brandColors.warning.main, background: 'rgba(217, 119, 6, 0.12)' },
+        }),
       ],
     },
 

@@ -172,9 +172,10 @@ Para facilitar la migración de productos que consumen `theme-gaia`, el tema tam
 
 - Claves de paleta: `tertiary`, `cta`, `green`, `brown`, `link`.
 - Variantes de botón: `gaia-cta-contained`, `gaia-cta-outlined`, `gaia-icon-glass`, `gaia-icon-outline`.
+- Botones de mapa de región: `gaia-amazonia`, `gaia-panamazonia`, `gaia-macroterritorio` (círculo con gradiente + etiqueta flotante), recoloreados a la gama CEICOL con tres tonos distinguibles (turquesa / azul / ámbar).
 - Variantes tipográficas: `h1xxlBold`, `bodyxlRegular`, y el resto de la escala de Gaia.
 
-Estas claves están marcadas como deprecadas; los proyectos nuevos deben usar la API principal de CEICOL. No se incluyen los botones de mapa de Gaia Amazonas (`gaia-amazonia`, `gaia-panamazonia`, `gaia-macroterritorio`).
+Estas claves están marcadas como deprecadas; los proyectos nuevos deben usar la API principal de CEICOL.
 
 ## Publicar una versión
 

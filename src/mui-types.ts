@@ -138,6 +138,9 @@ declare module '@mui/material/Button' {
     'gaia-cta-outlined': true;
     'gaia-icon-glass': true;
     'gaia-icon-outline': true;
+    'gaia-amazonia': true;
+    'gaia-panamazonia': true;
+    'gaia-macroterritorio': true;
   }
   interface ButtonPropsColorOverrides {
     accent: true; contrast: true;
