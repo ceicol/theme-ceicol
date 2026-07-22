@@ -257,17 +257,14 @@ const themeOptions: ThemeOptions = {
 
     MuiButton: {
       styleOverrides: {
+        // Solo estilo tipográfico/transición. NO se fija padding/gap/borderRadius
+        // globales: eso lo maneja MUI según el tamaño (size), como en el theme
+        // original. Las variantes cei-* definen su propio padding cuando aplica.
         root: {
           transition: `all ${durFast}ms ${easeOut}`,
           textTransform: 'none',
           fontWeight: 600,
-          fontSize: '0.875rem',
-          borderRadius: borderRadius.md,
-          padding: '0.75rem 1.5rem',
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: spacingConstants.xs,
-          lineHeight: 1,
+          lineHeight: 1.2,
         },
       },
       variants: [
