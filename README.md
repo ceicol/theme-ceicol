@@ -1,29 +1,39 @@
-# theme-ceicol
+# CEICOL UI Theme System
 
-Sistema de diseño de CEICOL para productos **React + Material UI**. Provee el tema (`AppTheme`), los tokens de marca (color, tipografía, espaciado, sombras, movimiento) y variantes de componentes listas para usar.
+[![versión](https://img.shields.io/github/v/tag/ceicol/theme-ceicol?label=versión&sort=semver)](https://github.com/ceicol/theme-ceicol/tags)
 
-Es un paquete nuevo e independiente. Comparte con `theme-gaia` el **patrón de estructura** (mismo mecanismo de tema, tokens y distribución), pero no comparte valores ni depende de ese repositorio.
+Sistema de diseño centralizado para el ecosistema de aplicaciones de CEICOL. Construido sobre **Material UI v5+**, este paquete provee una integración "Plug & Play" con los tokens de marca, tipografía, escala de espaciado, paleta de color semántica y variantes de componentes de CEICOL.
 
 ## Requisitos
 
 - React >= 17
 - @mui/material >= 5
-- @emotion/react, @emotion/styled
+- @emotion/react
+- @emotion/styled
 
-## Instalación
+## Instalación y actualización
 
-Se distribuye por Git usando **tags de versión inmutables**. Cada tag (`v0.1.0`) queda congelado: la misma versión siempre trae exactamente el mismo código, sin `--force` y sin sorpresas.
+Se distribuye a través de Git usando **tags de versión inmutables**: cada tag entrega siempre el mismo código compilado.
 
 ```bash
-npm install git+https://github.com/ceicol/theme-ceicol.git#v0.1.0
+npm install git+https://github.com/ceicol/theme-ceicol.git#v0.1.1
+```
+
+Para actualizar, cambia el tag por la versión deseada (ver el badge de arriba o la pestaña Tags del repositorio):
+
+```bash
+npm install git+https://github.com/ceicol/theme-ceicol.git#v0.1.1
+```
+
+### Dependencias peer (obligatorio)
+
+```bash
 npm install @mui/material @emotion/react @emotion/styled
 ```
 
-Para actualizar, cambia el tag en el comando (`#v0.1.1`) o en el `package.json` del proyecto consumidor. Fijar la versión es deliberado: un design system debe cambiar cuando tú decides, no solo.
-
 ### Tipografías (requerido)
 
-Las fuentes se cargan vía Google Fonts. Incluir en el `<head>`:
+El sistema **no instala fuentes por NPM**; se cargan vía Google Fonts para garantizar consistencia entre proyectos. Incluir en el `<head>`:
 
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,106 +44,149 @@ Las fuentes se cargan vía Google Fonts. Incluir en el `<head>`:
 />
 ```
 
-## Uso
+Sin este paso, el tema no se verá correctamente.
+
+## Quick Start
+
+Envuelve la aplicación con `ThemeProvider` y `CssBaseline`:
 
 ```tsx
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { AppTheme } from 'theme-ceicol';
 
-export default function App() {
-  return (
-    <ThemeProvider theme={AppTheme}>
-      <CssBaseline />
-      <TuApp />
-    </ThemeProvider>
-  );
-}
+const App = () => (
+  <ThemeProvider theme={AppTheme}>
+    <CssBaseline />
+    <TuAplicacion />
+  </ThemeProvider>
+);
 ```
 
-## Tokens
+## Manual de tokens
 
-### Color (nombres semánticos)
+### 1. Paleta de colores
 
-| Token | Rol | Valor |
-|---|---|---|
-| `primary` | Azul de marca | `#007298` (`.light .dark .bg`) |
-| `secondary` / `accent` | Turquesa — acción y datos | `#0d9488` (`.light .bg`) |
-| `success` | Verde — éxito | `#10b981` |
-| `warning` | Ámbar — advertencia | `#d97706` |
-| `error` | Rojo — error / destructivo | `#dc2626` |
-| `info` | Azul informativo | `#2563eb` |
-| `contrast` | Fondo de énfasis (footer, secciones oscuras) | `#0f172a` |
+Los colores son accesibles vía `color="..."` en componentes o `palette.nombre` en `sx`.
 
-Uso: `<Button color="primary">`, `sx={{ bgcolor: 'accent.bg', color: 'accent.main' }}`.
-
-### Tipografía
-
-Tres familias con rol exclusivo: **Big Shoulders Display** (títulos `h1`–`h4`), **Inter** (cuerpo e interfaz), **JetBrains Mono** (valores técnicos). Se usan con las variantes estándar de MUI:
+| Nombre semántico | Rol | Propiedades |
+| --- | --- | --- |
+| **`primary`** | Azul de marca | `.main` `.light` `.dark` `.bg` |
+| **`secondary`** / **`accent`** | Turquesa — acción y datos | `.main` `.light` `.bg` |
+| **`success`** | Verde — éxito | `.main` `.light` `.bg` |
+| **`warning`** | Ámbar — advertencia | `.main` `.light` `.bg` |
+| **`error`** | Rojo — error / destructivo | `.main` `.light` `.bg` |
+| **`info`** | Azul informativo | `.main` `.light` `.bg` |
+| **`contrast`** | Fondo de énfasis (footer, secciones oscuras) | `.main` `.light` |
 
 ```tsx
-<Typography variant="h1">Título de pantalla</Typography>
-<Typography variant="body1">Texto de cuerpo</Typography>
-<Typography variant="overline">Etiqueta de categoría</Typography>
+<Button color="primary">Continuar</Button>
+<Box sx={{ bgcolor: 'accent.bg', color: 'accent.main' }}>Contenido</Box>
 ```
 
-### Espaciado, radios, sombras, movimiento
+### 2. Tipografía
+
+Tres familias, cada una con rol exclusivo: **Big Shoulders Display** (títulos), **Inter** (cuerpo e interfaz), **JetBrains Mono** (valores técnicos). Se usan con las variantes estándar de MUI.
+
+| Variante | Familia | Uso |
+| --- | --- | --- |
+| `h1` | Big Shoulders | Título de pantalla / hero |
+| `h2` | Big Shoulders | Título de sección |
+| `h3` | Big Shoulders | Subtítulo |
+| `h4` | Big Shoulders | Nombre de componente |
+| `body1` | Inter | Texto de cuerpo (16px) |
+| `body2` | Inter | Lectura destacada (18px) |
+| `overline` | Inter | Etiqueta de categoría (uppercase) |
+| `caption` | Inter | Texto de apoyo (labels, fechas) |
+
+```tsx
+<Typography variant="h1">Territorio, datos y decisiones</Typography>
+<Typography variant="body1">Texto de cuerpo.</Typography>
+<Typography variant="overline">Servicios</Typography>
+```
+
+### 3. Layout (espaciado y bordes)
 
 ```ts
-import { spacingConstants, borderRadius, shadows, transitionStyles } from 'theme-ceicol';
-
-// spacingConstants: xs 8 · sm 16 · md 24 · lg 40 · xl 80 · xxl 140 (px)
-// borderRadius:     sm 6 · md 12 · lg 18 · xl 24 · xxl 54 · round
-// shadows:          sm · md · lg · premium · glow
-// transitionStyles: fast 150ms · normal 250ms · slow 300ms
+import { spacingConstants, borderRadius } from 'theme-ceicol';
 ```
 
-También accesibles desde el tema: `theme.customSpacing`, `theme.customShape`, `theme.effectShadows`, `theme.customTransitions`, `theme.fontFamilies`.
+**Espaciado (`spacingConstants`):** `xs` 8px · `sm` 16px · `md` 24px · `lg` 40px · `xl` 80px · `xxl` 140px
 
-### Variantes de botón
+**Bordes (`borderRadius`):** `sm` 6px · `md` 12px · `lg` 18px · `xl` 24px · `xxl` 54px · `round` 50%
 
 ```tsx
-<Button variant="cei-primary">Acción principal</Button>
-<Button variant="cei-secondary">Acción secundaria</Button>
+<Box sx={{ p: spacingConstants.md, borderRadius: borderRadius.lg }} />
+```
+
+También accesibles desde el tema: `theme.customSpacing`, `theme.customShape`.
+
+### 4. Efectos y sombras
+
+```ts
+import { shadows, glassEffect } from 'theme-ceicol';
+```
+
+**Sombras (`shadows`):** `sm` · `md` · `lg` · `premium` · `glow`
+
+**Glassmorphism (`glassEffect`):** objeto helper con fondo semitransparente, blur y borde.
+
+```tsx
+<Box sx={{ ...glassEffect, boxShadow: shadows.premium }} />
+```
+
+### 5. Animaciones
+
+Movimiento rápido y directo, acorde a la personalidad de la marca.
+
+```ts
+import { transitionStyles } from 'theme-ceicol';
+```
+
+- **`transitionStyles.fast`** — 150ms. Hovers y microinteracciones.
+- **`transitionStyles.normal`** — 250ms. Cambios de estado.
+- **`transitionStyles.slow`** — 300ms. Reveals y transiciones mayores.
+
+```tsx
+<Box sx={{ transition: transitionStyles.fast, '&:hover': { transform: 'translateY(-2px)' } }} />
+```
+
+### 6. Variantes de botón
+
+| Variante | Uso |
+| --- | --- |
+| **`cei-primary`** | Acción principal (azul de marca) |
+| **`cei-secondary`** | Acción secundaria (fondo claro con borde) |
+| **`cei-ghost`** | Acción terciaria / cancelar (solo texto) |
+| **`cei-destructive`** | Acciones irreversibles (rojo) |
+| **`cei-large`** | CTA de hero o de sección |
+
+```tsx
+<Button variant="cei-primary">Enviar consulta</Button>
 <Button variant="cei-ghost">Cancelar</Button>
-<Button variant="cei-destructive">Eliminar</Button>
-<Button variant="cei-large">CTA de hero</Button>
+<Button variant="cei-large">Comenzar ahora</Button>
 ```
 
-## Migración desde theme-gaia (capa de compatibilidad)
+### 7. Compatibilidad con theme-gaia
 
-Un producto que hoy consume `theme-gaia` puede adoptar la marca CEICOL **cambiando solo el import**, sin editar componentes:
+Para facilitar la migración de productos que consumen `theme-gaia`, el tema también reexpone el vocabulario genérico de Gaia con los valores de CEICOL, de modo que baste **cambiar el import**:
 
-```diff
-- import { AppTheme } from 'theme-gaia';
-+ import { AppTheme } from 'theme-ceicol';
-```
-
-Para que esto funcione, `theme-ceicol` reexpone el vocabulario público genérico de Gaia con valores de CEICOL (ver `src/compat.ts`):
-
-- Claves de paleta: `tertiary`, `cta`, `green`, `brown`, `link` (además de las propias `primary`, `secondary`/`accent`, etc.).
+- Claves de paleta: `tertiary`, `cta`, `green`, `brown`, `link`.
 - Variantes de botón: `gaia-cta-contained`, `gaia-cta-outlined`, `gaia-icon-glass`, `gaia-icon-outline`.
-- Las 26 variantes tipográficas (`h1xxlBold`, `bodyxlRegular`, …) mapeadas a las fuentes de CEICOL.
+- Variantes tipográficas: `h1xxlBold`, `bodyxlRegular`, y el resto de la escala de Gaia.
 
-Todo esto está **marcado como deprecado** y se retirará en una versión mayor cuando ya no queden productos migrando. Los proyectos **nuevos** deben usar la API limpia de CEICOL (nombres semánticos, variantes `h1`–`h4` y `cei-*`), no el vocabulario de Gaia.
+Estas claves están marcadas como deprecadas; los proyectos nuevos deben usar la API principal de CEICOL. No se incluyen los botones de mapa de Gaia Amazonas (`gaia-amazonia`, `gaia-panamazonia`, `gaia-macroterritorio`).
 
-No se incluyen los botones de mapa específicos de la Fundación Gaia Amazonas (`gaia-amazonia`, `gaia-panamazonia`, `gaia-macroterritorio`): son contenido de marca de Gaia, no estilo transversal. Un producto que se re-marque a CEICOL los reemplaza.
-
-## Publicar una versión nueva
-
-El código fuente vive en `main` (el `dist/` está en `.gitignore`, nunca se commitea a `main`). Cada release compila y crea un **tag** que sí incluye el `dist/`, sin ensuciar el historial de `main`.
+## Publicar una versión
 
 ```bash
-# 1. Subir la versión (sin crear tag automático)
-npm version patch --no-git-tag-version   # o minor / major
-git commit -am "chore: v0.1.1"
-git push origin main
-
-# 2. Compilar y publicar el tag con el dist incluido
-npm run release
+npm run release            # patch
+npm run release -- minor   # o major
 ```
 
-El script `release` compila, commitea el `dist/` en un commit temporal, crea y empuja el tag `vX.Y.Z`, y luego revierte ese commit de `main` para dejarlo limpio. El tag queda inmutable con el build listo para instalar.
+El script sube la versión en `package.json`, actualiza el comando de instalación de este README, compila y publica un tag `vX.Y.Z` con el `dist` incluido, dejando `main` sin artefactos de build.
 
-## Alcance
+## Solución de problemas
 
-Esta versión (0.1.0) cubre el alcance real de la fase actual: color, tipografía, espaciado, sombras, movimiento, variantes de botón y la capa de compatibilidad con Gaia. Componentes y patrones adicionales (modal, tabs, dashboard, GIS, modo oscuro, multi-marca) se agregan cuando un producto real los necesite — ver el Design System v2.1.
+**Los cambios no se reflejan tras actualizar:** verifica que el tag en el comando de instalación apunte a la versión deseada y limpia la caché de dependencias Git del proyecto consumidor (borra `node_modules` y el lockfile, reinstala).
+
+**El tema se ve sin las fuentes correctas:** confirma que el bloque de Google Fonts está en el `<head>`.

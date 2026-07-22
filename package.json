@@ -1,6 +1,6 @@
 {
   "name": "theme-ceicol",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sistema de diseño de CEICOL para productos React + Material UI. Tokens de marca, tipografía, espaciado y variantes de componentes.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts --clean",
-    "release": "npm run build && git add -f dist && git commit -m \"build: v$npm_package_version\" && git tag \"v$npm_package_version\" && git push origin \"v$npm_package_version\" && git reset --hard HEAD~1 && echo \"Publicado tag v$npm_package_version — instalar con #v$npm_package_version\""
+    "release": "bash scripts/release.sh"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",
