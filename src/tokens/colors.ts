@@ -50,6 +50,13 @@ export const brandColors = {
     light: '#1e293b',
   },
 
+  // ─── Compat theme-gaia (deprecado) ───
+  // Gaia expone `cta` (dorado). En CEICOL el CTA es el azul de marca.
+  cta: {
+    main: '#007298',
+    light: '#0391b2',
+  },
+
   // ─── Texto ───
   text: {
     heading: '#0f172a', // títulos / máximo énfasis

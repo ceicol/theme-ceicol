@@ -10,6 +10,8 @@ export const borderRadius = {
   xl: '24px',
   xxl: '54px',
   round: '50%',
+  // Compat theme-gaia (deprecado): Gaia usa `pill` para el radio máximo.
+  pill: '9999px',
 };
 
 // Escala de espaciado de CEICOL (múltiplos con ritmo propio).
@@ -21,4 +23,7 @@ export const spacingConstants = {
   lg: '40px',
   xl: '80px',
   xxl: '140px',
+  // Compat theme-gaia (deprecado): claves que Gaia usa y CEICOL no.
+  min: '8px', // Gaia `min` → CEICOL xs
+  base: '16px', // Gaia `base` → CEICOL sm
 };

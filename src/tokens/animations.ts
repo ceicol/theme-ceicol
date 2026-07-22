@@ -21,4 +21,8 @@ export const transitionStyles = {
   fast: `all ${animations.duration.fast}ms ${animations.easing.out}`,
   normal: `all ${animations.duration.normal}ms ${animations.easing.out}`,
   slow: `all ${animations.duration.slow}ms ${animations.easing.out}`,
+  // Compat theme-gaia (deprecado): Gaia expone `smooth` y `bounce`.
+  // Se mapean al movimiento de CEICOL (rápido y directo).
+  smooth: `all ${animations.duration.slow}ms ${animations.easing.out}`,
+  bounce: `all ${animations.duration.slow}ms ${animations.easing.out}`,
 };

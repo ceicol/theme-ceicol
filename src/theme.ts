@@ -35,6 +35,7 @@ const themeOptions: ThemeOptions = {
       light: brandColors.primary.light,
       dark: brandColors.primary.dark,
       bg: brandColors.primary.bg,
+      glass: 'rgba(0, 114, 152, 0.12)',
       contrastText: brandColors.text.white,
     },
     // En MUI, "secondary" = el color de acción/datos de CEICOL (turquesa).
@@ -42,6 +43,7 @@ const themeOptions: ThemeOptions = {
       main: brandColors.accent.main,
       light: brandColors.accent.light,
       bg: brandColors.accent.bg,
+      glass: 'rgba(13, 148, 136, 0.12)',
       contrastText: brandColors.text.white,
     },
     // Alias semántico explícito para quien prefiera nombrarlo "accent".
@@ -49,6 +51,7 @@ const themeOptions: ThemeOptions = {
       main: brandColors.accent.main,
       light: brandColors.accent.light,
       bg: brandColors.accent.bg,
+      glass: 'rgba(13, 148, 136, 0.12)',
       contrastText: brandColors.text.white,
     },
     success: {
@@ -87,23 +90,28 @@ const themeOptions: ThemeOptions = {
     tertiary: {
       main: brandColors.contrast.main,
       light: brandColors.contrast.light,
+      glass: 'rgba(15, 23, 42, 0.10)',
       contrastText: brandColors.text.white,
     },
     cta: {
       // El CTA de CEICOL es el azul de marca (no el dorado de Gaia).
       main: brandColors.primary.main,
       light: brandColors.primary.light,
+      glass: 'rgba(0, 114, 152, 0.12)',
       contrastText: brandColors.text.white,
     },
     green: {
       main: brandColors.success.main,
       light: brandColors.success.light,
       bg: brandColors.success.bg,
+      glass: 'rgba(16, 185, 129, 0.12)',
+      button: '#059669', // compat theme-gaia (green.button, tono sólido oscuro)
       contrastText: brandColors.text.white,
     },
     brown: {
       main: brandColors.text.heading,
       light: brandColors.text.muted,
+      glass: 'rgba(51, 65, 85, 0.10)',
       contrastText: brandColors.text.white,
     },
     link: {
@@ -115,6 +123,7 @@ const themeOptions: ThemeOptions = {
     text: {
       primary: brandColors.text.body,
       secondary: brandColors.text.muted,
+      light: brandColors.text.white, // compat theme-gaia: texto sobre fondos oscuros
     },
     background: {
       default: brandColors.background.default,
@@ -358,3 +367,32 @@ let theme = createTheme(themeOptions);
 theme = responsiveFontSizes(theme);
 
 export default theme;
+
+// ============================================================
+//  GaiaCompatTheme — theme para productos que migran de theme-gaia
+// ------------------------------------------------------------
+//  Reproduce FIELMENTE el modelo de color de Gaia adaptado a
+//  CEICOL: text.primary = texto muy oscuro, text.secondary y
+//  text.light = texto muy claro (para fondos oscuros: hero,
+//  banners, navbar sobre imagen de territorio). Comparte todo
+//  lo demás con AppTheme (paleta, glass, variantes, tipografía).
+//
+//  Los proyectos NUEVOS usan AppTheme (text.secondary = gris
+//  tenue, estándar MUI). Los que migran de Gaia usan este.
+// ============================================================
+const gaiaCompatOptions: ThemeOptions = {
+  ...themeOptions,
+  palette: {
+    ...themeOptions.palette,
+    text: {
+      primary: brandColors.text.heading, // muy oscuro
+      secondary: brandColors.text.white, // muy claro (sobre fondos oscuros)
+      light: brandColors.text.white,
+    },
+  },
+};
+
+let gaiaCompatTheme = createTheme(gaiaCompatOptions);
+gaiaCompatTheme = responsiveFontSizes(gaiaCompatTheme);
+
+export { gaiaCompatTheme as GaiaCompatTheme };

@@ -8,6 +8,14 @@ set -euo pipefail
 
 BUMP="${1:-patch}"
 
+# 0. Exige un árbol de trabajo limpio ANTES de empezar.
+#    Así el paso 6 (reset) nunca puede descartar trabajo sin commitear.
+if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+  echo "ERROR: hay cambios sin commitear. Haz commit de tu trabajo antes de publicar:"
+  echo "       git add -A && git commit -m \"...\""
+  exit 1
+fi
+
 # 1. Sube la versión en package.json (sin crear tag automático)
 npm version "$BUMP" --no-git-tag-version
 VERSION="$(npm pkg get version | tr -d '"')"
@@ -22,12 +30,16 @@ git add package.json README.md
 git commit -m "chore: release $TAG"
 git push origin main
 
-# 4. Compila y publica el tag con el dist incluido, dejando main limpio
+# 4. Compila y publica el tag con el dist incluido
 npm run build
 git add -f dist
 git commit -m "build: $TAG"
 git tag "$TAG"
 git push origin "$TAG"
-git reset --hard HEAD~1
+
+# 5. Quita SOLO el commit de dist de main, conservando el árbol de trabajo.
+#    --mixed (no --hard) NO borra archivos: deshace el commit y desindexa,
+#    dejando main == "chore: release" (ya empujado) y sin dist rastreado.
+git reset --mixed HEAD~1
 
 echo "Publicado $TAG — instalar con #$TAG"

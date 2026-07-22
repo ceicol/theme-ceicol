@@ -1,11 +1,8 @@
 // ============================================================
 //  CEICOL — Ampliaciones de tipos para MUI
 // ------------------------------------------------------------
-//  Registra los colores, variables y variantes propias de
-//  CEICOL en el sistema de tipos de MUI, para que
-//  theme.palette.accent, theme.customSpacing y
-//  <Button variant="cei-primary"> tengan autocompletado y
-//  chequeo de tipos.
+//  Registra colores, variables y variantes propias de CEICOL,
+//  más el vocabulario COMPAT de theme-gaia (deprecado).
 // ============================================================
 
 import '@mui/material/styles';
@@ -18,25 +15,35 @@ import { shadows } from './tokens/shadows';
 import { fontFamilies } from './tokens/typography';
 
 declare module '@mui/material/styles' {
-  // Propiedad extra en cada color: fondo tenue de acento
+  // Propiedades extra en cada color:
+  //  · bg     — fondo tenue de acento (API de CEICOL)
+  //  · glass  — compat theme-gaia: fondo translúcido
+  //  · button — compat theme-gaia (green.button)
   interface SimplePaletteColorOptions {
     bg?: string;
+    glass?: string;
+    button?: string;
   }
   interface PaletteColor {
     bg?: string;
+    glass?: string;
+    button?: string;
   }
 
-  // Colores propios de CEICOL que no existen de fábrica en MUI.
-  // Las claves tertiary/cta/green/brown/link son COMPAT con
-  // theme-gaia (deprecadas) — ver src/compat.ts.
+  // Token de texto claro (compat theme-gaia): texto sobre fondos oscuros.
+  interface TypeText {
+    light?: string;
+  }
+
+  // Colores propios de CEICOL (accent, contrast) + compat de Gaia.
   interface Palette {
     accent: PaletteColor;
     contrast: PaletteColor;
-    /** @deprecated compat theme-gaia */ tertiary: PaletteColor;
-    /** @deprecated compat theme-gaia */ cta: PaletteColor;
-    /** @deprecated compat theme-gaia */ green: PaletteColor;
-    /** @deprecated compat theme-gaia */ brown: PaletteColor;
-    /** @deprecated compat theme-gaia */ link: PaletteColor;
+    tertiary: PaletteColor;
+    cta: PaletteColor;
+    green: PaletteColor;
+    brown: PaletteColor;
+    link: PaletteColor;
   }
   interface PaletteOptions {
     accent?: SimplePaletteColorOptions;
@@ -46,6 +53,22 @@ declare module '@mui/material/styles' {
     green?: SimplePaletteColorOptions;
     brown?: SimplePaletteColorOptions;
     link?: SimplePaletteColorOptions;
+  }
+
+  // Variables globales del sistema, accesibles desde theme.*
+  interface Theme {
+    customShape: typeof borderRadius;
+    customSpacing: typeof spacingConstants;
+    customTransitions: typeof transitionStyles;
+    effectShadows: typeof shadows;
+    fontFamilies: typeof fontFamilies;
+  }
+  interface ThemeOptions {
+    customShape?: typeof borderRadius;
+    customSpacing?: typeof spacingConstants;
+    customTransitions?: typeof transitionStyles;
+    effectShadows?: typeof shadows;
+    fontFamilies?: typeof fontFamilies;
   }
 
   // Variantes tipográficas COMPAT con theme-gaia (deprecadas).
@@ -81,22 +104,6 @@ declare module '@mui/material/styles' {
     bodyRegular?: React.CSSProperties; bodyRegularSpacing?: React.CSSProperties;
     bodyMedium?: React.CSSProperties;
   }
-
-  // Variables globales del sistema, accesibles desde theme.*
-  interface Theme {
-    customShape: typeof borderRadius;
-    customSpacing: typeof spacingConstants;
-    customTransitions: typeof transitionStyles;
-    effectShadows: typeof shadows;
-    fontFamilies: typeof fontFamilies;
-  }
-  interface ThemeOptions {
-    customShape?: typeof borderRadius;
-    customSpacing?: typeof spacingConstants;
-    customTransitions?: typeof transitionStyles;
-    effectShadows?: typeof shadows;
-    fontFamilies?: typeof fontFamilies;
-  }
 }
 
 // Variantes tipográficas COMPAT en el componente Typography
@@ -119,7 +126,7 @@ declare module '@mui/material/Typography' {
 }
 
 // Variantes de botón: propias de CEICOL (cei-*) + compat genéricas de Gaia.
-// Se EXCLUYEN a propósito los botones de mapa de Gaia Amazonas.
+// Se EXCLUYEN los botones de mapa de Gaia Amazonas.
 declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
     'cei-primary': true;
@@ -138,16 +145,75 @@ declare module '@mui/material/Button' {
   }
 }
 
+// Overrides de color para el resto de componentes que aceptan `color`.
 declare module '@mui/material/Chip' {
   interface ChipPropsColorOverrides {
-    accent: true; contrast: true;
-    tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
   }
 }
 declare module '@mui/material/SvgIcon' {
   interface SvgIconPropsColorOverrides {
-    accent: true; contrast: true;
-    tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+  }
+}
+declare module '@mui/material/IconButton' {
+  interface IconButtonPropsColorOverrides {
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+  }
+}
+declare module '@mui/material/Fab' {
+  interface FabPropsColorOverrides {
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+  }
+}
+declare module '@mui/material/ButtonGroup' {
+  interface ButtonGroupPropsColorOverrides {
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+  }
+}
+declare module '@mui/material/ToggleButton' {
+  interface ToggleButtonPropsColorOverrides {
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+  }
+}
+declare module '@mui/material/Badge' {
+  interface BadgePropsColorOverrides {
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+  }
+}
+declare module '@mui/material/AppBar' {
+  interface AppBarPropsColorOverrides {
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+  }
+}
+declare module '@mui/material/Icon' {
+  interface IconPropsColorOverrides {
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+  }
+}
+declare module '@mui/material/CircularProgress' {
+  interface CircularProgressPropsColorOverrides {
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+  }
+}
+declare module '@mui/material/LinearProgress' {
+  interface LinearProgressPropsColorOverrides {
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+  }
+}
+declare module '@mui/material/Checkbox' {
+  interface CheckboxPropsColorOverrides {
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+  }
+}
+declare module '@mui/material/Radio' {
+  interface RadioPropsColorOverrides {
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+  }
+}
+declare module '@mui/material/Switch' {
+  interface SwitchPropsColorOverrides {
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
   }
 }
 

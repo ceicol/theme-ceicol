@@ -3,6 +3,9 @@ import './mui-types';
 // Tema listo para <ThemeProvider theme={AppTheme}>
 export { default as AppTheme } from './theme';
 
+// Theme para productos que migran de theme-gaia (ver src/theme.ts)
+export { GaiaCompatTheme } from './theme';
+
 // Tokens crudos y helpers, por si se necesitan fuera del theme
 export { brandColors } from './tokens/colors';
 export { borderRadius, spacingConstants } from './tokens/layout';
