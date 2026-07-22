@@ -93,19 +93,23 @@ const themeOptions: ThemeOptions = {
       glass: 'rgba(15, 23, 42, 0.10)',
       contrastText: brandColors.text.white,
     },
+    // Gaia usaba `cta` como su ACENTO dorado (títulos, bordes, "gold").
+    // Rol = acento secundario → en CEICOL es el turquesa (accent).
     cta: {
-      // El CTA de CEICOL es el azul de marca (no el dorado de Gaia).
-      main: brandColors.primary.main,
-      light: brandColors.primary.light,
-      glass: 'rgba(0, 114, 152, 0.12)',
+      main: brandColors.accent.main,
+      light: brandColors.accent.light,
+      glass: 'rgba(13, 148, 136, 0.12)',
       contrastText: brandColors.text.white,
     },
+    // Gaia usaba `green` como su color de MARCA/ACTIVO (green.button = estado
+    // activo/seleccionado). Rol = color de marca principal → en CEICOL es el AZUL.
+    // Así los estados activos y acentos "verdes" pasan a azul CEICOL, coherentes.
     green: {
-      main: brandColors.success.main,
-      light: brandColors.success.light,
-      bg: brandColors.success.bg,
-      glass: 'rgba(16, 185, 129, 0.12)',
-      button: '#059669', // compat theme-gaia (green.button, tono sólido oscuro)
+      main: brandColors.primary.main,
+      light: brandColors.primary.light,
+      bg: brandColors.primary.bg,
+      glass: 'rgba(0, 114, 152, 0.12)',
+      button: brandColors.primary.dark, // activo: azul oscuro, buen contraste como fondo y texto
       contrastText: brandColors.text.white,
     },
     brown: {
