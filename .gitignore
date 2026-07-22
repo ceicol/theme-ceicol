@@ -1,5 +1,7 @@
 node_modules/
 dist
+dist2
+dist3
 npm-debug.log*
 *.tgz
 .DS_Store

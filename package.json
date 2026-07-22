@@ -17,8 +17,7 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts --clean",
-    "prepare": "npm run build",
-    "release": "git checkout build && git merge main --no-edit && npm run build && git add dist -f && (git diff-index --quiet HEAD || git commit -m \"chore: new release\") && git push origin build && git checkout main && git push origin main && echo 'Publicado'"
+    "release": "npm run build && git add -f dist && git commit -m \"build: v$npm_package_version\" && git tag \"v$npm_package_version\" && git push origin \"v$npm_package_version\" && git reset --hard HEAD~1 && echo \"Publicado tag v$npm_package_version — instalar con #v$npm_package_version\""
   },
   "peerDependencies": {
     "@emotion/react": ">=11",

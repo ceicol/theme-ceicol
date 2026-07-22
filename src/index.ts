@@ -10,3 +10,6 @@ export { animations, transitionStyles } from './tokens/animations';
 export { glassEffect, shadows } from './tokens/shadows';
 export { typography, fontFamilies } from './tokens/typography';
 export { fluid } from './utils/fluidTypography';
+
+// Capa de compatibilidad con theme-gaia (deprecada) — ver src/compat.ts
+export { gaiaCompatTypography } from './compat';
