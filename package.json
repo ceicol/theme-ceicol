@@ -1,0 +1,38 @@
+{
+  "name": "theme-ceicol",
+  "version": "0.1.0",
+  "description": "Sistema de diseño de CEICOL para productos React + Material UI. Tokens de marca, tipografía, espaciado y variantes de componentes.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "prepare": "npm run build",
+    "release": "git checkout build && git merge main --no-edit && npm run build && git add dist -f && (git diff-index --quiet HEAD || git commit -m \"chore: new release\") && git push origin build && git checkout main && git push origin main && echo 'Publicado'"
+  },
+  "peerDependencies": {
+    "@emotion/react": ">=11",
+    "@emotion/styled": ">=11",
+    "@mui/material": ">=5",
+    "react": ">=17"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.0",
+    "@types/react": "^18.3.31",
+    "react": "^18.2.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0"
+  }
+}
