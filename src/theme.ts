@@ -234,7 +234,10 @@ const themeOptions: ThemeOptions = {
 
   // API principal (variantes h1–h4, body1…) + variantes COMPAT de Gaia
   typography: { ...typography, ...gaiaCompatTypography },
-  shape: { borderRadius: 12 },
+  // Radio base de MUI para Paper/Card/Menu sin radio explícito. Se mantiene
+  // discreto (como el theme original) para no inflar el radio de las tarjetas;
+  // los componentes que quieren más radio lo fijan con borderRadius.lg, etc.
+  shape: { borderRadius: 4 },
   shadows: Array(25)
     .fill('none')
     .map((_, i) => customShadowsArray[i] || 'none') as Shadows,
@@ -457,12 +460,6 @@ const themeOptions: ThemeOptions = {
           borderRadius: borderRadius.sm,
         },
         arrow: { color: brandColors.contrast.main },
-      },
-    },
-
-    MuiPaper: {
-      styleOverrides: {
-        rounded: { borderRadius: borderRadius.lg },
       },
     },
 
