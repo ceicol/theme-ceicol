@@ -42,4 +42,14 @@ git push origin "$TAG"
 #    dejando main == "chore: release" (ya empujado) y sin dist rastreado.
 git reset --mixed HEAD~1
 
-echo "Publicado $TAG — instalar con #$TAG"
+# 6. VERIFICA que el tag realmente llegó a GitHub (el push por SSH puede
+#    fallar en silencio). Si no está, aborta con instrucción clara.
+if git ls-remote --tags origin "refs/tags/$TAG" | grep -q "$TAG"; then
+  echo "✓ Publicado $TAG y confirmado en GitHub — instalar con #$TAG"
+else
+  echo "✗ ERROR: $TAG se creó localmente pero NO está en GitHub."
+  echo "  Empújalo a mano (con la llave SSH cargada):"
+  echo "      ssh-add ~/.ssh/id_ed25519"
+  echo "      git push origin main && git push origin $TAG"
+  exit 1
+fi
