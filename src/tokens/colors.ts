@@ -51,10 +51,15 @@ export const brandColors = {
   },
 
   // ─── Compat theme-gaia (deprecado) ───
-  // Gaia expone `cta` (dorado). En CEICOL el CTA es el azul de marca.
+  // Gaia usaba `cta` como su acento dorado. Rol = acento secundario →
+  // en CEICOL es el turquesa (accent), coherente con la paleta del tema.
   cta: {
+    main: '#0d9488',
+    light: '#2dd4bf',
+  },
+  // Gaia expone `link` como token crudo. En CEICOL el link es el azul de marca.
+  link: {
     main: '#007298',
-    light: '#0391b2',
   },
 
   // ─── Texto ───
@@ -63,6 +68,9 @@ export const brandColors = {
     body: '#334155', // cuerpo de lectura
     muted: '#64748b', // secundario / metainformación
     white: '#ffffff', // sobre fondos oscuros
+    // Compat theme-gaia (deprecado): Gaia usa text.dark / text.light.
+    dark: '#0f172a', // → equivale a heading (texto muy oscuro)
+    light: '#ffffff', // → equivale a white (texto claro sobre fondos oscuros)
   },
 
   // ─── Superficies ───
@@ -70,6 +78,9 @@ export const brandColors = {
     default: '#f8fafc', // fondo estándar de página
     subtle: '#f1f5f9', // secciones alternadas
     paper: '#ffffff', // tarjetas, formularios
+    // Compat theme-gaia (deprecado): Gaia usa background.main / background.light.
+    main: '#f8fafc', // → equivale a default
+    light: '#ffffff', // → equivale a paper
   },
 
   // ─── Bordes ───
