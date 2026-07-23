@@ -471,6 +471,101 @@ const themeOptions: ThemeOptions = {
         },
       },
     },
+
+    // Alert — estilo con borde izquierdo de acento (espejo de .cei-alert)
+    MuiAlert: {
+      styleOverrides: {
+        root: {
+          borderRadius: borderRadius.md,
+          borderLeft: '3px solid',
+          fontFamily: fontFamilies.body,
+        },
+        standardSuccess: { backgroundColor: brandColors.success.bg, borderLeftColor: brandColors.success.main, color: brandColors.text.heading },
+        standardWarning: { backgroundColor: brandColors.warning.bg, borderLeftColor: brandColors.warning.main, color: brandColors.text.heading },
+        standardError: { backgroundColor: brandColors.error.bg, borderLeftColor: brandColors.error.main, color: brandColors.text.heading },
+        standardInfo: { backgroundColor: brandColors.info.bg, borderLeftColor: brandColors.info.main, color: brandColors.text.heading },
+      },
+    },
+
+    // Chip — pill con la gama CEICOL
+    MuiChip: {
+      styleOverrides: {
+        root: { borderRadius: borderRadius.pill, fontWeight: 600 },
+      },
+    },
+
+    // Dialog / Modal — radio y sombra premium
+    MuiDialog: {
+      styleOverrides: {
+        paper: { borderRadius: borderRadius.lg, boxShadow: shadows.premium },
+      },
+    },
+
+    // Tabs — indicador y tab activo en azul de marca
+    MuiTabs: {
+      styleOverrides: {
+        indicator: { backgroundColor: brandColors.primary.main, height: 2 },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          fontWeight: 500,
+          color: brandColors.text.muted,
+          '&.Mui-selected': { color: brandColors.primary.main, fontWeight: 700 },
+        },
+      },
+    },
+
+    // Tabla de datos
+    MuiTableCell: {
+      styleOverrides: {
+        head: {
+          fontWeight: 700,
+          color: brandColors.text.heading,
+          borderBottom: `2px solid ${brandColors.border.medium}`,
+        },
+        root: { borderBottom: `1px solid ${brandColors.border.light}` },
+      },
+    },
+
+    // Avatar — fallback con fondo de marca
+    MuiAvatar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: brandColors.primary.bg,
+          color: brandColors.primary.dark,
+          fontFamily: fontFamilies.body,
+          fontWeight: 600,
+        },
+      },
+    },
+
+    // Accordion — sin sombra dura, bordes suaves
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          border: `1px solid ${brandColors.border.light}`,
+          borderRadius: `${borderRadius.md} !important`,
+          boxShadow: 'none',
+          '&::before': { display: 'none' },
+        },
+      },
+    },
+
+    // Paginación — item activo en azul de marca
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          borderRadius: borderRadius.md,
+          '&.Mui-selected': {
+            backgroundColor: brandColors.primary.main,
+            color: brandColors.text.white,
+          },
+        },
+      },
+    },
   },
 };
 
