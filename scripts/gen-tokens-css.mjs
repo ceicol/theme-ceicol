@@ -2,7 +2,7 @@
 // Se ejecuta en el build, DESPUÉS de tsup, leyendo dist/tokens.mjs — así
 // el CSS siempre refleja la misma fuente de verdad que el tema MUI.
 
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, copyFileSync } from 'node:fs';
 import {
   brandColors,
   spacingConstants,
@@ -54,3 +54,10 @@ lines.push(`  --cei-ease-out: ${animations.easing.out};`);
 lines.push('}', '');
 writeFileSync(new URL('../dist/tokens.css', import.meta.url), lines.join('\n'));
 console.log('✓ dist/tokens.css generado');
+
+// Copiar los primitivos de componentes (CSS autorado) al dist
+copyFileSync(
+  new URL('../src/components.css', import.meta.url),
+  new URL('../dist/components.css', import.meta.url),
+);
+console.log('✓ dist/components.css copiado');
