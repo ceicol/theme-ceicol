@@ -1,0 +1,86 @@
+/* CEICOL design tokens — generado desde theme-ceicol. NO editar a mano. */
+:root {
+  --cei-primary: #007298;
+  --cei-primary-light: #0391b2;
+  --cei-primary-dark: #005a7a;
+  --cei-primary-bg: #e1f0f8;
+  --cei-accent: #0d9488;
+  --cei-accent-light: #2dd4bf;
+  --cei-accent-bg: #f0fdfa;
+  --cei-success: #10b981;
+  --cei-success-light: #34d399;
+  --cei-success-bg: #ecfdf5;
+  --cei-warning: #d97706;
+  --cei-warning-light: #f59e0b;
+  --cei-warning-bg: #fffbeb;
+  --cei-error: #dc2626;
+  --cei-error-light: #ef4444;
+  --cei-error-bg: #fef2f2;
+  --cei-info: #2563eb;
+  --cei-info-light: #3b82f6;
+  --cei-info-bg: #eff6ff;
+  --cei-contrast: #0f172a;
+  --cei-contrast-light: #1e293b;
+  --cei-cta: #007298;
+  --cei-cta-light: #0391b2;
+  --cei-link: #007298;
+  --cei-text-heading: #0f172a;
+  --cei-text-body: #334155;
+  --cei-text-muted: #64748b;
+  --cei-text-white: #ffffff;
+  --cei-text-dark: #0f172a;
+  --cei-text-light: #ffffff;
+  --cei-background-default: #f8fafc;
+  --cei-background-subtle: #f1f5f9;
+  --cei-background-paper: #ffffff;
+  --cei-background: #f8fafc;
+  --cei-background-light: #ffffff;
+  --cei-border-light: #e2e8f0;
+  --cei-border-medium: #cbd5e1;
+
+  --cei-space-xs: 8px;
+  --cei-space-sm: 16px;
+  --cei-space-md: 24px;
+  --cei-space-lg: 40px;
+  --cei-space-xl: 80px;
+  --cei-space-xxl: 140px;
+  --cei-space-min: 8px;
+  --cei-space-base: 16px;
+
+  --cei-radius-sm: 6px;
+  --cei-radius-md: 12px;
+  --cei-radius-lg: 18px;
+  --cei-radius-xl: 24px;
+  --cei-radius-xxl: 54px;
+  --cei-radius-round: 50%;
+  --cei-radius-pill: 9999px;
+
+  --cei-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --cei-shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --cei-shadow-lg: 0 10px 15px -3px rgba(48, 112, 149, 0.08), 0 4px 6px -4px rgba(48, 112, 149, 0.08);
+  --cei-shadow-premium: 0 20px 40px -15px rgba(48, 112, 149, 0.12);
+  --cei-shadow-glow: 0 0 30px rgba(13, 148, 136, 0.08);
+
+  --cei-transition-fast: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --cei-transition-normal: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  --cei-transition-slow: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  --cei-transition-smooth: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  --cei-transition-bounce: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  --cei-font-display: 'Big Shoulders Display', 'Inter', system-ui, sans-serif;
+  --cei-font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --cei-font-mono: 'JetBrains Mono', monospace;
+
+  --cei-font-size-hero: clamp(2.5rem, 6vw, 4.5rem);
+  --cei-font-size-h1: clamp(2rem, 4.5vw, 2.4rem);
+  --cei-font-size-h2: clamp(1.6rem, 3.5vw, 1.9rem);
+  --cei-font-size-h3: clamp(1.25rem, 2.5vw, 1.5rem);
+  --cei-font-size-body: 1rem;
+  --cei-font-size-body-lg: 1.125rem;
+  --cei-font-size-small: 0.875rem;
+
+  --cei-duration-fast: 150ms;
+  --cei-duration-normal: 250ms;
+  --cei-duration-slow: 300ms;
+  --cei-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
