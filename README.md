@@ -16,13 +16,13 @@ Sistema de diseño centralizado para el ecosistema de aplicaciones de CEICOL. Co
 Se distribuye a través de Git usando **tags de versión inmutables**: cada tag entrega siempre el mismo código compilado.
 
 ```bash
-npm install git+https://github.com/ceicol/theme-ceicol.git#v0.10.0
+npm install git+https://github.com/ceicol/theme-ceicol.git#v0.11.0
 ```
 
 Para actualizar, cambia el tag por la versión deseada (ver el badge de arriba o la pestaña Tags del repositorio):
 
 ```bash
-npm install git+https://github.com/ceicol/theme-ceicol.git#v0.10.0
+npm install git+https://github.com/ceicol/theme-ceicol.git#v0.11.0
 ```
 
 ### Dependencias peer (obligatorio)
