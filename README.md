@@ -177,6 +177,52 @@ Para facilitar la migración de productos que consumen `theme-gaia`, el tema tam
 
 Estas claves están marcadas como deprecadas; los proyectos nuevos deben usar la API principal de CEICOL.
 
+## Uso sin MUI (CSS puro / Astro / Tailwind)
+
+Los mismos tokens (misma fuente de verdad que el tema MUI) están disponibles fuera de React.
+
+### CSS puro / Astro
+
+Importa la hoja de custom properties y usa las variables `--cei-*`:
+
+```css
+@import 'theme-ceicol/tokens.css';
+
+.boton {
+  background: var(--cei-primary);
+  color: var(--cei-text-white);
+  padding: var(--cei-space-sm) var(--cei-space-md);
+  border-radius: var(--cei-radius-md);
+  font-family: var(--cei-font-body);
+  transition: var(--cei-transition-fast);
+}
+.titulo { font-family: var(--cei-font-display); color: var(--cei-text-heading); }
+```
+
+Variables disponibles: colores (`--cei-primary`, `--cei-accent`, `--cei-success`, `--cei-warning`, `--cei-error`, `--cei-info`, `--cei-contrast`, `--cei-text-*`, `--cei-background-*`, `--cei-border-*`), espaciado (`--cei-space-*`), radios (`--cei-radius-*`), sombras (`--cei-shadow-*`), transiciones (`--cei-transition-*`) y fuentes (`--cei-font-*`). No olvides cargar las fuentes vía Google Fonts (ver arriba).
+
+### Tailwind
+
+Importa los tokens como objeto JS en `tailwind.config`:
+
+```js
+import { brandColors, spacingConstants, borderRadius } from 'theme-ceicol/tokens';
+
+export default {
+  theme: {
+    extend: {
+      colors: {
+        primary: brandColors.primary.main,
+        accent: brandColors.accent.main,
+        // …o mapea las variables CSS: primary: 'var(--cei-primary)'
+      },
+      borderRadius: { md: borderRadius.md },
+      spacing: { md: spacingConstants.md },
+    },
+  },
+};
+```
+
 ## Publicar una versión
 
 ```bash
