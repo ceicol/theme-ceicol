@@ -38,6 +38,7 @@ declare module '@mui/material/styles' {
   // Colores propios de CEICOL (accent, contrast) + compat de Gaia.
   interface Palette {
     accent: PaletteColor;
+    tech: PaletteColor;
     contrast: PaletteColor;
     tertiary: PaletteColor;
     cta: PaletteColor;
@@ -47,6 +48,7 @@ declare module '@mui/material/styles' {
   }
   interface PaletteOptions {
     accent?: SimplePaletteColorOptions;
+    tech?: SimplePaletteColorOptions;
     contrast?: SimplePaletteColorOptions;
     tertiary?: SimplePaletteColorOptions;
     cta?: SimplePaletteColorOptions;
@@ -121,7 +123,7 @@ declare module '@mui/material/Typography' {
   }
   interface TypographyPropsColorOverrides {
     accent: true; contrast: true;
-    tertiary: true; cta: true; green: true; brown: true; link: true;
+    tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 
@@ -144,79 +146,79 @@ declare module '@mui/material/Button' {
   }
   interface ButtonPropsColorOverrides {
     accent: true; contrast: true;
-    tertiary: true; cta: true; green: true; brown: true; link: true;
+    tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 
 // Overrides de color para el resto de componentes que aceptan `color`.
 declare module '@mui/material/Chip' {
   interface ChipPropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 declare module '@mui/material/SvgIcon' {
   interface SvgIconPropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 declare module '@mui/material/IconButton' {
   interface IconButtonPropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 declare module '@mui/material/Fab' {
   interface FabPropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 declare module '@mui/material/ButtonGroup' {
   interface ButtonGroupPropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 declare module '@mui/material/ToggleButton' {
   interface ToggleButtonPropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 declare module '@mui/material/Badge' {
   interface BadgePropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 declare module '@mui/material/AppBar' {
   interface AppBarPropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 declare module '@mui/material/Icon' {
   interface IconPropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 declare module '@mui/material/CircularProgress' {
   interface CircularProgressPropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 declare module '@mui/material/LinearProgress' {
   interface LinearProgressPropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 declare module '@mui/material/Checkbox' {
   interface CheckboxPropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 declare module '@mui/material/Radio' {
   interface RadioPropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 declare module '@mui/material/Switch' {
   interface SwitchPropsColorOverrides {
-    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true;
+    accent: true; contrast: true; tertiary: true; cta: true; green: true; brown: true; link: true; tech: true;
   }
 }
 

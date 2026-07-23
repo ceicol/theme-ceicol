@@ -21,6 +21,16 @@ export const brandColors = {
     light: '#2dd4bf',
     bg: '#f0fdfa',
   },
+  // ─── Acento tech (cian/sky) — secciones oscuras y visualizaciones ───
+  //  Acentos brillantes de alto contraste sobre fondos oscuros/tech.
+  //  Distintos del turquesa de marca; pensados para dataviz, glows y
+  //  detalles en modo oscuro. Disponibles para todos los productos.
+  tech: {
+    main: '#0ea5e9', // sky-500
+    light: '#22d3ee', // cyan-400 (el más brillante)
+    dark: '#0284c7', // sky-600
+    bg: '#ecfeff', // cyan-50
+  },
 
   // ─── Colores funcionales (estado del sistema) ───
   success: {
@@ -67,6 +77,7 @@ export const brandColors = {
     heading: '#0f172a', // títulos / máximo énfasis
     body: '#334155', // cuerpo de lectura
     muted: '#64748b', // secundario / metainformación
+    mutedLight: '#94a3b8', // secundario claro (sobre fondos oscuros)
     white: '#ffffff', // sobre fondos oscuros
     // Compat theme-gaia (deprecado): Gaia usa text.dark / text.light.
     dark: '#0f172a', // → equivale a heading (texto muy oscuro)

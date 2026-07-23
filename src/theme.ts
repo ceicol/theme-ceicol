@@ -150,6 +150,15 @@ const themeOptions: ThemeOptions = {
       glass: 'rgba(13, 148, 136, 0.12)',
       contrastText: brandColors.text.white,
     },
+    // Acento tech (cian/sky) — dataviz, glows y detalles en modo oscuro.
+    tech: {
+      main: brandColors.tech.main,
+      light: brandColors.tech.light,
+      dark: brandColors.tech.dark,
+      bg: brandColors.tech.bg,
+      glass: 'rgba(14, 165, 233, 0.12)',
+      contrastText: brandColors.contrast.main,
+    },
     success: {
       main: brandColors.success.main,
       light: brandColors.success.light,

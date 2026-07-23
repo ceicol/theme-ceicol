@@ -43,7 +43,10 @@ export const fontSizes = {
   h3: 'clamp(1.25rem, 2.5vw, 1.5rem)',
   body: '1rem',
   bodyLg: '1.125rem',
-  small: '0.875rem',
+  small: '0.875rem', // 14px — texto secundario
+  xs: '0.75rem', // 12px — captions, metadatos
+  xxs: '0.65rem', // ~10px — etiquetas, badges
+  xxxs: '0.55rem', // ~9px — micro-etiquetas, overlines densas
 };
 
 export const typography: ThemeOptions['typography'] = {

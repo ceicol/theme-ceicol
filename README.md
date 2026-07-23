@@ -72,6 +72,7 @@ Los colores son accesibles vía `color="..."` en componentes o `palette.nombre` 
 | --- | --- | --- |
 | **`primary`** | Azul de marca | `.main` `.light` `.dark` `.bg` |
 | **`secondary`** / **`accent`** | Turquesa — acción y datos | `.main` `.light` `.bg` |
+| **`tech`** | Cian/sky — dataviz, glows y detalles en modo oscuro | `.main` `.light` `.dark` `.bg` |
 | **`success`** | Verde — éxito | `.main` `.light` `.bg` |
 | **`warning`** | Ámbar — advertencia | `.main` `.light` `.bg` |
 | **`error`** | Rojo — error / destructivo | `.main` `.light` `.bg` |
@@ -199,7 +200,7 @@ Importa la hoja de custom properties y usa las variables `--cei-*`:
 .titulo { font-family: var(--cei-font-display); color: var(--cei-text-heading); }
 ```
 
-Variables disponibles: colores (`--cei-primary`, `--cei-accent`, `--cei-success`, `--cei-warning`, `--cei-error`, `--cei-info`, `--cei-contrast`, `--cei-text-*`, `--cei-background-*`, `--cei-border-*`), espaciado (`--cei-space-*`), radios (`--cei-radius-*`), sombras (`--cei-shadow-*`), transiciones (`--cei-transition-*`) y fuentes (`--cei-font-*`). No olvides cargar las fuentes vía Google Fonts (ver arriba).
+Variables disponibles: colores (`--cei-primary`, `--cei-accent`, `--cei-tech`, `--cei-success`, `--cei-warning`, `--cei-error`, `--cei-info`, `--cei-contrast`, `--cei-text-*`, `--cei-background-*`, `--cei-border-*`), tamaños de fuente (`--cei-font-size-hero`, `-h1`…`-h3`, `-body`, `-body-lg`, `-small`, `-xs`, `-xxs`, `-xxxs`), espaciado (`--cei-space-*`), radios (`--cei-radius-*`), sombras (`--cei-shadow-*`), transiciones (`--cei-transition-*`) y fuentes (`--cei-font-*`). No olvides cargar las fuentes vía Google Fonts (ver arriba).
 
 ### Tailwind
 

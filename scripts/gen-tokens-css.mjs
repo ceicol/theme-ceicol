@@ -19,15 +19,15 @@ const lines = [
   ':root {',
 ];
 
+const kebab = (s) => s.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
+
 // ── Color ── (main → --cei-{grupo}; resto → --cei-{grupo}-{sub})
 for (const [group, val] of Object.entries(brandColors)) {
   for (const [k, v] of Object.entries(val)) {
-    const name = k === 'main' ? `--cei-${group}` : `--cei-${group}-${k}`;
+    const name = k === 'main' ? `--cei-${group}` : `--cei-${group}-${kebab(k)}`;
     lines.push(`  ${name}: ${v};`);
   }
 }
-
-const kebab = (s) => s.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
 
 const flat = [
   ['space', spacingConstants],
