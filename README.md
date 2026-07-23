@@ -223,6 +223,151 @@ export default {
 };
 ```
 
+## Componentes CSS (`.cei-*`)
+
+Primitivos de componentes para proyectos CSS puro / Astro, alimentados por los tokens. Los productos React+MUI usan las variantes/estilos equivalentes del tema; estas clases son el espejo para no-MUI.
+
+```html
+<!-- requiere tokens.css primero -->
+<link rel="stylesheet" href="theme-ceicol/tokens.css" />
+<link rel="stylesheet" href="theme-ceicol/components.css" />
+```
+
+O en un `.css`/`.astro`:
+
+```css
+@import 'theme-ceicol/tokens.css';
+@import 'theme-ceicol/components.css';
+```
+
+### Botón y link
+
+```html
+<button class="cei-btn cei-btn--primary">Enviar</button>
+<button class="cei-btn cei-btn--secondary">Cancelar</button>
+<button class="cei-btn cei-btn--ghost">Terciario</button>
+<button class="cei-btn cei-btn--destructive">Eliminar</button>
+<button class="cei-btn cei-btn--primary cei-btn--large">CTA grande</button>
+<button class="cei-icon-btn" aria-label="Buscar"><svg>…</svg></button>
+<a class="cei-link" href="#">Ver más</a>
+```
+
+Variantes: `--primary`, `--secondary`, `--ghost`, `--destructive`; tamaños: `--large`, `--sm`.
+
+### Tipografía
+
+```html
+<h1 class="cei-h1">Título de pantalla</h1>
+<h2 class="cei-h2">Título de sección</h2>
+<p class="cei-body">Texto de cuerpo.</p>
+<span class="cei-overline">Categoría</span>
+```
+
+Utilidades: `cei-h1`…`cei-h4`, `cei-body`, `cei-body-lg`, `cei-small`, `cei-overline`.
+
+### Superficies, badges y alertas
+
+```html
+<div class="cei-card cei-card--hover">Contenido</div>
+
+<span class="cei-badge">Nuevo</span>
+<span class="cei-badge cei-badge--success">Activo</span>
+
+<div class="cei-alert cei-alert--error">Algo salió mal.</div>
+```
+
+Badge: `--accent`, `--success`, `--warning`, `--error`, `--neutral`. Alert: `--success`, `--warning`, `--error`, `--info`.
+
+### Formularios
+
+```html
+<label class="cei-field">
+  <span class="cei-field__label">Correo</span>
+  <input class="cei-input" type="email" placeholder="name@ceicol.com" />
+  <span class="cei-field__help">No lo compartimos.</span>
+</label>
+
+<textarea class="cei-textarea"></textarea>
+<select class="cei-select"><option>Opción</option></select>
+
+<label class="cei-check"><input type="checkbox" /> Acepto</label>
+<label class="cei-check"><input type="radio" name="g" /> Opción A</label>
+
+<label class="cei-switch">
+  <input type="checkbox" />
+  <span class="cei-switch__track"></span>
+</label>
+```
+
+Estado de error en input: `cei-input cei-input--error` + `cei-field__error`.
+
+### Estados
+
+```html
+<div class="cei-skeleton cei-skeleton--text"></div>
+<div class="cei-avatar">MR</div>
+<div class="cei-empty">
+  <div class="cei-empty__icon">◎</div>
+  <div class="cei-empty__title">Sin resultados</div>
+  <p class="cei-empty__text">Ajusta los filtros e intenta de nuevo.</p>
+</div>
+```
+
+Avatar: `--sm`, `--lg`. Skeleton: `--text`, `--circle`.
+
+### Feedback, navegación, colapsables y tabla
+
+```html
+<!-- Modal (apertura/cierre por JS del consumidor) -->
+<div class="cei-modal__overlay">
+  <div class="cei-modal">
+    <h3 class="cei-modal__title">Confirmar</h3>
+    <div class="cei-modal__body">¿Continuar?</div>
+    <div class="cei-modal__actions">
+      <button class="cei-btn cei-btn--ghost">Cancelar</button>
+      <button class="cei-btn cei-btn--primary">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+<div class="cei-toast-container">
+  <div class="cei-toast cei-toast--success">Guardado</div>
+</div>
+
+<div class="cei-tabs">
+  <button class="cei-tab cei-tab--active">Uno</button>
+  <button class="cei-tab">Dos</button>
+</div>
+
+<nav class="cei-breadcrumb">
+  <a href="#">Inicio</a><span class="cei-breadcrumb__sep">/</span>
+  <span class="cei-breadcrumb__current">Actual</span>
+</nav>
+
+<div class="cei-pagination">
+  <button class="cei-page cei-page--active">1</button>
+  <button class="cei-page">2</button>
+</div>
+
+<div class="cei-accordion">
+  <button class="cei-accordion__header">Pregunta</button>
+  <div class="cei-accordion__panel">Respuesta.</div>
+</div>
+
+<div class="cei-stepper">
+  <span class="cei-step cei-step--done"><span class="cei-step__num">1</span></span>
+  <span class="cei-step__line"></span>
+  <span class="cei-step cei-step--active"><span class="cei-step__num">2</span></span>
+</div>
+
+<table class="cei-table">
+  <thead><tr><th>Nombre</th><th>Estado</th></tr></thead>
+  <tbody><tr><td>Item</td><td>Activo</td></tr></tbody>
+</table>
+```
+
+Toast: `--success`, `--warning`, `--error`, `--info`. Tabs/paginación: estado activo con `--active`. Stepper: `--active`, `--done`.
+
 ## Publicar una versión
 
 ```bash
