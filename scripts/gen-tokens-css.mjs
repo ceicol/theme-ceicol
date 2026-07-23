@@ -10,6 +10,8 @@ import {
   shadows,
   transitionStyles,
   fontFamilies,
+  fontSizes,
+  animations,
 } from '../dist/tokens.mjs';
 
 const lines = [
@@ -25,19 +27,29 @@ for (const [group, val] of Object.entries(brandColors)) {
   }
 }
 
+const kebab = (s) => s.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
+
 const flat = [
   ['space', spacingConstants],
   ['radius', borderRadius],
   ['shadow', shadows],
   ['transition', transitionStyles],
   ['font', fontFamilies],
+  ['font-size', fontSizes],
 ];
 for (const [prefix, obj] of flat) {
   lines.push('');
   for (const [k, v] of Object.entries(obj)) {
-    lines.push(`  --cei-${prefix}-${k}: ${v};`);
+    lines.push(`  --cei-${prefix}-${kebab(k)}: ${v};`);
   }
 }
+
+// Duraciones y easing (crudos, para composición manual de transiciones)
+lines.push('');
+for (const [k, v] of Object.entries(animations.duration)) {
+  lines.push(`  --cei-duration-${k}: ${v}ms;`);
+}
+lines.push(`  --cei-ease-out: ${animations.easing.out};`);
 
 lines.push('}', '');
 writeFileSync(new URL('../dist/tokens.css', import.meta.url), lines.join('\n'));

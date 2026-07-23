@@ -14,4 +14,4 @@ export { brandColors } from './tokens/colors';
 export { borderRadius, spacingConstants } from './tokens/layout';
 export { shadows, glassEffect } from './tokens/shadows';
 export { animations, transitionStyles } from './tokens/animations';
-export { fontFamilies } from './tokens/typography';
+export { fontFamilies, fontSizes } from './tokens/typography';

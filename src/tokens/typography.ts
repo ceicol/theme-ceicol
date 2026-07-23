@@ -34,6 +34,18 @@ export const fontFamilies = {
   mono: FONT_MONO,
 };
 
+// Escala de tamaños de tipografía (canónica CEICOL, fluida con clamp).
+// Fuente única para títulos y párrafos en todos los stacks.
+export const fontSizes = {
+  hero: 'clamp(2.5rem, 6vw, 4.5rem)',
+  h1: 'clamp(2rem, 4.5vw, 2.4rem)',
+  h2: 'clamp(1.6rem, 3.5vw, 1.9rem)',
+  h3: 'clamp(1.25rem, 2.5vw, 1.5rem)',
+  body: '1rem',
+  bodyLg: '1.125rem',
+  small: '0.875rem',
+};
+
 export const typography: ThemeOptions['typography'] = {
   fontFamily: FONT_BODY,
 
