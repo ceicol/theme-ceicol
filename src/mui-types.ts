@@ -36,10 +36,18 @@ declare module '@mui/material/styles' {
   }
 
   // Colores propios de CEICOL (accent, contrast) + compat de Gaia.
+  // Superficies oscuras (temas dark): brand / slate / deep.
+  interface DarkSurfaces {
+    brand: string;
+    slate: string;
+    deep: string;
+  }
+
   interface Palette {
     accent: PaletteColor;
     tech: PaletteColor;
     contrast: PaletteColor;
+    surface: DarkSurfaces;
     tertiary: PaletteColor;
     cta: PaletteColor;
     green: PaletteColor;
@@ -50,6 +58,7 @@ declare module '@mui/material/styles' {
     accent?: SimplePaletteColorOptions;
     tech?: SimplePaletteColorOptions;
     contrast?: SimplePaletteColorOptions;
+    surface?: DarkSurfaces;
     tertiary?: SimplePaletteColorOptions;
     cta?: SimplePaletteColorOptions;
     green?: SimplePaletteColorOptions;

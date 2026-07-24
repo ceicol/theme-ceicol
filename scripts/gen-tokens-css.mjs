@@ -61,3 +61,10 @@ copyFileSync(
   new URL('../dist/components.css', import.meta.url),
 );
 console.log('✓ dist/components.css copiado');
+
+// Copiar la capa semántica (roles claro/oscuro) al dist
+copyFileSync(
+  new URL('../src/semantic.css', import.meta.url),
+  new URL('../dist/semantic.css', import.meta.url),
+);
+console.log('✓ dist/semantic.css copiado');

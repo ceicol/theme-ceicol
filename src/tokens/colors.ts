@@ -60,6 +60,17 @@ export const brandColors = {
     light: '#1e293b',
   },
 
+  // ─── Superficies oscuras (temas dark de producto) ───
+  //  Familia de superficies para UIs en modo oscuro. `brand` es el
+  //  azul-petróleo de identidad de CEICOL (heroes/banners dark);
+  //  `slate` es el neutro sobrio (mismo valor que contrast); `deep`
+  //  es el negro azulado para el fondo más profundo y paneles de datos.
+  surface: {
+    brand: '#0a2530', // petróleo de marca — superficie dark principal
+    slate: '#0f172a', // slate neutro (= contrast) — superficies sobrias
+    deep: '#020617', // negro azulado — fondo profundo / paneles tech
+  },
+
   // ─── Compat theme-gaia (deprecado) ───
   // Gaia usaba `cta` como su acento dorado. Se traduce al AZUL de marca
   // de CEICOL (decisión de marca: máxima cohesión en azul, como la landing).

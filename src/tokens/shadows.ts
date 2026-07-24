@@ -38,5 +38,6 @@ export const shadows = {
   md: customShadowsArray[4],
   lg: customShadowsArray[8],
   premium: customShadowsArray[16],
-  glow: '0 0 30px rgba(13, 148, 136, 0.08)',
+  glow: '0 0 30px rgba(13, 148, 136, 0.08)', // halo ambiental (acento turquesa)
+  glowTech: '0 0 8px rgba(34, 211, 238, 0.55)', // glow tenue y brillante (cian tech: nodos, indicadores activos)
 };

@@ -188,6 +188,12 @@ const themeOptions: ThemeOptions = {
       light: brandColors.contrast.light,
       contrastText: brandColors.text.white,
     },
+    // Superficies oscuras para temas dark de producto.
+    surface: {
+      brand: brandColors.surface.brand,
+      slate: brandColors.surface.slate,
+      deep: brandColors.surface.deep,
+    },
 
     // ─── Claves COMPAT con theme-gaia (deprecadas) ───
     // Mismos nombres que usa Gaia, con valores de CEICOL, para
