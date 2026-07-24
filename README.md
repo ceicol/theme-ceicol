@@ -200,7 +200,7 @@ Importa la hoja de custom properties y usa las variables `--cei-*`:
 .titulo { font-family: var(--cei-font-display); color: var(--cei-text-heading); }
 ```
 
-Variables disponibles: colores (`--cei-primary`, `--cei-accent`, `--cei-tech`, `--cei-success`, `--cei-warning`, `--cei-error`, `--cei-info`, `--cei-contrast`, `--cei-text-*`, `--cei-background-*`, `--cei-border-*`), tamaños de fuente (`--cei-font-size-hero`, `-h1`…`-h3`, `-body`, `-body-lg`, `-small`, `-xs`, `-xxs`, `-xxxs`), espaciado (`--cei-space-*`), radios (`--cei-radius-*`), sombras (`--cei-shadow-*`), transiciones (`--cei-transition-*`) y fuentes (`--cei-font-*`). No olvides cargar las fuentes vía Google Fonts (ver arriba).
+Variables disponibles: colores (`--cei-primary`, `--cei-accent`, `--cei-tech`, `--cei-success`, `--cei-warning`, `--cei-error`, `--cei-info`, `--cei-contrast`, `--cei-text-*`, `--cei-background-*`, `--cei-border-*`), tamaños de fuente (`--cei-font-size-hero`, `-h1`…`-h3`, `-body`, `-body-lg`, `-small`, `-xs`, `-xxs`, `-xxxs`), espaciado (`--cei-space-xxs` 4 · `-xtight` 6 · `-xs` 8 · `-xsm` 12 · `-sm` 16 · `-md` 24 · `-lg` 40 · `-xl` 80 · `-xxl` 140), radios (`--cei-radius-xs` 4 · `-sm` 6 · `-md` 12 · `-lg` 18 · `-xl` 24 · `-xxl` 54 · `-round` · `-pill`), sombras (`--cei-shadow-*`), transiciones (`--cei-transition-*`) y fuentes (`--cei-font-*`). No olvides cargar las fuentes vía Google Fonts (ver arriba).
 
 ### Tailwind
 
