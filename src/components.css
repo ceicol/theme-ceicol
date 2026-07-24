@@ -135,18 +135,32 @@
   color: var(--cei-primary);
 }
 
-/* ─── CARD / SUPERFICIE ─── */
+/* ─── CARD / SUPERFICIE ───
+   Usa los ROLES semánticos (semantic.css) para adaptarse a claro/oscuro,
+   con fallback al primitivo crudo si semantic.css no está cargado. */
 .cei-card {
-  background: var(--cei-background-paper);
-  border: 1px solid var(--cei-border-light);
+  background: var(--cei-bg-raised, var(--cei-background-paper));
+  color: var(--cei-fg, var(--cei-text-body));
+  border: 1px solid var(--cei-line, var(--cei-border-light));
   border-radius: var(--cei-radius-lg);
   padding: var(--cei-space-md);
-  box-shadow: var(--cei-shadow-sm);
+  box-shadow: var(--cei-elevation-1, var(--cei-shadow-sm));
   transition: var(--cei-transition-normal);
 }
 .cei-card--hover:hover {
-  box-shadow: var(--cei-shadow-lg);
+  box-shadow: var(--cei-elevation-3, var(--cei-shadow-lg));
   transform: translateY(-2px);
+}
+
+/* ─── GLASS / SUPERFICIE TRANSLÚCIDA (adaptable claro/oscuro) ───
+   Para contenedores con transparencia (tarjeta editorial de blog, paneles
+   flotantes, barras). Se tiñe del color de superficie del tema activo. */
+.cei-glass {
+  background: var(--cei-bg-glass, color-mix(in srgb, var(--cei-background-paper) 60%, transparent));
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--cei-line, var(--cei-border-light));
+  border-radius: var(--cei-radius-lg);
 }
 
 /* ─── CHIP / BADGE ─── */

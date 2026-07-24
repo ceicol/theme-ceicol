@@ -15,7 +15,9 @@
   --cei-bg:          var(--cei-background-default); /* fondo de página */
   --cei-bg-raised:   var(--cei-background-paper);   /* tarjetas, formularios */
   --cei-bg-sunken:   var(--cei-background-subtle);  /* secciones alternadas */
-  --cei-bg-inverse:  var(--cei-contrast);           /* footer, banners oscuros */
+  --cei-bg-inverse:  var(--cei-contrast);           /* banners (about, blog): color original del claro, estable en ambos temas */
+  --cei-bg-footer:   var(--cei-contrast);           /* footer: azul oscuro original en claro */
+  --cei-bg-glass:    color-mix(in srgb, var(--cei-bg-raised) 60%, transparent); /* superficie translúcida (vidrio) adaptable */
 
   /* Texto */
   --cei-fg:            var(--cei-text-body);    /* texto por defecto */
@@ -42,11 +44,13 @@
 :root[data-theme='dark'] {
   color-scheme: dark;
 
-  /* Superficies */
-  --cei-bg:          var(--cei-surface-deep);   /* negro azulado */
-  --cei-bg-raised:   var(--cei-surface-brand);  /* petróleo de marca */
-  --cei-bg-sunken:   var(--cei-surface-slate);  /* slate */
-  --cei-bg-inverse:  var(--cei-surface-brand);  /* se mantiene oscuro */
+  /* Superficies — solo voltean las que eran CLARAS en el tema claro.
+     --cei-bg-inverse NO se redefine: las secciones que ya eran oscuras
+     (footer, banners, about) se mantienen idénticas al original. */
+  --cei-bg:          var(--cei-surface-deep);   /* era claro → negro azulado */
+  --cei-bg-raised:   var(--cei-surface-brand);  /* era blanco → petróleo de marca */
+  --cei-bg-sunken:   var(--cei-surface-slate);  /* era gris claro → slate */
+  --cei-bg-footer:   var(--cei-surface-deep);   /* footer en dark = color base del navbar/página */
 
   /* Texto */
   --cei-fg:            var(--cei-text-white);
