@@ -112,9 +112,9 @@ Tres familias, cada una con rol exclusivo: **Big Shoulders Display** (títulos),
 import { spacingConstants, borderRadius } from 'theme-ceicol';
 ```
 
-**Espaciado (`spacingConstants`):** `xs` 8px · `sm` 16px · `md` 24px · `lg` 40px · `xl` 80px · `xxl` 140px
+**Espaciado (`spacingConstants`):** `xxs` 4px · `xtight` 6px · `xs` 8px · `xsm` 12px · `sm` 16px · `md` 24px · `lg` 40px · `xl` 80px · `xxl` 140px
 
-**Bordes (`borderRadius`):** `sm` 6px · `md` 12px · `lg` 18px · `xl` 24px · `xxl` 54px · `round` 50%
+**Bordes (`borderRadius`):** `xs` 4px · `sm` 6px · `md` 12px · `lg` 18px · `xl` 24px · `xxl` 54px · `round` 50% · `pill` 9999px
 
 ```tsx
 <Box sx={{ p: spacingConstants.md, borderRadius: borderRadius.lg }} />
@@ -128,9 +128,9 @@ También accesibles desde el tema: `theme.customSpacing`, `theme.customShape`.
 import { shadows, glassEffect } from 'theme-ceicol';
 ```
 
-**Sombras (`shadows`):** `sm` · `md` · `lg` · `premium` · `glow`
+**Sombras (`shadows`):** `sm` · `md` · `lg` · `premium` · `glow` (halo turquesa) · `glowTech` (glow cian brillante)
 
-**Glassmorphism (`glassEffect`):** objeto helper con fondo semitransparente, blur y borde.
+**Glassmorphism:** para superficies translúcidas que se **adaptan al tema** usa los roles `--cei-bg-glass*` o el primitivo `.cei-glass` (ver la sección [Temas](#temas-claro--oscuro-capa-semántica)). El helper JS `glassEffect` (estático) se mantiene para casos legacy.
 
 ```tsx
 <Box sx={{ ...glassEffect, boxShadow: shadows.premium }} />
@@ -179,6 +179,49 @@ Para facilitar la migración de productos que consumen `theme-gaia`, el tema tam
 
 Estas claves están marcadas como deprecadas; los proyectos nuevos deben usar la API principal de CEICOL.
 
+## Temas: claro / oscuro (capa semántica)
+
+Sobre los tokens crudos (`--cei-*`), el sistema expone una **capa semántica de roles** (`theme-ceicol/semantic.css`). Los componentes consumen *roles* (el fondo de página, el texto de cuerpo, un borde…) en vez de colores concretos, y **un tema no es más que una reasignación de esos roles**. Cambiar de tema no toca ningún componente.
+
+```css
+@import 'theme-ceicol/tokens.css';    /* 1. tokens crudos (valores de marca) */
+@import 'theme-ceicol/semantic.css';  /* 2. roles: mapa claro + bloque [data-theme="dark"] */
+```
+
+Activar el tema oscuro con un atributo en `<html>`:
+
+```js
+document.documentElement.setAttribute('data-theme', 'dark'); // o 'light'
+```
+
+Para evitar el parpadeo (FOUC), fija el atributo con un script inline en el `<head>` antes de pintar, leyendo `localStorage` y/o `prefers-color-scheme`.
+
+**Roles disponibles** (úsalos en los componentes en lugar de los tokens crudos):
+
+| Rol | Uso | ¿Voltea? |
+| --- | --- | --- |
+| `--cei-bg` | Fondo de página | sí |
+| `--cei-bg-raised` | Tarjetas, superficies elevadas | sí |
+| `--cei-bg-sunken` | Secciones alternadas | sí |
+| `--cei-bg-inverse` | Banners / secciones oscuras | no (estable) |
+| `--cei-bg-footer` | Footer | sí |
+| `--cei-fg` | Texto de cuerpo | sí |
+| `--cei-fg-strong` | Títulos / máximo énfasis | sí |
+| `--cei-fg-muted` | Texto secundario | sí |
+| `--cei-fg-on-inverse` · `--cei-fg-on-brand` | Texto sobre superficie oscura / sobre marca | estable |
+| `--cei-line` · `--cei-line-strong` | Bordes | sí |
+| `--cei-brand` · `--cei-brand-hover` | Color de marca interactivo | sí |
+| `--cei-elevation-1` · `-2` · `-3` | Sombras por nivel | sí |
+
+**Vidrio (superficies translúcidas) adaptable:** `--cei-bg-glass-soft` (55%) · `--cei-bg-glass` (72%) · `--cei-bg-glass-strong` (85%). Se tiñen del color de superficie del tema activo; también disponible como primitivo `.cei-glass`.
+
+```css
+.panel { background: var(--cei-bg-raised); color: var(--cei-fg); border: 1px solid var(--cei-line); }
+.flotante { background: var(--cei-bg-glass); backdrop-filter: blur(12px); }
+```
+
+> Los tonos de **marca, acento y estado** (`--cei-primary`, `--cei-accent`, `--cei-success`…) se mantienen estables entre temas; solo voltean superficies, texto, bordes y elevación. Los productos MUI también pueden cargar `semantic.css` y usar `data-theme` para compartir exactamente la misma semántica.
+
 ## Uso sin MUI (CSS puro / Astro / Tailwind)
 
 Los mismos tokens (misma fuente de verdad que el tema MUI) están disponibles fuera de React.
@@ -201,7 +244,9 @@ Importa la hoja de custom properties y usa las variables `--cei-*`:
 .titulo { font-family: var(--cei-font-display); color: var(--cei-text-heading); }
 ```
 
-Variables disponibles: colores (`--cei-primary`, `--cei-accent`, `--cei-tech`, `--cei-success`, `--cei-warning`, `--cei-error`, `--cei-info`, `--cei-contrast`, `--cei-text-*`, `--cei-background-*`, `--cei-border-*`), superficies dark (`--cei-surface-brand`, `--cei-surface-slate`, `--cei-surface-deep`), tamaños de fuente (`--cei-font-size-hero`, `-h1`…`-h3`, `-body`, `-body-lg`, `-small`, `-xs`, `-xxs`, `-xxxs`), espaciado (`--cei-space-xxs` 4 · `-xtight` 6 · `-xs` 8 · `-xsm` 12 · `-sm` 16 · `-md` 24 · `-lg` 40 · `-xl` 80 · `-xxl` 140), radios (`--cei-radius-xs` 4 · `-sm` 6 · `-md` 12 · `-lg` 18 · `-xl` 24 · `-xxl` 54 · `-round` · `-pill`), sombras (`--cei-shadow-*`), transiciones (`--cei-transition-*`) y fuentes (`--cei-font-*`). No olvides cargar las fuentes vía Google Fonts (ver arriba).
+Variables disponibles: colores (`--cei-primary`, `--cei-accent`, `--cei-tech`, `--cei-success`, `--cei-warning`, `--cei-error`, `--cei-info`, `--cei-contrast`, `--cei-text-*`, `--cei-background-*`, `--cei-border-*`), superficies dark (`--cei-surface-brand`, `--cei-surface-slate`, `--cei-surface-deep`), tamaños de fuente (`--cei-font-size-hero`, `-h1`…`-h3`, `-body`, `-body-lg`, `-small`, `-xs`, `-xxs`, `-xxxs`), espaciado (`--cei-space-xxs` 4 · `-xtight` 6 · `-xs` 8 · `-xsm` 12 · `-sm` 16 · `-md` 24 · `-lg` 40 · `-xl` 80 · `-xxl` 140), radios (`--cei-radius-xs` 4 · `-sm` 6 · `-md` 12 · `-lg` 18 · `-xl` 24 · `-xxl` 54 · `-round` · `-pill`), sombras (`--cei-shadow-*`, incluye `--cei-shadow-glow` y `--cei-shadow-glow-tech`), transiciones (`--cei-transition-*`) y fuentes (`--cei-font-*`). No olvides cargar las fuentes vía Google Fonts (ver arriba).
+
+> Para soporte de **tema oscuro**, importa además `theme-ceicol/semantic.css` y consume los **roles** (`--cei-bg`, `--cei-fg`, `--cei-line`, `--cei-bg-glass*`…) en lugar de los tokens crudos. Ver la sección [Temas](#temas-claro--oscuro-capa-semántica).
 
 ### Tailwind
 
@@ -230,8 +275,9 @@ export default {
 Primitivos de componentes para proyectos CSS puro / Astro, alimentados por los tokens. Los productos React+MUI usan las variantes/estilos equivalentes del tema; estas clases son el espejo para no-MUI.
 
 ```html
-<!-- requiere tokens.css primero -->
+<!-- requiere tokens.css primero; semantic.css habilita temas claro/oscuro -->
 <link rel="stylesheet" href="theme-ceicol/tokens.css" />
+<link rel="stylesheet" href="theme-ceicol/semantic.css" />
 <link rel="stylesheet" href="theme-ceicol/components.css" />
 ```
 
@@ -239,6 +285,7 @@ O en un `.css`/`.astro`:
 
 ```css
 @import 'theme-ceicol/tokens.css';
+@import 'theme-ceicol/semantic.css';
 @import 'theme-ceicol/components.css';
 ```
 
@@ -272,13 +319,16 @@ Utilidades: `cei-h1`…`cei-h4`, `cei-body`, `cei-body-lg`, `cei-small`, `cei-ov
 ```html
 <div class="cei-card cei-card--hover">Contenido</div>
 
+<!-- Superficie translúcida adaptable (claro/oscuro) -->
+<div class="cei-glass">Panel flotante</div>
+
 <span class="cei-badge">Nuevo</span>
 <span class="cei-badge cei-badge--success">Activo</span>
 
 <div class="cei-alert cei-alert--error">Algo salió mal.</div>
 ```
 
-Badge: `--accent`, `--success`, `--warning`, `--error`, `--neutral`. Alert: `--success`, `--warning`, `--error`, `--info`.
+Badge: `--accent`, `--success`, `--warning`, `--error`, `--neutral`. Alert: `--success`, `--warning`, `--error`, `--info`. `cei-card` y `cei-glass` se adaptan al tema si `semantic.css` está cargado.
 
 ### Formularios
 

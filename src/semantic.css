@@ -17,7 +17,11 @@
   --cei-bg-sunken:   var(--cei-background-subtle);  /* secciones alternadas */
   --cei-bg-inverse:  var(--cei-contrast);           /* banners (about, blog): color original del claro, estable en ambos temas */
   --cei-bg-footer:   var(--cei-contrast);           /* footer: azul oscuro original en claro */
-  --cei-bg-glass:    color-mix(in srgb, var(--cei-bg-raised) 60%, transparent); /* superficie translúcida (vidrio) adaptable */
+  /* Superficies translúcidas (vidrio) adaptables — niveles nombrados.
+     El tinte (--cei-bg-raised) voltea por tema; solo cambia la opacidad. */
+  --cei-bg-glass-soft:   color-mix(in srgb, var(--cei-bg-raised) 55%, transparent);
+  --cei-bg-glass:        color-mix(in srgb, var(--cei-bg-raised) 72%, transparent);
+  --cei-bg-glass-strong: color-mix(in srgb, var(--cei-bg-raised) 85%, transparent);
 
   /* Texto */
   --cei-fg:            var(--cei-text-body);    /* texto por defecto */
