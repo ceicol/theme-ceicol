@@ -497,6 +497,8 @@ const themeOptions: ThemeOptions = {
 
     // Alert — fondo teñido del color semántico sobre la superficie del tema
     // (color-mix adapta el tinte a claro/oscuro); texto por rol.
+    // MUI 9: los estilos por-severidad se declaran con la API `variants`
+    // (los slots standardSuccess/… se removieron del styleOverrides).
     MuiAlert: {
       styleOverrides: {
         root: {
@@ -505,11 +507,25 @@ const themeOptions: ThemeOptions = {
           fontFamily: fontFamilies.body,
           color: `var(--cei-fg-strong, ${brandColors.text.heading})`,
         },
-        standardSuccess: { backgroundColor: `color-mix(in srgb, var(--cei-success) 14%, var(--cei-bg-raised, ${brandColors.background.paper}))`, borderLeftColor: brandColors.success.main },
-        standardWarning: { backgroundColor: `color-mix(in srgb, var(--cei-warning) 14%, var(--cei-bg-raised, ${brandColors.background.paper}))`, borderLeftColor: brandColors.warning.main },
-        standardError: { backgroundColor: `color-mix(in srgb, var(--cei-error) 14%, var(--cei-bg-raised, ${brandColors.background.paper}))`, borderLeftColor: brandColors.error.main },
-        standardInfo: { backgroundColor: `color-mix(in srgb, var(--cei-info) 14%, var(--cei-bg-raised, ${brandColors.background.paper}))`, borderLeftColor: brandColors.info.main },
       },
+      variants: [
+        {
+          props: { variant: 'standard', severity: 'success' },
+          style: { backgroundColor: `color-mix(in srgb, var(--cei-success) 14%, var(--cei-bg-raised, ${brandColors.background.paper}))`, borderLeftColor: brandColors.success.main },
+        },
+        {
+          props: { variant: 'standard', severity: 'warning' },
+          style: { backgroundColor: `color-mix(in srgb, var(--cei-warning) 14%, var(--cei-bg-raised, ${brandColors.background.paper}))`, borderLeftColor: brandColors.warning.main },
+        },
+        {
+          props: { variant: 'standard', severity: 'error' },
+          style: { backgroundColor: `color-mix(in srgb, var(--cei-error) 14%, var(--cei-bg-raised, ${brandColors.background.paper}))`, borderLeftColor: brandColors.error.main },
+        },
+        {
+          props: { variant: 'standard', severity: 'info' },
+          style: { backgroundColor: `color-mix(in srgb, var(--cei-info) 14%, var(--cei-bg-raised, ${brandColors.background.paper}))`, borderLeftColor: brandColors.info.main },
+        },
+      ],
     },
 
     // Chip — pill con la gama CEICOL
