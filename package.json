@@ -25,21 +25,27 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts src/tokens.ts --format cjs,esm --dts --clean && node scripts/gen-tokens-css.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "check:tokens": "node scripts/check-tokens.mjs",
+    "ci": "npm run typecheck && npm run lint:css && npm run build && npm run check:tokens",
     "release": "bash scripts/release.sh"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",
     "@emotion/styled": ">=11",
     "@mui/material": ">=5",
-    "react": ">=17"
+    "react": ">=18"
   },
   "devDependencies": {
-    "@emotion/react": "^11.11.0",
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.15.0",
-    "@types/react": "^18.3.31",
-    "react": "^18.2.0",
-    "tsup": "^8.0.0",
-    "typescript": "^5.4.0"
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.0.0",
+    "@types/react": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "stylelint": "^16.10.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0"
   }
 }

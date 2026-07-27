@@ -6,8 +6,8 @@ Sistema de diseño centralizado para el ecosistema de aplicaciones de CEICOL. Co
 
 ## Requisitos
 
-- React >= 17
-- @mui/material >= 5
+- React >= 18 (desarrollado y probado con **React 19**)
+- @mui/material >= 5 (desarrollado y probado con **MUI 7**)
 - @emotion/react
 - @emotion/styled
 

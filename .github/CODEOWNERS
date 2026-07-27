@@ -1,6 +1,5 @@
 # CODEOWNERS — theme-ceicol
 # Cada PR que toque estas rutas requiere revisión del/los owner(s).
-# Reemplaza @USUARIO-GITHUB por el handle real del mantenedor (o un equipo, p. ej. @ceicol/design-system).
 
 # Owner por defecto de todo el repositorio
 * @Andrssnsdc

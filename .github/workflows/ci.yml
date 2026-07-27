@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  quality:
+    name: Calidad (tipos, lint, build, contrato)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # devDeps son públicas de npm; el git+ssh solo aplica a consumidores.
+      - name: Instalar dependencias
+        run: npm install --no-audit --no-fund
+
+      - name: Type-check (tsc --noEmit)
+        run: npm run typecheck
+
+      - name: Lint CSS (tokens/roles, sin hex crudo)
+        run: npm run lint:css
+
+      - name: Build (tema + tokens.css + semantic.css + components.css)
+        run: npm run build
+
+      - name: Contrato de tokens
+        run: npm run check:tokens

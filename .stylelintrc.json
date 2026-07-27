@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "color-no-hex": true,
+    "color-named": "never",
+    "custom-property-pattern": "^cei-[a-z0-9-]+$"
+  }
+}

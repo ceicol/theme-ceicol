@@ -16,6 +16,11 @@ if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
   exit 1
 fi
 
+# 0.5 Gates de calidad: no se publica una versión que no pase tipos y lint.
+echo "▶ Validando tipos y CSS…"
+npm run typecheck
+npm run lint:css
+
 # 1. Sube la versión en package.json (sin crear tag automático)
 npm version "$BUMP" --no-git-tag-version
 VERSION="$(npm pkg get version | tr -d '"')"
@@ -32,6 +37,8 @@ git push origin main
 
 # 4. Compila y publica el tag con el dist incluido
 npm run build
+# 4.1 Contrato de tokens sobre el dist recién compilado (aborta si se rompió algo).
+npm run check:tokens
 git add -f dist
 git commit -m "build: $TAG"
 git tag "$TAG"
