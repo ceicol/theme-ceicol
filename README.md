@@ -272,24 +272,42 @@ Variables disponibles: colores (`--cei-primary`, `--cei-accent`, `--cei-tech`, `
 
 ### Tailwind
 
-Importa los tokens como objeto JS en `tailwind.config`:
+Usa el **preset generado** desde los tokens — sin mapear nada a mano:
 
 ```js
-import { brandColors, spacingConstants, borderRadius } from 'theme-ceicol/tokens';
-
-export default {
-  theme: {
-    extend: {
-      colors: {
-        primary: brandColors.primary.main,
-        accent: brandColors.accent.main,
-        // …o mapea las variables CSS: primary: 'var(--cei-primary)'
-      },
-      borderRadius: { md: borderRadius.md },
-      spacing: { md: spacingConstants.md },
-    },
-  },
+// tailwind.config.js
+module.exports = {
+  presets: [require('theme-ceicol/tailwind')],
+  content: ['./src/**/*.{astro,html,js,jsx,ts,tsx}'],
 };
+```
+
+Con eso tienes `bg-primary`, `text-fg`, `p-md`, `rounded-lg`, `shadow-premium`, etc. Los colores de marca/estado son concretos (soportan opacidad: `bg-primary/50`); los **roles** (`bg`, `bg-raised`, `fg`, `line`, `elevation-*`…) usan `var(--cei-*)` y voltean con el tema (requiere cargar `semantic.css` + `data-theme`).
+
+Alternativa manual: `import { brandColors } from 'theme-ceicol/tokens'` y mapea tú mismo.
+
+### Autocompletado de `--cei-*` en el editor
+
+VS Code autocompleta variables CSS presentes en el workspace. Para que sugiera los `--cei-*` del paquete, usa una extensión de variables CSS (p. ej. *CSS Variable Autocomplete*) apuntándola a los archivos ya publicados:
+
+```jsonc
+// .vscode/settings.json del proyecto consumidor
+"cssVariables.lookupFiles": [
+  "node_modules/theme-ceicol/dist/tokens.css",
+  "node_modules/theme-ceicol/dist/semantic.css"
+]
+```
+
+Para Tailwind, la extensión oficial *Tailwind CSS IntelliSense* autocompleta las clases del preset automáticamente.
+
+### Tokens en formato estándar (DTCG) — para herramientas y agentes
+
+El paquete también expone los tokens en el formato **W3C Design Tokens (DTCG)** en `theme-ceicol/tokens.json`, generado desde la misma fuente. Es un artefacto estándar, ideal como **fuente de verdad para herramientas de diseño y agentes de IA**: primitivos con `$type`/`$value`, roles semánticos con alias (`{color.background.default}`) y el valor de tema oscuro en `$extensions`.
+
+```js
+import tokens from 'theme-ceicol/tokens.json' with { type: 'json' };
+// tokens.color.primary.main.$value → "#007298"
+// tokens.semantic.bg.$value → "{color.background.default}"  (dark en $extensions)
 ```
 
 ## Componentes CSS (`.cei-*`)

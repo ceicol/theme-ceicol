@@ -39,6 +39,8 @@ const outputs = {
   'dist/tokens.css': ['--cei-primary', '--cei-tech', '--cei-space-md', '--cei-radius-md'],
   'dist/semantic.css': ['--cei-bg', '--cei-fg', '--cei-line', '--cei-bg-glass'],
   'dist/components.css': ['.cei-btn', '.cei-card', '.cei-glass'],
+  'dist/tokens.json': ['"$value"', '"color"', '"semantic"', '"$type"'],
+  'dist/tailwind.cjs': ['module.exports', 'colors', 'boxShadow'],
 };
 for (const [file, needles] of Object.entries(outputs)) {
   const path = resolve(root, file);
