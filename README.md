@@ -451,6 +451,14 @@ npm run release -- minor   # o major
 
 El script sube la versión en `package.json`, actualiza el comando de instalación de este README, compila y publica un tag `vX.Y.Z` con el `dist` incluido, dejando `main` sin artefactos de build.
 
+Antes de publicar, mueve los cambios de `[Unreleased]` a la nueva versión en el [CHANGELOG](./CHANGELOG.md).
+
+## Gobernanza
+
+- **[CHANGELOG.md](./CHANGELOG.md)** — qué cambió en cada versión.
+- **[CONTRIBUTING.md](./CONTRIBUTING.md)** — cómo contribuir, "Definition of Done", Conventional Commits, política de versionado (SemVer) y de deprecación.
+- Cambios en `src/tokens/`, `src/theme.ts` y `src/semantic.css` requieren revisión de un CODEOWNER.
+
 ## Solución de problemas
 
 **Los cambios no se reflejan tras actualizar:** verifica que el tag en el comando de instalación apunte a la versión deseada y limpia la caché de dependencias Git del proyecto consumidor (borra `node_modules` y el lockfile, reinstala).
