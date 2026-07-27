@@ -309,13 +309,13 @@ const themeOptions: ThemeOptions = {
         {
           props: { variant: 'cei-secondary' },
           style: {
-            backgroundColor: brandColors.background.paper,
-            color: brandColors.text.heading,
-            border: `1px solid ${brandColors.border.light}`,
+            backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
+            color: `var(--cei-fg-strong, ${brandColors.text.heading})`,
+            border: `1px solid var(--cei-line, ${brandColors.border.light})`,
             boxShadow: shadows.sm,
             '&:hover': {
-              backgroundColor: brandColors.background.subtle,
-              borderColor: brandColors.border.medium,
+              backgroundColor: `var(--cei-bg-sunken, ${brandColors.background.subtle})`,
+              borderColor: `var(--cei-line-strong, ${brandColors.border.medium})`,
               transform: 'translateY(-2px)',
             },
             '&:active': { transform: 'translateY(0) scale(0.98)' },
@@ -326,11 +326,11 @@ const themeOptions: ThemeOptions = {
           props: { variant: 'cei-ghost' },
           style: {
             backgroundColor: 'transparent',
-            color: brandColors.text.heading,
+            color: `var(--cei-fg-strong, ${brandColors.text.heading})`,
             border: 'none',
             boxShadow: 'none',
             '&:hover': {
-              backgroundColor: brandColors.background.subtle,
+              backgroundColor: `var(--cei-bg-sunken, ${brandColors.background.subtle})`,
             },
             '&:active': { transform: 'scale(0.98)' },
           },
@@ -389,14 +389,14 @@ const themeOptions: ThemeOptions = {
         {
           props: { variant: 'gaia-cta-outlined' },
           style: {
-            backgroundColor: brandColors.background.paper,
-            color: brandColors.text.heading,
-            border: `1px solid ${brandColors.border.light}`,
+            backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
+            color: `var(--cei-fg-strong, ${brandColors.text.heading})`,
+            border: `1px solid var(--cei-line, ${brandColors.border.light})`,
             borderRadius: borderRadius.md,
             boxShadow: shadows.sm,
             '&:hover': {
-              backgroundColor: brandColors.background.subtle,
-              borderColor: brandColors.border.medium,
+              backgroundColor: `var(--cei-bg-sunken, ${brandColors.background.subtle})`,
+              borderColor: `var(--cei-line-strong, ${brandColors.border.medium})`,
             },
             '&:active': { transform: 'scale(0.98)' },
           },
@@ -409,7 +409,7 @@ const themeOptions: ThemeOptions = {
             height: '40px',
             padding: '8px',
             borderRadius: borderRadius.round,
-            backgroundColor: brandColors.background.paper,
+            backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
             color: brandColors.primary.main,
             border: '1px solid transparent',
             '&:hover': { boxShadow: shadows.sm },
@@ -428,7 +428,7 @@ const themeOptions: ThemeOptions = {
             height: '40px',
             padding: '8px',
             borderRadius: borderRadius.round,
-            backgroundColor: brandColors.background.paper,
+            backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
             color: brandColors.primary.main,
             border: `1px solid ${brandColors.primary.main}`,
             '&:hover': { boxShadow: shadows.sm, borderColor: 'transparent' },
@@ -487,22 +487,28 @@ const themeOptions: ThemeOptions = {
         root: {
           borderRadius: borderRadius.md,
           transition: `border-color ${durNormal}ms ${easeOut}`,
+          // Borde del input → rol (visible en claro y oscuro)
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: `var(--cei-line-strong, ${brandColors.border.medium})`,
+          },
         },
       },
     },
 
-    // Alert — estilo con borde izquierdo de acento (espejo de .cei-alert)
+    // Alert — fondo teñido del color semántico sobre la superficie del tema
+    // (color-mix adapta el tinte a claro/oscuro); texto por rol.
     MuiAlert: {
       styleOverrides: {
         root: {
           borderRadius: borderRadius.md,
           borderLeft: '3px solid',
           fontFamily: fontFamilies.body,
+          color: `var(--cei-fg-strong, ${brandColors.text.heading})`,
         },
-        standardSuccess: { backgroundColor: brandColors.success.bg, borderLeftColor: brandColors.success.main, color: brandColors.text.heading },
-        standardWarning: { backgroundColor: brandColors.warning.bg, borderLeftColor: brandColors.warning.main, color: brandColors.text.heading },
-        standardError: { backgroundColor: brandColors.error.bg, borderLeftColor: brandColors.error.main, color: brandColors.text.heading },
-        standardInfo: { backgroundColor: brandColors.info.bg, borderLeftColor: brandColors.info.main, color: brandColors.text.heading },
+        standardSuccess: { backgroundColor: `color-mix(in srgb, var(--cei-success) 14%, var(--cei-bg-raised, ${brandColors.background.paper}))`, borderLeftColor: brandColors.success.main },
+        standardWarning: { backgroundColor: `color-mix(in srgb, var(--cei-warning) 14%, var(--cei-bg-raised, ${brandColors.background.paper}))`, borderLeftColor: brandColors.warning.main },
+        standardError: { backgroundColor: `color-mix(in srgb, var(--cei-error) 14%, var(--cei-bg-raised, ${brandColors.background.paper}))`, borderLeftColor: brandColors.error.main },
+        standardInfo: { backgroundColor: `color-mix(in srgb, var(--cei-info) 14%, var(--cei-bg-raised, ${brandColors.background.paper}))`, borderLeftColor: brandColors.info.main },
       },
     },
 
@@ -513,17 +519,17 @@ const themeOptions: ThemeOptions = {
       },
     },
 
-    // Dialog / Modal — radio y sombra premium
+    // Dialog / Modal — radio y sombra premium (paper hereda background.paper → rol)
     MuiDialog: {
       styleOverrides: {
         paper: { borderRadius: borderRadius.lg, boxShadow: shadows.premium },
       },
     },
 
-    // Tabs — indicador y tab activo en azul de marca
+    // Tabs — indicador y tab activo en el azul de marca (rol: aclara en oscuro)
     MuiTabs: {
       styleOverrides: {
-        indicator: { backgroundColor: brandColors.primary.main, height: 2 },
+        indicator: { backgroundColor: `var(--cei-brand, ${brandColors.primary.main})`, height: 2 },
       },
     },
     MuiTab: {
@@ -531,55 +537,56 @@ const themeOptions: ThemeOptions = {
         root: {
           textTransform: 'none',
           fontWeight: 500,
-          color: brandColors.text.muted,
-          '&.Mui-selected': { color: brandColors.primary.main, fontWeight: 700 },
+          color: `var(--cei-fg-muted, ${brandColors.text.muted})`,
+          '&.Mui-selected': { color: `var(--cei-brand, ${brandColors.primary.main})`, fontWeight: 700 },
         },
       },
     },
 
-    // Tabla de datos
+    // Tabla de datos — texto y bordes por rol
     MuiTableCell: {
       styleOverrides: {
         head: {
           fontWeight: 700,
-          color: brandColors.text.heading,
-          borderBottom: `2px solid ${brandColors.border.medium}`,
+          color: `var(--cei-fg-strong, ${brandColors.text.heading})`,
+          borderBottom: `2px solid var(--cei-line-strong, ${brandColors.border.medium})`,
         },
-        root: { borderBottom: `1px solid ${brandColors.border.light}` },
+        root: { borderBottom: `1px solid var(--cei-line, ${brandColors.border.light})` },
       },
     },
 
-    // Avatar — fallback con fondo de marca
+    // Avatar — fondo teñido de marca adaptable
     MuiAvatar: {
       styleOverrides: {
         root: {
-          backgroundColor: brandColors.primary.bg,
-          color: brandColors.primary.dark,
+          backgroundColor: `color-mix(in srgb, var(--cei-primary) 12%, var(--cei-bg-raised, ${brandColors.background.paper}))`,
+          color: `var(--cei-brand, ${brandColors.primary.dark})`,
           fontFamily: fontFamilies.body,
           fontWeight: 600,
         },
       },
     },
 
-    // Accordion — sin sombra dura, bordes suaves
+    // Accordion — bordes suaves por rol; fondo por rol
     MuiAccordion: {
       styleOverrides: {
         root: {
-          border: `1px solid ${brandColors.border.light}`,
+          border: `1px solid var(--cei-line, ${brandColors.border.light})`,
           borderRadius: `${borderRadius.md} !important`,
           boxShadow: 'none',
+          backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
           '&::before': { display: 'none' },
         },
       },
     },
 
-    // Paginación — item activo en azul de marca
+    // Paginación — item activo en azul de marca (rol)
     MuiPaginationItem: {
       styleOverrides: {
         root: {
           borderRadius: borderRadius.md,
           '&.Mui-selected': {
-            backgroundColor: brandColors.primary.main,
+            backgroundColor: `var(--cei-brand, ${brandColors.primary.main})`,
             color: brandColors.text.white,
           },
         },
