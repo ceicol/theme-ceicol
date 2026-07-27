@@ -220,7 +220,29 @@ Para evitar el parpadeo (FOUC), fija el atributo con un script inline en el `<he
 .flotante { background: var(--cei-bg-glass); backdrop-filter: blur(12px); }
 ```
 
-> Los tonos de **marca, acento y estado** (`--cei-primary`, `--cei-accent`, `--cei-success`…) se mantienen estables entre temas; solo voltean superficies, texto, bordes y elevación. Los productos MUI también pueden cargar `semantic.css` y usar `data-theme` para compartir exactamente la misma semántica.
+> Los tonos de **marca, acento y estado** (`--cei-primary`, `--cei-accent`, `--cei-success`…) se mantienen estables entre temas; solo voltean superficies, texto, bordes y elevación.
+
+### En MUI (React)
+
+El tema oscuro de MUI usa **la misma fuente de verdad**: la paleta de `AppTheme` referencia los roles (`background`, `text`, `divider` apuntan a `var(--cei-bg)`, `var(--cei-fg)`, `var(--cei-line)`…), con fallback al valor claro. No hay una paleta dark duplicada en JS. Para habilitarlo:
+
+```tsx
+import 'theme-ceicol/semantic.css'; // 1. carga los roles (claro + oscuro)
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import { AppTheme } from 'theme-ceicol';
+
+<ThemeProvider theme={AppTheme}>
+  <CssBaseline /> {/* aplica background/text desde los roles */}
+  <App />
+</ThemeProvider>
+```
+
+```js
+// 2. alternar tema (mismo atributo que el resto del sistema)
+document.documentElement.setAttribute('data-theme', 'dark'); // o 'light'
+```
+
+Los componentes MUI que usan `background.*`, `text.*` y `divider` voltean solos al cambiar `data-theme`, porque leen las variables CSS vivas. Si **no** cargas `semantic.css`, el tema funciona igual en claro (usa los fallbacks). Nota: los overrides de componentes con color de superficie fijo pueden requerir referenciar roles para un dark 100% pulido.
 
 ## Uso sin MUI (CSS puro / Astro / Tailwind)
 

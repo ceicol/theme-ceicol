@@ -235,16 +235,20 @@ const themeOptions: ThemeOptions = {
       contrastText: brandColors.text.white,
     },
 
+    // Superficies, texto y borde → referencian los ROLES de semantic.css
+    // (con fallback al token crudo si semantic.css no está cargado). Así el
+    // tema oscuro de MUI usa la MISMA fuente de verdad que el CSS: basta
+    // cargar semantic.css y alternar data-theme; no hay paleta dark duplicada.
     text: {
-      primary: brandColors.text.body,
-      secondary: brandColors.text.muted,
+      primary: `var(--cei-fg, ${brandColors.text.body})`,
+      secondary: `var(--cei-fg-muted, ${brandColors.text.muted})`,
       light: brandColors.text.white, // compat theme-gaia: texto sobre fondos oscuros
     },
     background: {
-      default: brandColors.background.default,
-      paper: brandColors.background.paper,
+      default: `var(--cei-bg, ${brandColors.background.default})`,
+      paper: `var(--cei-bg-raised, ${brandColors.background.paper})`,
     },
-    divider: brandColors.border.light,
+    divider: `var(--cei-line, ${brandColors.border.light})`,
   },
 
   // API principal (variantes h1–h4, body1…) + variantes COMPAT de Gaia
