@@ -12,6 +12,7 @@ import {
   fontFamilies,
   fontSizes,
   animations,
+  semanticRoles,
 } from '../dist/tokens.mjs';
 
 const lines = [
@@ -62,9 +63,31 @@ copyFileSync(
 );
 console.log('✓ dist/components.css copiado');
 
-// Copiar la capa semántica (roles claro/oscuro) al dist
-copyFileSync(
-  new URL('../src/semantic.css', import.meta.url),
-  new URL('../dist/semantic.css', import.meta.url),
-);
-console.log('✓ dist/semantic.css copiado');
+// Generar la capa semántica (roles claro/oscuro) desde semanticRoles (TS).
+function genSemanticCss() {
+  const out = [
+    '/* CEICOL — capa semántica (roles) · generado desde theme-ceicol. NO editar a mano. */',
+    '/* Los componentes consumen estos roles; un tema los reasigna. Requiere tokens.css. */',
+    '',
+    ':root {',
+    '  color-scheme: light;',
+  ];
+  for (const group of semanticRoles) {
+    out.push('', `  /* ${group.title} */`);
+    for (const [name, role] of Object.entries(group.roles)) {
+      const c = role.comment ? ` /* ${role.comment} */` : '';
+      out.push(`  --cei-${name}: ${role.light};${c}`);
+    }
+  }
+  out.push('}', '', ":root[data-theme='dark'] {", '  color-scheme: dark;');
+  for (const group of semanticRoles) {
+    const dark = Object.entries(group.roles).filter(([, r]) => r.dark != null);
+    if (!dark.length) continue;
+    out.push('', `  /* ${group.title} */`);
+    for (const [name, role] of dark) out.push(`  --cei-${name}: ${role.dark};`);
+  }
+  out.push('}', '');
+  return out.join('\n');
+}
+writeFileSync(new URL('../dist/semantic.css', import.meta.url), genSemanticCss());
+console.log('✓ dist/semantic.css generado');

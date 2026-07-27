@@ -15,3 +15,5 @@ export { borderRadius, spacingConstants } from './tokens/layout';
 export { shadows, glassEffect } from './tokens/shadows';
 export { animations, transitionStyles } from './tokens/animations';
 export { fontFamilies, fontSizes } from './tokens/typography';
+export { semanticRoles } from './tokens/semantic';
+export type { SemanticRole, SemanticGroup } from './tokens/semantic';
