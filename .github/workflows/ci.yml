@@ -5,19 +5,27 @@ on:
   push:
     branches: [main]
 
+# Repo público: mínimo privilegio. El CI solo lee el código; no escribe nada.
+# Los PRs desde forks corren con token de solo lectura por defecto.
+permissions:
+  contents: read
+
 jobs:
   quality:
     name: Calidad (tipos, lint, build, contrato)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
         with:
-          node-version: 20
+          persist-credentials: false # no dejar el token de git en el runner tras el checkout
 
-      # devDeps son públicas de npm; el git+ssh solo aplica a consumidores.
-      # npm ci = instalación reproducible desde package-lock.json.
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24 # Active LTS (EOL abr 2028); Node 20 quedó EOL en abr 2026
+          cache: npm # cachea desde package-lock.json (instalaciones más rápidas y estables)
+
+      # Todas las devDeps vienen del registro público de npm → npm ci es reproducible.
+      # npm ci = instalación exacta desde package-lock.json (debe estar commiteado y en sync).
       - name: Instalar dependencias
         run: npm ci --no-audit --no-fund
 
