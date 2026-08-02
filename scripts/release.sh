@@ -30,8 +30,10 @@ TAG="v$VERSION"
 sed -i.bak -E "s|(theme-ceicol\.git#)v[0-9]+\.[0-9]+\.[0-9]+|\1$TAG|g" README.md
 rm -f README.md.bak
 
-# 3. Commit del bump + README en main
-git add package.json README.md
+# 3. Commit del bump + README en main.
+#    Incluye package-lock.json: `npm version` (paso 1) también sube la versión ahí,
+#    y si no se commitea queda un desync package.json ↔ lock en main.
+git add package.json package-lock.json README.md
 git commit -m "chore: release $TAG"
 git push origin main
 
