@@ -31,7 +31,8 @@
     "lint:css": "stylelint \"src/**/*.css\"",
     "check:tokens": "node scripts/check-tokens.mjs",
     "check:mui-parity": "node scripts/check-mui-parity.mjs",
-    "ci": "npm run typecheck && npm run lint:css && npm run build && npm run check:tokens && npm run check:mui-parity",
+    "check:theme": "node scripts/check-theme.mjs",
+    "ci": "npm run typecheck && npm run lint:css && npm run build && npm run check:tokens && npm run check:mui-parity && npm run check:theme",
     "release": "bash scripts/release.sh"
   },
   "peerDependencies": {

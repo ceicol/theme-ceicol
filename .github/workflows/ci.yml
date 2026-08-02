@@ -40,3 +40,9 @@ jobs:
 
       - name: Contrato de tokens
         run: npm run check:tokens
+
+      - name: Parity MUI (colores de marca en paleta + tipos)
+        run: npm run check:mui-parity
+
+      - name: Sanity del theme (tipografía sin NaN)
+        run: npm run check:theme

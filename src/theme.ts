@@ -14,7 +14,6 @@ import './mui-types';
 import {
   createTheme,
   ThemeOptions,
-  responsiveFontSizes,
   Shadows,
 } from '@mui/material/styles';
 import { brandColors } from './tokens/colors';
@@ -611,8 +610,10 @@ const themeOptions: ThemeOptions = {
   },
 };
 
-let theme = createTheme(themeOptions);
-theme = responsiveFontSizes(theme);
+// Nota: NO usar responsiveFontSizes() — hace parseFloat() sobre los fontSize y
+// convierte los títulos fluidos (clamp()) en NaNrem. El fluid()/clamp de
+// typography.ts ya es responsivo por sí mismo.
+const theme = createTheme(themeOptions);
 
 export default theme;
 
@@ -640,7 +641,6 @@ const gaiaCompatOptions: ThemeOptions = {
   },
 };
 
-let gaiaCompatTheme = createTheme(gaiaCompatOptions);
-gaiaCompatTheme = responsiveFontSizes(gaiaCompatTheme);
+const gaiaCompatTheme = createTheme(gaiaCompatOptions);
 
 export { gaiaCompatTheme as GaiaCompatTheme };

@@ -8,16 +8,21 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.22.0]
+
 ### Added
 - **`tokens.json` (formato W3C Design Tokens / DTCG)** como export `./tokens.json`: artefacto estándar para herramientas y agentes de IA, generado desde los mismos tokens.
 - **Preset de Tailwind** generado (`export ./tailwind`): `presets: [require('theme-ceicol/tailwind')]`, colores de marca concretos + roles como `var(--cei-*)`.
 - Roles semánticos como **fuente TS** (`src/tokens/semantic.ts`); `semantic.css` ahora se **genera** (antes CSS a mano) — estructura single-source.
 - **Gobernanza**: `CHANGELOG`, `CONTRIBUTING`, PR template, `CODEOWNERS`.
-- **Quality gates (CI)**: `typecheck`, Stylelint anti-hex, contrato de tokens y **parity check MUI** (falla si un color de marca no está cableado en la paleta/augment). `release.sh` no publica si fallan.
+- **Quality gates (CI)**: `typecheck`, Stylelint anti-hex, contrato de tokens, **parity check MUI** y **sanity del theme** (`check:theme` — falla si la tipografía tiene `NaN`). `release.sh` no publica si fallan.
 
 ### Changed
 - Dependencias de desarrollo a últimas estables: **React 19**, **MUI 9** (peer amplio: `react >=18`, `@mui/material >=5`).
 - Alert (MUI): estilos por-severidad con la API `variants` (MUI 9 removió los slots `standardSuccess/…`).
+
+### Fixed
+- **Escala de títulos MUI (`h1`–`h4`)**: se elimina `responsiveFontSizes()`, que hacía `parseFloat()` sobre los títulos fluidos (`clamp()`) y los convertía en `NaNrem` en `AppTheme` y `GaiaCompatTheme`. El `fluid()` de `typography.ts` ya es responsivo por sí mismo.
 
 ## [0.21.0]
 
@@ -65,5 +70,6 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.21.0...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.22.0...HEAD
+[0.22.0]: https://github.com/ceicol/theme-ceicol/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/ceicol/theme-ceicol/releases/tag/v0.21.0
