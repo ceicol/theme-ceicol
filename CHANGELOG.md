@@ -8,6 +8,9 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Changed
+- **Tipografía `h4`** acotada a **máx `1.125rem`** (18px), fluido 16→18px, para títulos compactos (cabeceras de panel/collapse). Antes 20–24px. Los consumidores que usan `variant="h4"` heredan el nuevo tamaño (sin hardcodear).
+
 ## [0.25.0]
 
 ### Fixed

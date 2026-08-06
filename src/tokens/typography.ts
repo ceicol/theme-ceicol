@@ -75,11 +75,12 @@ export const typography: ThemeOptions['typography'] = {
     fontSize: fluid(30, 26),
     lineHeight: 1.25,
   },
-  // Nivel 3 — subtítulo / nombre de componente
+  // Nivel 3 — subtítulo / título compacto (p. ej. cabeceras de panel/collapse).
+  // Máximo 1.125rem (18px) para títulos densos; fluido 16→18px.
   h4: {
     fontFamily: FONT_DISPLAY,
     fontWeight: WEIGHTS.bold,
-    fontSize: fluid(24, 20),
+    fontSize: fluid(18, 16),
     lineHeight: 1.3,
   },
 
