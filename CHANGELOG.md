@@ -8,6 +8,14 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.25.0]
+
+### Fixed
+- **AppTheme renderiza en MUI 9.** El palette usaba strings `var(--cei-*)` en `text`/`background`/`divider`, que rompían `alpha()`/`decomposeColor()` de MUI 9 (`Unsupported var(...) color`) en cualquier componente que derive tonos (p. ej. Button). Ahora el palette usa **hex reales** vía `cssVariables` + `colorSchemes` (claro/oscuro), y el tema oscuro de MUI se activa con el **mismo `data-theme`** que la capa CSS (`colorSchemeSelector: '[data-theme="%s"]'`).
+
+### Changed
+- El esquema oscuro de MUI ahora deriva correctamente `palette.action.*` y `text.disabled` (antes `mode` quedaba en `light`).
+
 ## [0.24.0]
 
 ### Added
@@ -91,7 +99,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.24.0...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.25.0...HEAD
+[0.25.0]: https://github.com/ceicol/theme-ceicol/compare/v0.24.0...v0.25.0
 [0.24.0]: https://github.com/ceicol/theme-ceicol/compare/v0.23.0...v0.24.0
 [0.23.0]: https://github.com/ceicol/theme-ceicol/compare/v0.22.0...v0.23.0
 [0.22.0]: https://github.com/ceicol/theme-ceicol/compare/v0.21.0...v0.22.0

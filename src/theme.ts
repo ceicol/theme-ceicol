@@ -123,8 +123,8 @@ const createMapButtonVariant = (
   };
 };
 
-const themeOptions: ThemeOptions = {
-  palette: {
+// Colores de marca/estado/compat — ESTABLES en ambos esquemas (hex reales).
+const brandPalette = {
     primary: {
       main: brandColors.primary.main,
       light: brandColors.primary.light,
@@ -233,21 +233,45 @@ const themeOptions: ThemeOptions = {
       light: brandColors.primary.light,
       contrastText: brandColors.text.white,
     },
+};
 
-    // Superficies, texto y borde → referencian los ROLES de semantic.css
-    // (con fallback al token crudo si semantic.css no está cargado). Así el
-    // tema oscuro de MUI usa la MISMA fuente de verdad que el CSS: basta
-    // cargar semantic.css y alternar data-theme; no hay paleta dark duplicada.
-    text: {
-      primary: `var(--cei-fg, ${brandColors.text.body})`,
-      secondary: `var(--cei-fg-muted, ${brandColors.text.muted})`,
-      light: brandColors.text.white, // compat theme-gaia: texto sobre fondos oscuros
-    },
-    background: {
-      default: `var(--cei-bg, ${brandColors.background.default})`,
-      paper: `var(--cei-bg-raised, ${brandColors.background.paper})`,
-    },
-    divider: `var(--cei-line, ${brandColors.border.light})`,
+// Superficies/texto/borde por ESQUEMA. Hex reales (no var()) para que las
+// operaciones de color de MUI 9 (alpha/decomposeColor) funcionen. El dark se
+// activa con el MISMO data-theme que la capa CSS (ver colorSchemeSelector).
+const lightPalette = {
+  ...brandPalette,
+  text: {
+    primary: brandColors.text.body,
+    secondary: brandColors.text.muted,
+    light: brandColors.text.white, // compat theme-gaia
+  },
+  background: {
+    default: brandColors.background.default,
+    paper: brandColors.background.paper,
+  },
+  divider: brandColors.border.light,
+};
+const darkPalette = {
+  ...brandPalette,
+  text: {
+    primary: brandColors.text.white,
+    secondary: brandColors.text.mutedLight,
+    light: brandColors.text.white,
+  },
+  background: {
+    default: brandColors.surface.deep,
+    paper: brandColors.surface.brand,
+  },
+  divider: 'rgba(255, 255, 255, 0.12)',
+};
+
+const themeOptions: ThemeOptions = {
+  // MUI 9: variables CSS + esquemas claro/oscuro. El dark se activa con el
+  // MISMO atributo data-theme que usa la capa CSS de CEICOL.
+  cssVariables: { colorSchemeSelector: '[data-theme="%s"]' },
+  colorSchemes: {
+    light: { palette: lightPalette },
+    dark: { palette: darkPalette },
   },
 
   // API principal (variantes h1–h4, body1…) + variantes COMPAT de Gaia
@@ -673,13 +697,20 @@ export default theme;
 // ============================================================
 const gaiaCompatOptions: ThemeOptions = {
   ...themeOptions,
-  palette: {
-    ...themeOptions.palette,
-    text: {
-      primary: brandColors.text.heading, // muy oscuro
-      secondary: brandColors.text.white, // muy claro (sobre fondos oscuros)
-      light: brandColors.text.white,
+  colorSchemes: {
+    // Compat: en claro, texto secundario/light en blanco (para fondos oscuros
+    // de Gaia). El resto de la paleta se mantiene. Dark igual que AppTheme.
+    light: {
+      palette: {
+        ...lightPalette,
+        text: {
+          primary: brandColors.text.heading,
+          secondary: brandColors.text.white,
+          light: brandColors.text.white,
+        },
+      },
     },
+    dark: { palette: darkPalette },
   },
 };
 
