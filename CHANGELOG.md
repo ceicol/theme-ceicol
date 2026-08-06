@@ -8,6 +8,11 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.24.0]
+
+### Added
+- **Variantes de icon-button `cei-icon-glass` / `cei-icon-outline`** (API CEICOL): reemplazo moderno de `gaia-icon-glass`/`gaia-icon-outline`. Mismo aspecto, pero el color usa el rol `--cei-brand` (voltea con el tema).
+
 ### Changed
 - Peer `@mui/material` acotado a `>=9` (la API de Alert por severidad requiere MUI 9; antes `>=5`, donde los tints se degradaban).
 
@@ -86,7 +91,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.23.0...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.24.0...HEAD
+[0.24.0]: https://github.com/ceicol/theme-ceicol/compare/v0.23.0...v0.24.0
 [0.23.0]: https://github.com/ceicol/theme-ceicol/compare/v0.22.0...v0.23.0
 [0.22.0]: https://github.com/ceicol/theme-ceicol/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/ceicol/theme-ceicol/releases/tag/v0.21.0

@@ -159,6 +159,8 @@ declare module '@mui/material/Button' {
     'cei-ghost': true;
     'cei-destructive': true;
     'cei-large': true;
+    'cei-icon-glass': true;
+    'cei-icon-outline': true;
     'gaia-cta-contained': true;
     'gaia-cta-outlined': true;
     'gaia-icon-glass': true;

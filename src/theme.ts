@@ -367,6 +367,48 @@ const themeOptions: ThemeOptions = {
           },
         },
 
+        // ─── Icon buttons (API CEICOL) ───
+        // Botón circular de solo ícono. Reemplazo moderno de gaia-icon-*;
+        // el color usa el rol --cei-brand para voltear con el tema.
+        {
+          props: { variant: 'cei-icon-glass' },
+          style: {
+            minWidth: '40px',
+            width: '40px',
+            height: '40px',
+            padding: '8px',
+            borderRadius: borderRadius.round,
+            backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
+            color: `var(--cei-brand, ${brandColors.primary.main})`,
+            border: '1px solid transparent',
+            '&:hover': { boxShadow: shadows.sm },
+            '&:active, &.Mui-active': {
+              ...glassEffect,
+              color: `var(--cei-brand, ${brandColors.primary.main})`,
+              borderColor: `var(--cei-brand, ${brandColors.primary.main})`,
+            },
+          },
+        },
+        {
+          props: { variant: 'cei-icon-outline' },
+          style: {
+            minWidth: '40px',
+            width: '40px',
+            height: '40px',
+            padding: '8px',
+            borderRadius: borderRadius.round,
+            backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
+            color: `var(--cei-brand, ${brandColors.primary.main})`,
+            border: `1px solid var(--cei-brand, ${brandColors.primary.main})`,
+            '&:hover': { boxShadow: shadows.sm, borderColor: 'transparent' },
+            '&:active, &.Mui-active': {
+              backgroundColor: `var(--cei-brand, ${brandColors.primary.main})`,
+              color: brandColors.text.white,
+              border: 'none',
+            },
+          },
+        },
+
         // ─── Variantes COMPAT con theme-gaia (deprecadas) ───
         // Reexponen los nombres genéricos de botón de Gaia con el
         // aspecto de CEICOL. NO se incluyen los botones de mapa de
