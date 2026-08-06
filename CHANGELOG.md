@@ -8,6 +8,9 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Changed
+- Peer `@mui/material` acotado a `>=9` (la API de Alert por severidad requiere MUI 9; antes `>=5`, donde los tints se degradaban).
+
 ## [0.23.0]
 
 ### Fixed
