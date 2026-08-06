@@ -1,0 +1,66 @@
+/* CEICOL — capa semántica (roles) · generado desde theme-ceicol. NO editar a mano. */
+/* Los componentes consumen estos roles; un tema los reasigna. Requiere tokens.css. */
+
+:root {
+  color-scheme: light;
+
+  /* Superficies */
+  --cei-bg: var(--cei-background-default); /* fondo de página */
+  --cei-bg-raised: var(--cei-background-paper); /* tarjetas, formularios */
+  --cei-bg-sunken: var(--cei-background-subtle); /* secciones alternadas */
+  --cei-bg-inverse: var(--cei-contrast); /* banners: estable en ambos temas */
+  --cei-bg-footer: var(--cei-contrast); /* footer */
+  --cei-bg-glass-soft: color-mix(in srgb, var(--cei-bg-raised) 55%, transparent); /* vidrio translúcido suave */
+  --cei-bg-glass: color-mix(in srgb, var(--cei-bg-raised) 72%, transparent); /* vidrio translúcido medio */
+  --cei-bg-glass-strong: color-mix(in srgb, var(--cei-bg-raised) 85%, transparent); /* vidrio translúcido fuerte */
+
+  /* Texto */
+  --cei-fg: var(--cei-text-body); /* texto por defecto */
+  --cei-fg-strong: var(--cei-text-heading); /* títulos / máximo énfasis */
+  --cei-fg-muted: var(--cei-text-muted); /* secundario / metadatos */
+  --cei-fg-on-inverse: var(--cei-text-white); /* texto sobre superficie inversa */
+  --cei-fg-on-brand: var(--cei-text-white); /* texto sobre color de marca */
+
+  /* Bordes */
+  --cei-line: var(--cei-border-light);
+  --cei-line-strong: var(--cei-border-medium);
+
+  /* Marca (interactivo) */
+  --cei-brand: var(--cei-primary);
+  --cei-brand-hover: var(--cei-primary-dark);
+
+  /* Elevación (sombras como rol — voltean por tema) */
+  --cei-elevation-1: var(--cei-shadow-sm);
+  --cei-elevation-2: var(--cei-shadow-md);
+  --cei-elevation-3: var(--cei-shadow-lg);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* Superficies */
+  --cei-bg: var(--cei-surface-deep);
+  --cei-bg-raised: var(--cei-surface-brand);
+  --cei-bg-sunken: var(--cei-surface-slate);
+  --cei-bg-footer: var(--cei-surface-deep);
+
+  /* Texto */
+  --cei-fg: var(--cei-text-white);
+  --cei-fg-strong: var(--cei-text-white);
+  --cei-fg-muted: var(--cei-text-muted-light);
+  --cei-fg-on-inverse: var(--cei-text-white);
+  --cei-fg-on-brand: var(--cei-text-white);
+
+  /* Bordes */
+  --cei-line: color-mix(in srgb, var(--cei-text-white) 12%, transparent);
+  --cei-line-strong: color-mix(in srgb, var(--cei-text-white) 22%, transparent);
+
+  /* Marca (interactivo) */
+  --cei-brand: var(--cei-primary-light);
+  --cei-brand-hover: var(--cei-primary);
+
+  /* Elevación (sombras como rol — voltean por tema) */
+  --cei-elevation-1: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --cei-elevation-2: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --cei-elevation-3: 0 12px 30px rgba(0, 0, 0, 0.55);
+}
