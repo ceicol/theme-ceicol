@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.28.0]
+
 ### Added
 - **Token `fontSize.h4`** (`--cei-font-size-h4`, `text-h4` en Tailwind, `fontSize.h4` en DTCG) = `clamp(1rem, …, 1.125rem)` (16→18px). Ahora `h4` es un paso de escala de primera clase, documentado en el espécimen en vivo de la doc, no solo una variante MUI.
 
