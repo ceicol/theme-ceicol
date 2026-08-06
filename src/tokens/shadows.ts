@@ -3,11 +3,13 @@
 //  Valores tomados de styles.css (:root).
 // ============================================================
 
-// Efecto vidrio (usado en la caja de logo del hero, overlays claros)
+// Efecto vidrio. Usa el rol semántico --cei-bg-glass (deriva de --cei-bg-raised),
+// por lo que voltea automáticamente en dark. El borde usa --cei-line para
+// acompañar el tema. Ambos con fallback por si la capa semantic.css no se cargó.
 export const glassEffect = {
-  background: 'rgba(255, 255, 255, 0.5)',
+  background: 'var(--cei-bg-glass, color-mix(in srgb, var(--cei-background-paper) 60%, transparent))',
   backdropFilter: 'blur(8px)',
-  border: '1px solid rgba(255, 255, 255, 0.7)',
+  border: '1px solid var(--cei-line, rgba(255, 255, 255, 0.7))',
 };
 
 // MUI espera un array de 25 sombras (índice 0..24).

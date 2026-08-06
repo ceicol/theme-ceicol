@@ -8,6 +8,11 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Fixed
+- **`glassEffect` voltea en dark.** El objeto `glassEffect` hardcodeaba `rgba(255,255,255,…)` (fondo y borde), por lo que los overlays de vidrio se quedaban claros en tema oscuro. Ahora usa el rol semántico **`--cei-bg-glass`** (deriva de `--cei-bg-raised`) para el fondo y **`--cei-line`** para el borde, con fallback. Afecta a la variante de botón `cei-icon-glass` y a cualquier consumidor que use el token.
+
+## [0.26.0]
+
 ### Changed
 - **Tipografía `h4`** acotada a **máx `1.125rem`** (18px), fluido 16→18px, para títulos compactos (cabeceras de panel/collapse). Antes 20–24px. Los consumidores que usan `variant="h4"` heredan el nuevo tamaño (sin hardcodear).
 
@@ -102,7 +107,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.25.0...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.26.0...HEAD
+[0.26.0]: https://github.com/ceicol/theme-ceicol/compare/v0.25.0...v0.26.0
 [0.25.0]: https://github.com/ceicol/theme-ceicol/compare/v0.24.0...v0.25.0
 [0.24.0]: https://github.com/ceicol/theme-ceicol/compare/v0.23.0...v0.24.0
 [0.23.0]: https://github.com/ceicol/theme-ceicol/compare/v0.22.0...v0.23.0
