@@ -41,6 +41,7 @@ export const fontSizes = {
   h1: 'clamp(2rem, 4.5vw, 2.4rem)',
   h2: 'clamp(1.6rem, 3.5vw, 1.9rem)',
   h3: 'clamp(1.25rem, 2.5vw, 1.5rem)',
+  h4: fluid(18, 16), // 16→18px — título compacto (cabeceras de panel/collapse). Paridad con typography.h4.
   body: '1rem',
   bodyLg: '1.125rem',
   small: '0.875rem', // 14px — texto secundario

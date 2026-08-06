@@ -26,6 +26,19 @@ npm version "$BUMP" --no-git-tag-version
 VERSION="$(npm pkg get version | tr -d '"')"
 TAG="v$VERSION"
 
+# 1.5 Mueve el encabezado [Unreleased] del CHANGELOG a la versión nueva y
+#     refresca los enlaces de comparación al pie, para que el CHANGELOG nunca
+#     quede desincronizado de los tags (Keep a Changelog). Idempotente: si no
+#     hay sección [Unreleased], no hace nada.
+if grep -q '^## \[Unreleased\]' CHANGELOG.md; then
+  PREV_TAG="$(git describe --tags --abbrev=0 2>/dev/null || echo '')"
+  perl -0pi -e "s/^## \[Unreleased\]\n/## [Unreleased]\n\n## [$VERSION]\n/m" CHANGELOG.md
+  if [ -n "$PREV_TAG" ]; then
+    perl -pi -e "s#^\[Unreleased\]:.*#[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/$TAG...HEAD\n[$VERSION]: https://github.com/ceicol/theme-ceicol/compare/$PREV_TAG...$TAG#" CHANGELOG.md
+  fi
+  echo "✓ CHANGELOG: [Unreleased] → [$VERSION]"
+fi
+
 # 2. Deja el comando de instalación del README apuntando a la versión nueva
 sed -i.bak -E "s|(theme-ceicol\.git#)v[0-9]+\.[0-9]+\.[0-9]+|\1$TAG|g" README.md
 rm -f README.md.bak
@@ -33,7 +46,7 @@ rm -f README.md.bak
 # 3. Commit del bump + README en main.
 #    Incluye package-lock.json: `npm version` (paso 1) también sube la versión ahí,
 #    y si no se commitea queda un desync package.json ↔ lock en main.
-git add package.json package-lock.json README.md
+git add package.json package-lock.json README.md CHANGELOG.md
 git commit -m "chore: release $TAG"
 git push origin main
 

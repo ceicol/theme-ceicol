@@ -8,6 +8,14 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Added
+- **Token `fontSize.h4`** (`--cei-font-size-h4`, `text-h4` en Tailwind, `fontSize.h4` en DTCG) = `clamp(1rem, …, 1.125rem)` (16→18px). Ahora `h4` es un paso de escala de primera clase, documentado en el espécimen en vivo de la doc, no solo una variante MUI.
+
+### Fixed
+- **Paridad de `.cei-h4`.** La utilidad CSS `.cei-h4` apuntaba a `--cei-font-size-h3` (20–24px), desalineada con la variante MUI `h4` (16–18px tras acotarla). Ahora usa `--cei-font-size-h4`, quedando ambas superficies (CSS/Tailwind y React/MUI) en el mismo tamaño.
+
+## [0.27.0]
+
 ### Fixed
 - **`glassEffect` voltea en dark.** El objeto `glassEffect` hardcodeaba `rgba(255,255,255,…)` (fondo y borde), por lo que los overlays de vidrio se quedaban claros en tema oscuro. Ahora usa el rol semántico **`--cei-bg-glass`** (deriva de `--cei-bg-raised`) para el fondo y **`--cei-line`** para el borde, con fallback. Afecta a la variante de botón `cei-icon-glass` y a cualquier consumidor que use el token.
 
@@ -107,7 +115,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.26.0...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.27.0...HEAD
+[0.27.0]: https://github.com/ceicol/theme-ceicol/compare/v0.26.0...v0.27.0
 [0.26.0]: https://github.com/ceicol/theme-ceicol/compare/v0.25.0...v0.26.0
 [0.25.0]: https://github.com/ceicol/theme-ceicol/compare/v0.24.0...v0.25.0
 [0.24.0]: https://github.com/ceicol/theme-ceicol/compare/v0.23.0...v0.24.0
