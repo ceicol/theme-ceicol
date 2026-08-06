@@ -2,6 +2,13 @@
   "name": "theme-ceicol",
   "version": "0.22.0",
   "description": "Sistema de diseño de CEICOL para productos React + Material UI. Tokens de marca, tipografía, espaciado y variantes de componentes.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceicol/theme-ceicol.git"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

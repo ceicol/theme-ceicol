@@ -43,16 +43,30 @@ declare module '@mui/material/styles' {
     deep: string;
   }
 
+  // Color de marca de CEICOL. Solo `main` es obligatorio: MUI únicamente
+  // calcula dark/contrastText para los colores ESTÁNDAR (primary, error…),
+  // no para los custom. Tiparlos como PaletteColor prometía un `.dark` que
+  // en runtime es undefined. Aquí se refleja la realidad.
+  interface CeiPaletteColor {
+    main: string;
+    light?: string;
+    dark?: string;
+    contrastText?: string;
+    bg?: string;
+    glass?: string;
+    button?: string;
+  }
+
   interface Palette {
-    accent: PaletteColor;
-    tech: PaletteColor;
-    contrast: PaletteColor;
+    accent: CeiPaletteColor;
+    tech: CeiPaletteColor;
+    contrast: CeiPaletteColor;
     surface: DarkSurfaces;
-    tertiary: PaletteColor;
-    cta: PaletteColor;
-    green: PaletteColor;
-    brown: PaletteColor;
-    link: PaletteColor;
+    tertiary: CeiPaletteColor;
+    cta: CeiPaletteColor;
+    green: CeiPaletteColor;
+    brown: CeiPaletteColor;
+    link: CeiPaletteColor;
   }
   interface PaletteOptions {
     accent?: SimplePaletteColorOptions;

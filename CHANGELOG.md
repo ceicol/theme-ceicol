@@ -8,6 +8,19 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.23.0]
+
+### Fixed
+- **Sombra de marca unificada**: el tinte pasa al primary real (`rgba(0,114,152)`). Antes las sombras `lg`/`premium` y varias de botón usaban un azul fantasma (`#307095`) que no era ningún token.
+- **Contraste en tema oscuro**: `.cei-badge`, `.cei-avatar` y `.cei-link` usan `var(--cei-brand)` (voltea) en vez de `--cei-primary-dark` fijo, que quedaba con bajo contraste en oscuro.
+
+### Changed
+- **Tipos de paleta**: los colores de marca custom (`accent`, `tech`, `contrast`, `tertiary`, `cta`, `green`, `brown`, `link`) usan un tipo propio `CeiPaletteColor` donde solo `main` es obligatorio. Antes se tipaban como `PaletteColor`, prometiendo un `.dark`/`.contrastText` que en runtime es `undefined`.
+
+### Added
+- **Accesibilidad**: `:focus-visible` de marca en icon-button, tab, paginación y acordeón; guarda `prefers-reduced-motion` que desactiva los desplazamientos de hover.
+- **Metadata del paquete**: `repository` y `sideEffects` (`["**/*.css"]`) para tree-shaking y trazabilidad.
+
 ## [0.22.0]
 
 ### Added
@@ -70,6 +83,7 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.22.0...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.23.0...HEAD
+[0.23.0]: https://github.com/ceicol/theme-ceicol/compare/v0.22.0...v0.23.0
 [0.22.0]: https://github.com/ceicol/theme-ceicol/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/ceicol/theme-ceicol/releases/tag/v0.21.0

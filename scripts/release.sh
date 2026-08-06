@@ -39,8 +39,10 @@ git push origin main
 
 # 4. Compila y publica el tag con el dist incluido
 npm run build
-# 4.1 Contrato de tokens sobre el dist recién compilado (aborta si se rompió algo).
+# 4.1 Gates sobre el dist recién compilado (aborta si se rompió algo).
 npm run check:tokens
+npm run check:mui-parity
+npm run check:theme
 git add -f dist
 git commit -m "build: $TAG"
 git tag "$TAG"

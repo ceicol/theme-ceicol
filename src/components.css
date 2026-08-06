@@ -109,12 +109,12 @@
 
 /* ─── LINK ─── */
 .cei-link {
-  color: var(--cei-primary);
+  color: var(--cei-brand, var(--cei-primary));
   text-decoration: none;
   transition: color var(--cei-duration-fast) var(--cei-ease-out);
 }
 .cei-link:hover {
-  color: var(--cei-primary-dark);
+  color: var(--cei-brand-hover, var(--cei-primary-dark));
   text-decoration: underline;
 }
 
@@ -175,7 +175,7 @@
   line-height: 1.6;
   border-radius: var(--cei-radius-pill);
   background: color-mix(in srgb, var(--cei-primary) 14%, var(--cei-bg-raised, var(--cei-background-paper)));
-  color: var(--cei-primary-dark);
+  color: var(--cei-brand, var(--cei-primary-dark));
 }
 .cei-badge--accent { background: color-mix(in srgb, var(--cei-accent) 14%, var(--cei-bg-raised, var(--cei-background-paper))); color: var(--cei-accent); }
 .cei-badge--success { background: color-mix(in srgb, var(--cei-success) 14%, var(--cei-bg-raised, var(--cei-background-paper))); color: var(--cei-success); }
@@ -372,7 +372,7 @@
   border-radius: 50%;
   overflow: hidden;
   background: color-mix(in srgb, var(--cei-primary) 14%, var(--cei-bg-raised, var(--cei-background-paper)));
-  color: var(--cei-primary-dark);
+  color: var(--cei-brand, var(--cei-primary-dark));
   font-family: var(--cei-font-body);
   font-weight: 600;
   font-size: var(--cei-font-size-small);
@@ -610,3 +610,21 @@
   border-bottom: 1px solid var(--cei-line, var(--cei-border-light));
 }
 .cei-table tbody tr:hover { background: var(--cei-bg-sunken, var(--cei-background-subtle)); }
+
+/* ─── ACCESIBILIDAD (foco visible + movimiento reducido) ─── */
+/* Anillo de foco de marca en los interactivos que quedaban con el outline del navegador. */
+.cei-icon-btn:focus-visible,
+.cei-tab:focus-visible,
+.cei-page:focus-visible,
+.cei-accordion__header:focus-visible {
+  outline: 2px solid var(--cei-primary);
+  outline-offset: 2px;
+}
+/* Respeta prefers-reduced-motion: sin desplazamientos de hover/active. */
+@media (prefers-reduced-motion: reduce) {
+  .cei-btn:hover,
+  .cei-btn:active,
+  .cei-card--hover:hover {
+    transform: none;
+  }
+}

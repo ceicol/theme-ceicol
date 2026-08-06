@@ -21,7 +21,7 @@ export const customShadowsArray = [
   'none',
   'none',
   'none',
-  '0 10px 15px -3px rgba(48, 112, 149, 0.08), 0 4px 6px -4px rgba(48, 112, 149, 0.08)', // 8 -> lg
+  '0 10px 15px -3px rgba(0, 114, 152, 0.08), 0 4px 6px -4px rgba(0, 114, 152, 0.08)', // 8 -> lg
   'none',
   'none',
   'none',
@@ -29,7 +29,7 @@ export const customShadowsArray = [
   'none',
   'none',
   'none',
-  '0 20px 40px -15px rgba(48, 112, 149, 0.12)', // 16 -> premium
+  '0 20px 40px -15px rgba(0, 114, 152, 0.12)', // 16 -> premium
 ];
 
 // Acceso semántico directo (para sx / styled)
