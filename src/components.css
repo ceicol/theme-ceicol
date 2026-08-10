@@ -99,12 +99,44 @@
   border: 1px solid transparent;
   border-radius: var(--cei-radius-round);
   background: transparent;
-  color: var(--cei-primary);
+  color: var(--cei-brand, var(--cei-primary));
   cursor: pointer;
   transition: var(--cei-transition-fast);
 }
 .cei-icon-btn:hover {
   background: var(--cei-bg-sunken, var(--cei-background-subtle));
+}
+
+/* Variante: contorno (borde de marca) — espejo de la variante MUI cei-icon-outline */
+.cei-icon-btn--outline {
+  background: var(--cei-bg-raised);
+  border-color: var(--cei-brand, var(--cei-primary));
+}
+.cei-icon-btn--outline:hover {
+  background: var(--cei-bg-raised);
+  border-color: transparent;
+  box-shadow: var(--cei-shadow-sm);
+}
+.cei-icon-btn--outline:active {
+  background: var(--cei-brand, var(--cei-primary));
+  border-color: transparent;
+  color: var(--cei-text-white);
+}
+
+/* Variante: vidrio — espejo de la variante MUI cei-icon-glass */
+.cei-icon-btn--glass {
+  background: var(--cei-bg-raised);
+  border-color: transparent;
+}
+.cei-icon-btn--glass:hover {
+  background: var(--cei-bg-raised);
+  box-shadow: var(--cei-shadow-sm);
+}
+.cei-icon-btn--glass:active {
+  background: var(--cei-bg-glass);
+  border-color: var(--cei-brand, var(--cei-primary));
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 
 /* ─── LINK ─── */

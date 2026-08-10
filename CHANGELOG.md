@@ -8,6 +8,9 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Added
+- **Variantes CSS `.cei-icon-btn--outline` / `.cei-icon-btn--glass`** en `components.css`, espejo de las variantes MUI `cei-icon-outline`/`cei-icon-glass`. Armoniza el botón de ícono entre stacks: la capa CSS (Astro/HTML) ahora tiene las mismas dos variantes que React/MUI, con roles que voltean en dark.
+
 ## [0.29.0]
 
 ### Added
