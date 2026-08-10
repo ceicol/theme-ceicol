@@ -10,6 +10,7 @@ así que se trabaja con disciplina.
 - **Una sola fuente de verdad.** Los valores viven en `src/tokens/*.ts`. MUI los importa, `tokens.css` se genera de ahí y Tailwind los consume desde el mismo export. No dupliques valores.
 - **Nombrar por rol, no por apariencia.** Los tokens crudos se nombran por lo que son (`--cei-primary`); los roles semánticos por su función (`--cei-bg`, `--cei-fg`). Nunca un rol con nombre de apariencia (`--text-dark`).
 - **Sin drift.** Documentación y validaciones se derivan de los tokens; no se mantienen a mano.
+- **Paridad entre tecnologías.** Todo componente vive en las capas que documentamos: CSS (`.cei-*`), MUI (`styleOverrides`/`variants`) y Tailwind. Crear (o cambiar) uno en una capa **obliga** a hacer su espejo en las demás, con el mismo aspecto. Si la doc muestra un `.cei-*` que en MUI no se ve igual, la doc miente.
 
 ## Flujo de trabajo
 
@@ -24,7 +25,7 @@ así que se trabaja con disciplina.
 Un token o componente está "terminado" solo si:
 
 - [ ] El valor vive en `src/tokens/*.ts` (o el rol en `semantic.css`), no hardcodeado.
-- [ ] Funciona en **ambos stacks**: tema MUI y CSS (`--cei-*` / `.cei-*`).
+- [ ] **Paridad de stacks (obligatoria).** Si hay clase `.cei-*` (CSS), existe su equivalente en el **tema MUI** (`styleOverrides`/`variants`) y en **Tailwind** cuando aplique, con el mismo aspecto. Un componente solo en CSS (sin espejo MUI) **no** está terminado.
 - [ ] Es **theme-aware** cuando corresponde (usa roles con fallback al token crudo).
 - [ ] Tipos MUI actualizados (`mui-types.ts`) si agrega una clave de paleta/variante.
 - [ ] Documentado en `README.md` (y en el sitio de docs cuando exista).
