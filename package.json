@@ -1,6 +1,6 @@
 {
   "name": "theme-ceicol",
-  "version": "0.31.0",
+  "version": "0.32.0",
   "description": "Sistema de diseño de CEICOL para productos React + Material UI. Tokens de marca, tipografía, espaciado y variantes de componentes.",
   "repository": {
     "type": "git",

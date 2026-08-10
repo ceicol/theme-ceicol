@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.32.0]
+
 ### Added
 - Tokens de sombra **`button`** y **`buttonHover`** (CTA de marca) en `shadows` → `--cei-shadow-button` / `--cei-shadow-button-hover`.
 
