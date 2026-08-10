@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.31.0]
+
 ### Added
 - **Estado presionado (`aria-pressed`) en los botones de ícono.** Las variantes `cei-icon-outline` / `cei-icon-glass` (en `MuiButton` y `MuiIconButton`, más los clones compat `gaia-icon-*`) ahora responden a `aria-pressed="true"` con el mismo aspecto activo que `:active`/`.Mui-active` (relleno de marca + icono blanco / vidrio). Un toggle solo necesita `aria-pressed={activo}` — ya no hace falta hardcodear el fondo activo.
 
