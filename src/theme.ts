@@ -524,6 +524,57 @@ const themeOptions: ThemeOptions = {
       ],
     },
 
+    // IconButton no expone prop `variant` en MUI. Por eso:
+    //  · root   → default global sutil: todos los <IconButton> se sienten CEICOL
+    //             (color de marca en hover + transición), respetando su color prop.
+    //  · clases → variantes opt-in por className (`cei-icon-outline`/`cei-icon-glass`),
+    //             con el mismo aspecto que sus equivalentes de MuiButton, para los
+    //             iconos prominentes. Hovers autocontenidos (no heredan el default).
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          transition: `all ${durFast}ms ${easeOut}`,
+          '&:hover': {
+            backgroundColor: `var(--cei-bg-sunken, ${brandColors.background.subtle})`,
+            color: `var(--cei-brand, ${brandColors.primary.main})`,
+          },
+          '&.cei-icon-outline': {
+            borderRadius: borderRadius.round,
+            backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
+            color: `var(--cei-brand, ${brandColors.primary.main})`,
+            border: `1px solid var(--cei-brand, ${brandColors.primary.main})`,
+            '&:hover': {
+              backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
+              color: `var(--cei-brand, ${brandColors.primary.main})`,
+              boxShadow: shadows.sm,
+              borderColor: 'transparent',
+            },
+            '&:active, &.Mui-active': {
+              backgroundColor: `var(--cei-brand, ${brandColors.primary.main})`,
+              color: brandColors.text.white,
+              border: 'none',
+            },
+          },
+          '&.cei-icon-glass': {
+            borderRadius: borderRadius.round,
+            backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
+            color: `var(--cei-brand, ${brandColors.primary.main})`,
+            border: '1px solid transparent',
+            '&:hover': {
+              backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
+              color: `var(--cei-brand, ${brandColors.primary.main})`,
+              boxShadow: shadows.sm,
+            },
+            '&:active, &.Mui-active': {
+              ...glassEffect,
+              color: `var(--cei-brand, ${brandColors.primary.main})`,
+              borderColor: `var(--cei-brand, ${brandColors.primary.main})`,
+            },
+          },
+        },
+      },
+    },
+
     MuiLink: {
       styleOverrides: {
         root: {

@@ -8,6 +8,9 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Added
+- **Estilo de `MuiIconButton`.** Antes el theme no estilizaba `IconButton` (los `cei-icon-*` eran solo variantes de `MuiButton`), así que los `<IconButton>` quedaban MUI plano. Ahora: `root` con un **default global** sutil (color de marca + fondo en hover, transición) que respeta el `color` prop, y **variantes opt-in por `className`** `cei-icon-outline`/`cei-icon-glass` (MUI 9 no expone prop `variant` en IconButton), con el mismo aspecto que sus equivalentes de botón.
+
 ## [0.28.0]
 
 ### Added
