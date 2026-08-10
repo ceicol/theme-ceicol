@@ -663,6 +663,137 @@ const themeOptions: ThemeOptions = {
       },
     },
 
+    // Acciones de diálogo: padding generoso alineado a los 24px del contenido
+    // (.cei-modal usa space-md), para que los botones no queden pegados al borde.
+    MuiDialogActions: {
+      styleOverrides: {
+        root: {
+          padding: `${spacingConstants.sm} ${spacingConstants.md} ${spacingConstants.md}`,
+        },
+      },
+    },
+
+    // Switch — espejo del .cei-switch del DS: compacto 40×22, pista de marca al
+    // activar (rol, voltea en dark), pulgar 18px con sombra sm.
+    MuiSwitch: {
+      styleOverrides: {
+        root: { width: 40, height: 22, padding: 0, display: 'inline-flex' },
+        switchBase: {
+          padding: 2,
+          '&.Mui-checked': {
+            transform: 'translateX(18px)',
+            '& + .MuiSwitch-track': {
+              backgroundColor: `var(--cei-brand, ${brandColors.primary.main})`,
+              opacity: 1,
+            },
+          },
+          '&.Mui-disabled + .MuiSwitch-track': { opacity: 0.4 },
+        },
+        thumb: {
+          width: 18,
+          height: 18,
+          boxShadow: shadows.sm,
+          backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
+        },
+        track: {
+          borderRadius: 11,
+          backgroundColor: `var(--cei-line-strong, ${brandColors.border.medium})`,
+          opacity: 1,
+        },
+      },
+    },
+
+    // Card — espejo de .cei-card (fondo elevado + borde de línea + radio lg).
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
+          border: `1px solid var(--cei-line, ${brandColors.border.light})`,
+          borderRadius: borderRadius.lg,
+        },
+      },
+    },
+
+    // Checkbox — espejo de .cei-check (línea en reposo; marca al activar, voltea).
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          color: `var(--cei-line-strong, ${brandColors.border.medium})`,
+          '&.Mui-checked': { color: `var(--cei-brand, ${brandColors.primary.main})` },
+        },
+      },
+    },
+
+    // Select — el input hereda borde/radio de OutlinedInput; el ícono usa fg-muted.
+    MuiSelect: {
+      styleOverrides: {
+        icon: { color: `var(--cei-fg-muted, ${brandColors.text.muted})` },
+      },
+    },
+
+    // Skeleton — espejo de .cei-skeleton (fondo hundido, radio sm).
+    MuiSkeleton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: `var(--cei-bg-sunken, ${brandColors.background.subtle})`,
+          borderRadius: borderRadius.sm,
+        },
+      },
+    },
+
+    // Breadcrumbs — espejo de .cei-breadcrumb (texto tenue, separador de línea).
+    MuiBreadcrumbs: {
+      styleOverrides: {
+        root: {
+          color: `var(--cei-fg-muted, ${brandColors.text.muted})`,
+          fontSize: '0.875rem',
+        },
+        separator: { color: `var(--cei-line-strong, ${brandColors.border.medium})` },
+      },
+    },
+
+    // Stepper — espejo de .cei-stepper/.cei-step. MUI dibuja el icono como SVG
+    // relleno (no un círculo con borde como el CSS); se aproxima con los mismos
+    // roles: inactivo = hundido/tenue, activo = marca, completado = éxito.
+    MuiStepConnector: {
+      styleOverrides: {
+        line: { borderColor: `var(--cei-line-strong, ${brandColors.border.medium})` },
+        root: {
+          '&.Mui-active .MuiStepConnector-line, &.Mui-completed .MuiStepConnector-line': {
+            borderColor: `var(--cei-brand, ${brandColors.primary.main})`,
+          },
+        },
+      },
+    },
+    MuiStepIcon: {
+      styleOverrides: {
+        root: {
+          color: `var(--cei-bg-sunken, ${brandColors.background.subtle})`,
+          '& .MuiStepIcon-text': {
+            fill: `var(--cei-fg-muted, ${brandColors.text.muted})`,
+          },
+          '&.Mui-active': {
+            color: `var(--cei-brand, ${brandColors.primary.main})`,
+            '& .MuiStepIcon-text': { fill: brandColors.text.white },
+          },
+          '&.Mui-completed': { color: `var(--cei-success, ${brandColors.success.main})` },
+        },
+      },
+    },
+    MuiStepLabel: {
+      styleOverrides: {
+        label: {
+          color: `var(--cei-fg-muted, ${brandColors.text.muted})`,
+          fontSize: '0.875rem',
+          '&.Mui-active': {
+            color: `var(--cei-brand, ${brandColors.primary.main})`,
+            fontWeight: 700,
+          },
+          '&.Mui-completed': { color: `var(--cei-fg, ${brandColors.text.body})` },
+        },
+      },
+    },
+
     // Tabs — indicador y tab activo en el azul de marca (rol: aclara en oscuro)
     MuiTabs: {
       styleOverrides: {

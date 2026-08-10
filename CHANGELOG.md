@@ -8,6 +8,13 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Added
+- **`MuiSwitch` estilizado como el `.cei-switch` del DS**: compacto (40×22), pista `--cei-line-strong` que pasa a `--cei-brand` al activar (voltea en dark), pulgar de 18px con `shadow-sm`. Antes los switches en React eran los de MUI por defecto (voluminosos, fuera de la escala del DS).
+- **Espejos MUI de componentes que solo existían en CSS**: `MuiCard`, `MuiCheckbox`, `MuiSelect`, `MuiSkeleton`, `MuiBreadcrumbs` y `MuiStepper` (`StepIcon`/`StepLabel`/`StepConnector`) — reflejan sus clases `.cei-*` para que React/MUI y CSS se vean igual (antes la doc mostraba estilos CSS sin equivalente en MUI). Se formaliza el principio de **paridad CSS ↔ MUI ↔ Tailwind** en `CONTRIBUTING.md`.
+
+### Changed
+- **`MuiDialogActions` con padding proporcional** (`16/24/24`, alineado a los 24px del contenido, como `.cei-modal`) para que los botones de acción no queden pegados al borde. Antes usaban el padding por defecto de MUI (8px → botones al filo).
+
 ## [0.32.0]
 
 ### Added
