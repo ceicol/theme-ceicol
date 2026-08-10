@@ -8,6 +8,13 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Added
+- Tokens de sombra **`button`** y **`buttonHover`** (CTA de marca) en `shadows` → `--cei-shadow-button` / `--cei-shadow-button-hover`.
+
+### Changed
+- **Los botones MUI ahora consumen los tokens de radio y padding del DS.** `MuiButton` heredaba `shape.borderRadius: 4px` (esquinas casi rectas), desalineado con `.cei-btn` (`--cei-radius-md` = 12px). Ahora `root` fija `borderRadius: borderRadius.md` y `sizeMedium` el padding `12×24px` (`spacingConstants.xsm/md`), igualando el botón React/MUI con el de CSS/Tailwind.
+- **Sombra de botón tokenizada.** `cei-primary`, `cei-large` (theme) y `.cei-btn--primary` (CSS) usaban un `rgba` hardcodeado; ahora usan `shadows.button` / `shadows.buttonHover`.
+
 ## [0.31.0]
 
 ### Added

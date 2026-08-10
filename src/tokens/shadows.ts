@@ -42,4 +42,6 @@ export const shadows = {
   premium: customShadowsArray[16],
   glow: '0 0 30px rgba(13, 148, 136, 0.08)', // halo ambiental (acento turquesa)
   glowTech: '0 0 8px rgba(34, 211, 238, 0.55)', // glow tenue y brillante (cian tech: nodos, indicadores activos)
+  button: '0 4px 14px rgba(0, 114, 152, 0.2)', // sombra de CTA de marca (reposo)
+  buttonHover: '0 6px 20px rgba(0, 114, 152, 0.3)', // sombra de CTA de marca (hover)
 };

@@ -302,14 +302,19 @@ const themeOptions: ThemeOptions = {
 
     MuiButton: {
       styleOverrides: {
-        // Solo estilo tipográfico/transición. NO se fija padding/gap/borderRadius
-        // globales: eso lo maneja MUI según el tamaño (size), como en el theme
-        // original. Las variantes cei-* definen su propio padding cuando aplica.
+        // Radio y tipografía desde tokens: borderRadius.md = 12px (igual que .cei-btn).
+        // El padding va en sizeMedium/… (no en root) para no pelear con el sistema
+        // de tamaños de MUI. Las variantes cei-* fijan su propio padding/radio.
         root: {
+          borderRadius: borderRadius.md,
           transition: `all ${durFast}ms ${easeOut}`,
           textTransform: 'none',
           fontWeight: 600,
           lineHeight: 1.2,
+        },
+        // Botón estándar (medium): mismo padding que .cei-btn (12×24px, desde tokens).
+        sizeMedium: {
+          padding: `${spacingConstants.xsm} ${spacingConstants.md}`,
         },
       },
       variants: [
@@ -319,11 +324,11 @@ const themeOptions: ThemeOptions = {
           style: {
             backgroundColor: brandColors.primary.main,
             color: brandColors.text.white,
-            boxShadow: '0 4px 14px rgba(0, 114, 152, 0.2)',
+            boxShadow: shadows.button,
             '&:hover': {
               backgroundColor: brandColors.primary.dark,
               transform: 'translateY(-2px)',
-              boxShadow: '0 6px 20px rgba(0, 114, 152, 0.3)',
+              boxShadow: shadows.buttonHover,
             },
             '&:active': { transform: 'translateY(0) scale(0.98)' },
           },
@@ -381,11 +386,11 @@ const themeOptions: ThemeOptions = {
             padding: '1rem 2rem',
             fontSize: '1rem',
             borderRadius: borderRadius.lg,
-            boxShadow: '0 4px 14px rgba(0, 114, 152, 0.2)',
+            boxShadow: shadows.button,
             '&:hover': {
               backgroundColor: brandColors.primary.dark,
               transform: 'translateY(-2px)',
-              boxShadow: '0 6px 20px rgba(0, 114, 152, 0.3)',
+              boxShadow: shadows.buttonHover,
             },
             '&:active': { transform: 'translateY(0) scale(0.98)' },
           },
@@ -443,7 +448,7 @@ const themeOptions: ThemeOptions = {
             backgroundColor: brandColors.primary.main,
             color: brandColors.text.white,
             borderRadius: borderRadius.md,
-            boxShadow: '0 4px 14px rgba(0, 114, 152, 0.2)',
+            boxShadow: shadows.button,
             '&:hover': {
               backgroundColor: brandColors.primary.dark,
               transform: 'translateY(-2px)',

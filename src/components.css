@@ -39,7 +39,7 @@
 .cei-btn--primary {
   background: var(--cei-primary);
   color: var(--cei-text-white);
-  box-shadow: 0 4px 14px rgba(0, 114, 152, 0.2);
+  box-shadow: var(--cei-shadow-button);
 }
 .cei-btn--primary:hover {
   background: var(--cei-primary-dark);
