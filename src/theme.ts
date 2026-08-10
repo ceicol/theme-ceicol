@@ -406,7 +406,7 @@ const themeOptions: ThemeOptions = {
             color: `var(--cei-brand, ${brandColors.primary.main})`,
             border: '1px solid transparent',
             '&:hover': { boxShadow: shadows.sm },
-            '&:active, &.Mui-active': {
+            '&:active, &.Mui-active, &[aria-pressed="true"]': {
               ...glassEffect,
               color: `var(--cei-brand, ${brandColors.primary.main})`,
               borderColor: `var(--cei-brand, ${brandColors.primary.main})`,
@@ -425,7 +425,7 @@ const themeOptions: ThemeOptions = {
             color: `var(--cei-brand, ${brandColors.primary.main})`,
             border: `1px solid var(--cei-brand, ${brandColors.primary.main})`,
             '&:hover': { boxShadow: shadows.sm, borderColor: 'transparent' },
-            '&:active, &.Mui-active': {
+            '&:active, &.Mui-active, &[aria-pressed="true"]': {
               backgroundColor: `var(--cei-brand, ${brandColors.primary.main})`,
               color: brandColors.text.white,
               border: 'none',
@@ -478,7 +478,7 @@ const themeOptions: ThemeOptions = {
             color: brandColors.primary.main,
             border: '1px solid transparent',
             '&:hover': { boxShadow: shadows.sm },
-            '&:active, &.Mui-active': {
+            '&:active, &.Mui-active, &[aria-pressed="true"]': {
               ...glassEffect,
               color: brandColors.primary.main,
               borderColor: brandColors.primary.main,
@@ -497,7 +497,7 @@ const themeOptions: ThemeOptions = {
             color: brandColors.primary.main,
             border: `1px solid ${brandColors.primary.main}`,
             '&:hover': { boxShadow: shadows.sm, borderColor: 'transparent' },
-            '&:active, &.Mui-active': {
+            '&:active, &.Mui-active, &[aria-pressed="true"]': {
               backgroundColor: brandColors.primary.main,
               color: brandColors.text.white,
               border: 'none',
@@ -549,7 +549,7 @@ const themeOptions: ThemeOptions = {
               boxShadow: shadows.sm,
               borderColor: 'transparent',
             },
-            '&:active, &.Mui-active': {
+            '&:active, &.Mui-active, &[aria-pressed="true"]': {
               backgroundColor: `var(--cei-brand, ${brandColors.primary.main})`,
               color: brandColors.text.white,
               border: 'none',
@@ -565,7 +565,7 @@ const themeOptions: ThemeOptions = {
               color: `var(--cei-brand, ${brandColors.primary.main})`,
               boxShadow: shadows.sm,
             },
-            '&:active, &.Mui-active': {
+            '&:active, &.Mui-active, &[aria-pressed="true"]': {
               ...glassEffect,
               color: `var(--cei-brand, ${brandColors.primary.main})`,
               borderColor: `var(--cei-brand, ${brandColors.primary.main})`,
