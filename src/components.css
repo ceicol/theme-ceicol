@@ -680,8 +680,23 @@
   color: var(--cei-brand, var(--cei-primary));
 }
 
+.cei-tab:disabled,
+.cei-tab[aria-disabled='true'],
+.cei-page:disabled,
+.cei-page[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* Paso con error (validación fallida en un wizard). */
+.cei-step--error .cei-step__num {
+  background: var(--cei-error);
+  color: var(--cei-text-white);
+  border-color: var(--cei-error);
+}
+
 /* ─── ACCESIBILIDAD (foco visible + movimiento reducido) ─── */
 /* Anillo de foco de marca en los interactivos que quedaban con el outline del navegador. */
+.cei-link:focus-visible,
 .cei-icon-btn:focus-visible,
 .cei-tab:focus-visible,
 .cei-page:focus-visible,
