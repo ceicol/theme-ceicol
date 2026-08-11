@@ -614,6 +614,18 @@ const themeOptions: ThemeOptions = {
           },
         },
       },
+      // Estado válido: `color="success"` pinta el borde de verde de forma
+      // persistente (espejo de `.cei-input--success`; complementa a `error`).
+      variants: [
+        {
+          props: { color: 'success' },
+          style: {
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: `var(--cei-success, ${brandColors.success.main})`,
+            },
+          },
+        },
+      ],
     },
 
     // Alert — fondo teñido del color semántico sobre la superficie del tema

@@ -259,8 +259,11 @@
 }
 .cei-input--error { border-color: var(--cei-error); }
 .cei-input--error:focus { box-shadow: 0 0 0 3px var(--cei-error-bg); }
+.cei-input--success { border-color: var(--cei-success); }
+.cei-input--success:focus { box-shadow: 0 0 0 3px var(--cei-success-bg); }
 .cei-field__help { font-size: var(--cei-font-size-small); color: var(--cei-fg-muted, var(--cei-text-muted)); }
 .cei-field__error { font-size: var(--cei-font-size-small); color: var(--cei-error); }
+.cei-field__success { font-size: var(--cei-font-size-small); color: var(--cei-success); }
 
 /* ─── TEXTAREA ─── */
 .cei-textarea {
