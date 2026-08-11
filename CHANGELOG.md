@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.33.3]
+
 ### Added
 - **Más estados de componente** (paridad CSS + MUI): `disabled` en `.cei-tab` y `.cei-page` (+ `Mui-disabled` en `MuiTab`); **paso con error** `.cei-step--error` (+ `Mui-error` en `MuiStepIcon`); y **anillo de foco visible** en `.cei-link` (faltaba — accesibilidad de teclado).
 
