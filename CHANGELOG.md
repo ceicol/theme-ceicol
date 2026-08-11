@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.33.1]
+
 ### Added
 - **Estados de componente en la capa CSS** (paridad con el tema MUI): `disabled` en `.cei-icon-btn`, `.cei-input`, `.cei-select`, `.cei-textarea`, `.cei-check` y `.cei-switch`; y toggle activo por `[aria-pressed="true"]` en `.cei-icon-btn--outline`/`--glass`. Permite documentar los estados estáticos sin drift (hover/foco siguen siendo vivos en la doc, no se falsifican).
 
