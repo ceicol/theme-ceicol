@@ -12,6 +12,7 @@ export const brandColors = {
   primary: {
     main: '#007298', // Azul CEICOL
     light: '#0391b2',
+    lighter: '#3cbfe0', // texto/borde de marca en dark — AAA sobre superficies oscuras
     dark: '#005a7a',
     bg: '#e1f0f8', // fondo de acento azul claro
   },

@@ -118,7 +118,7 @@
   box-shadow: var(--cei-shadow-sm);
 }
 .cei-icon-btn--outline:active {
-  background: var(--cei-brand, var(--cei-primary));
+  background: var(--cei-primary);
   border-color: transparent;
   color: var(--cei-text-white);
 }
@@ -670,7 +670,7 @@
 }
 /* Toggle activo por aria-pressed (mismo aspecto que la variante MUI). */
 .cei-icon-btn--outline[aria-pressed='true'] {
-  background: var(--cei-brand, var(--cei-primary));
+  background: var(--cei-primary);
   border-color: transparent;
   color: var(--cei-text-white);
 }

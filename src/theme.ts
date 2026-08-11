@@ -431,7 +431,7 @@ const themeOptions: ThemeOptions = {
             border: `1px solid var(--cei-brand, ${brandColors.primary.main})`,
             '&:hover': { boxShadow: shadows.sm, borderColor: 'transparent' },
             '&:active, &.Mui-active, &[aria-pressed="true"]': {
-              backgroundColor: `var(--cei-brand, ${brandColors.primary.main})`,
+              backgroundColor: `var(--cei-primary, ${brandColors.primary.main})`,
               color: brandColors.text.white,
               border: 'none',
             },
@@ -555,7 +555,7 @@ const themeOptions: ThemeOptions = {
               borderColor: 'transparent',
             },
             '&:active, &.Mui-active, &[aria-pressed="true"]': {
-              backgroundColor: `var(--cei-brand, ${brandColors.primary.main})`,
+              backgroundColor: `var(--cei-primary, ${brandColors.primary.main})`,
               color: brandColors.text.white,
               border: 'none',
             },
@@ -868,7 +868,7 @@ const themeOptions: ThemeOptions = {
         root: {
           borderRadius: borderRadius.md,
           '&.Mui-selected': {
-            backgroundColor: `var(--cei-brand, ${brandColors.primary.main})`,
+            backgroundColor: `var(--cei-primary, ${brandColors.primary.main})`,
             color: brandColors.text.white,
           },
         },

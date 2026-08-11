@@ -8,6 +8,12 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Added
+- Primitivo **`--cei-primary-lighter`** (`#3cbfe0`) — azul de marca brillante para superficies oscuras.
+
+### Fixed
+- **Accesibilidad: contraste del texto de marca en dark.** El texto/borde/ícono con `--cei-brand` en tema oscuro derivaba de `--cei-primary-light` (`#0391b2`), que sobre las superficies oscuras daba ~4:1 (**fallaba WCAG AA**). Ahora el rol `brand` en dark usa `--cei-primary-lighter` (`#3cbfe0`), con **AAA (≥7:1)** sobre `surface-brand/slate/deep`. Los rellenos activos que llevan texto blanco (toggle de icon-button, ítem de paginación seleccionado) pasan a `--cei-primary` fijo para conservar el blanco legible (AA) en ambos temas.
+
 ## [0.33.3]
 
 ### Added

@@ -57,7 +57,7 @@ export const semanticRoles: SemanticGroup[] = [
   {
     title: 'Marca (interactivo)',
     roles: {
-      brand: { light: 'var(--cei-primary)', dark: 'var(--cei-primary-light)' },
+      brand: { light: 'var(--cei-primary)', dark: 'var(--cei-primary-lighter)' },
       'brand-hover': { light: 'var(--cei-primary-dark)', dark: 'var(--cei-primary)' },
     },
   },
