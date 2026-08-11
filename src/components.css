@@ -643,6 +643,40 @@
 }
 .cei-table tbody tr:hover { background: var(--cei-bg-sunken, var(--cei-background-subtle)); }
 
+/* ─── ESTADOS (deshabilitado + toggle activo) — paridad con el tema MUI ─── */
+.cei-icon-btn:disabled,
+.cei-icon-btn[aria-disabled='true'],
+.cei-input:disabled,
+.cei-select:disabled,
+.cei-textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.cei-input:disabled,
+.cei-select:disabled,
+.cei-textarea:disabled {
+  background: var(--cei-bg-sunken, var(--cei-background-subtle));
+}
+.cei-check:has(input:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.cei-switch input:disabled + .cei-switch__track {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* Toggle activo por aria-pressed (mismo aspecto que la variante MUI). */
+.cei-icon-btn--outline[aria-pressed='true'] {
+  background: var(--cei-brand, var(--cei-primary));
+  border-color: transparent;
+  color: var(--cei-text-white);
+}
+.cei-icon-btn--glass[aria-pressed='true'] {
+  background: var(--cei-bg-glass);
+  border-color: var(--cei-brand, var(--cei-primary));
+  color: var(--cei-brand, var(--cei-primary));
+}
+
 /* ─── ACCESIBILIDAD (foco visible + movimiento reducido) ─── */
 /* Anillo de foco de marca en los interactivos que quedaban con el outline del navegador. */
 .cei-icon-btn:focus-visible,
