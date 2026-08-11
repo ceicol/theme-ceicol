@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.34.0]
+
 ### Added
 - **Sistema de movimiento.** Tokens: `duration.instant` (90ms) y easings `standard`/`in` (además del `out` de marca) → `--cei-duration-*` / `--cei-ease-*`, y utilidades Tailwind `duration-*` / `ease-*` (paridad CSS↔MUI↔Tailwind). Microinteracción de **press** (`scale`) en icon buttons (CSS + MUI). Personalidad "sutil y precisa".
 
