@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.33.2]
+
 ### Added
 - **Estado válido en campos** (complementa a `error`): `.cei-input--success` + `.cei-field__success` en CSS, y `color="success"` con borde verde persistente en `MuiOutlinedInput` (React). Guía de uso en la doc: reservarlo para confirmación que aporta (validación asíncrona, reglas complejas, formularios largos), no para todo campo.
 
