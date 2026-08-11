@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.33.4]
+
 ### Added
 - Primitivo **`--cei-primary-lighter`** (`#3cbfe0`) — azul de marca brillante para superficies oscuras.
 
