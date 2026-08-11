@@ -106,6 +106,9 @@
 .cei-icon-btn:hover {
   background: var(--cei-bg-sunken, var(--cei-background-subtle));
 }
+.cei-icon-btn:active {
+  transform: scale(0.94);
+}
 
 /* Variante: contorno (borde de marca) — espejo de la variante MUI cei-icon-outline */
 .cei-icon-btn--outline {
@@ -708,6 +711,7 @@
 @media (prefers-reduced-motion: reduce) {
   .cei-btn:hover,
   .cei-btn:active,
+  .cei-icon-btn:active,
   .cei-card--hover:hover {
     transform: none;
   }

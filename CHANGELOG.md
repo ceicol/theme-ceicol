@@ -8,6 +8,12 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Added
+- **Sistema de movimiento.** Tokens: `duration.instant` (90ms) y easings `standard`/`in` (además del `out` de marca) → `--cei-duration-*` / `--cei-ease-*`, y utilidades Tailwind `duration-*` / `ease-*` (paridad CSS↔MUI↔Tailwind). Microinteracción de **press** (`scale`) en icon buttons (CSS + MUI). Personalidad "sutil y precisa".
+
+### Changed
+- **Accesibilidad de movimiento global.** `MuiCssBaseline` ahora incluye el reset de `prefers-reduced-motion: reduce` para todo el árbol (una sola vez), además de los guards existentes en la capa CSS.
+
 ## [0.33.4]
 
 ### Added

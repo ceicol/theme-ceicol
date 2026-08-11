@@ -50,7 +50,9 @@ lines.push('');
 for (const [k, v] of Object.entries(animations.duration)) {
   lines.push(`  --cei-duration-${k}: ${v}ms;`);
 }
-lines.push(`  --cei-ease-out: ${animations.easing.out};`);
+for (const [k, v] of Object.entries(animations.easing)) {
+  lines.push(`  --cei-ease-${kebab(k)}: ${v};`);
+}
 
 lines.push('}', '');
 writeFileSync(new URL('../dist/tokens.css', import.meta.url), lines.join('\n'));

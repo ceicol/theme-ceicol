@@ -12,6 +12,7 @@ import {
   fontFamilies,
   fontSizes,
   semanticRoles,
+  animations,
 } from '../dist/tokens.mjs';
 
 const kebab = (s) => s.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
@@ -46,7 +47,28 @@ for (const grp of semanticRoles) {
   }
 }
 
-const preset = { theme: { extend: { colors, spacing, borderRadius: radius, fontSize, fontFamily, boxShadow } } };
+// Movimiento → utilidades duration-* y ease-* (misma escala que CSS/MUI).
+const transitionDuration = Object.fromEntries(
+  Object.entries(animations.duration).map(([k, v]) => [k, `${v}ms`]),
+);
+const transitionTimingFunction = Object.fromEntries(
+  Object.entries(animations.easing).map(([k, v]) => [kebab(k), v]),
+);
+
+const preset = {
+  theme: {
+    extend: {
+      colors,
+      spacing,
+      borderRadius: radius,
+      fontSize,
+      fontFamily,
+      boxShadow,
+      transitionDuration,
+      transitionTimingFunction,
+    },
+  },
+};
 
 const banner = '// CEICOL Tailwind preset — generado desde theme-ceicol. NO editar a mano.\n';
 writeFileSync(

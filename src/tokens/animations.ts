@@ -5,14 +5,20 @@
 // ============================================================
 
 export const animations = {
+  // Duración (ms) — escala corta y precisa. Marca de datos: ágil, nunca lento.
   duration: {
-    fast: 150,
-    normal: 250,
-    slow: 300,
+    instant: 90, // micro-feedback táctil: press, tick, anillo de foco
+    fast: 150, // hover, color/fondo, cambios de estado pequeños
+    normal: 250, // transición por defecto
+    slow: 300, // superficies, paneles, reveals mayores
   },
   easing: {
-    // Curva de salida suave usada en toda la landing
+    // Decelerada (entra rápido, asienta suave) — entradas y estados. Firma de la marca.
     out: 'cubic-bezier(0.16, 1, 0.3, 1)',
+    // Estándar equilibrada — cambios de estado en ambos sentidos.
+    standard: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    // Acelerada — salidas (algo que desaparece).
+    in: 'cubic-bezier(0.4, 0, 1, 1)',
   },
 };
 

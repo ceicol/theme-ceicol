@@ -297,6 +297,15 @@ const themeOptions: ThemeOptions = {
       styleOverrides: {
         body: { fontFamily: fontFamilies.body },
         'h1, h2, h3, h4': { fontFamily: fontFamilies.display },
+        // Accesibilidad: respeta "reducir movimiento" en todo el árbol, una sola vez.
+        '@media (prefers-reduced-motion: reduce)': {
+          '*, *::before, *::after': {
+            animationDuration: '0.01ms !important',
+            animationIterationCount: '1 !important',
+            transitionDuration: '0.01ms !important',
+            scrollBehavior: 'auto !important',
+          },
+        },
       },
     },
 
@@ -543,6 +552,7 @@ const themeOptions: ThemeOptions = {
             backgroundColor: `var(--cei-bg-sunken, ${brandColors.background.subtle})`,
             color: `var(--cei-brand, ${brandColors.primary.main})`,
           },
+          '&:active': { transform: 'scale(0.94)' },
           '&.cei-icon-outline': {
             borderRadius: borderRadius.round,
             backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
