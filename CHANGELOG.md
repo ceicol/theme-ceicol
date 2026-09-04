@@ -8,6 +8,10 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Fixed
+- **`release.sh` vuelve a actualizar los enlaces de comparación del CHANGELOG.** El paso 1.5 tomaba el tag anterior con `git describe --tags`, y eso **nunca pudo funcionar aquí**: el paso 4 crea el tag sobre el commit `build:` y el paso 5 hace `git reset --mixed HEAD~1`, así que todo tag queda un commit **por delante** de `main`, y `git describe` solo ve tags alcanzables *desde* HEAD. Devolvía vacío en cada publicación y el bloque se saltaba **en silencio**, porque el `|| echo ''` se comía el error. Ocho releases con el enlace `[Unreleased]` clavado en `v0.27.0` mientras la versión iba por 0.34.1. Ahora usa `git tag --list 'v*' --sort=-v:refname | head -1` —en ese punto el tag nuevo aún no existe, así que el más alto es el anterior— y avisa si no hay ninguno, que solo es normal en la primera publicación del paquete.
+- **Los 13 enlaces de versión que se perdieron mientras tanto**, reconstruidos desde los tags reales: de `0.28.0` a `0.34.1`, más `0.13.0`. El pie pasa de 8 enlaces a 21.
+
 ## [0.34.1]
 
 ### Deprecated
@@ -195,11 +199,24 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.27.0...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.34.1...HEAD
+[0.34.1]: https://github.com/ceicol/theme-ceicol/compare/v0.34.0...v0.34.1
+[0.34.0]: https://github.com/ceicol/theme-ceicol/compare/v0.33.4...v0.34.0
+[0.33.4]: https://github.com/ceicol/theme-ceicol/compare/v0.33.3...v0.33.4
+[0.33.3]: https://github.com/ceicol/theme-ceicol/compare/v0.33.2...v0.33.3
+[0.33.2]: https://github.com/ceicol/theme-ceicol/compare/v0.33.1...v0.33.2
+[0.33.1]: https://github.com/ceicol/theme-ceicol/compare/v0.33.0...v0.33.1
+[0.33.0]: https://github.com/ceicol/theme-ceicol/compare/v0.32.0...v0.33.0
+[0.32.0]: https://github.com/ceicol/theme-ceicol/compare/v0.31.0...v0.32.0
+[0.31.0]: https://github.com/ceicol/theme-ceicol/compare/v0.30.0...v0.31.0
+[0.30.0]: https://github.com/ceicol/theme-ceicol/compare/v0.29.0...v0.30.0
+[0.29.0]: https://github.com/ceicol/theme-ceicol/compare/v0.28.0...v0.29.0
+[0.28.0]: https://github.com/ceicol/theme-ceicol/compare/v0.27.0...v0.28.0
 [0.27.0]: https://github.com/ceicol/theme-ceicol/compare/v0.26.0...v0.27.0
 [0.26.0]: https://github.com/ceicol/theme-ceicol/compare/v0.25.0...v0.26.0
 [0.25.0]: https://github.com/ceicol/theme-ceicol/compare/v0.24.0...v0.25.0
 [0.24.0]: https://github.com/ceicol/theme-ceicol/compare/v0.23.0...v0.24.0
 [0.23.0]: https://github.com/ceicol/theme-ceicol/compare/v0.22.0...v0.23.0
 [0.22.0]: https://github.com/ceicol/theme-ceicol/compare/v0.21.0...v0.22.0
-[0.21.0]: https://github.com/ceicol/theme-ceicol/releases/tag/v0.21.0
+[0.21.0]: https://github.com/ceicol/theme-ceicol/compare/v0.13.0...v0.21.0
+[0.13.0]: https://github.com/ceicol/theme-ceicol/releases/tag/v0.13.0
