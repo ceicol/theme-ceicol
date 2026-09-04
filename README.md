@@ -207,6 +207,23 @@ Las **variantes tipográficas** tampoco son un renombrado: la escala compat cruz
 
 Equivalencia por familia y tamaño: display 64/52/40 → `h1`, 36/32 → `h2`, 28/24 → `h3`, 18 → `h4`; cuerpo 24/18 → `body2`, 16 → `body1`, 14 → `caption`. Cada nombre compat lleva su equivalente en el `@deprecated` de sus tipos.
 
+#### La escala son cuatro niveles, y `h5`/`h6`/`subtitle1`/`subtitle2` no existen
+
+MUI declara trece slots de tipografía y CEICOL define nueve. Los cuatro que faltan **no son huecos que rellenar**: la escala de CEICOL es una jerarquía de cuatro niveles de encabezado, a propósito.
+
+Pero al estar declarados por MUI se pueden escribir, y entonces devuelven los valores de **Material Design en la tipografía de cuerpo** — encabezados en Inter:
+
+| | Hoy devuelve | Usa en su lugar |
+|---|---|---|
+| `h5` | Inter 400 · 24 px | `h4` |
+| `h6` | Inter 500 · 20 px | `h4` |
+| `subtitle1` | Inter 400 · 16 px | `body1` — es casi idéntico, solo cambia el interlineado |
+| `subtitle2` | Inter 500 · 14 px | `caption` |
+
+**Se desactivarán en `1.0`** con `h5: false` en el augment de tipos, para que TypeScript los rechace en vez de dejarlos filtrar Material.
+
+Y si tu producto repite el mismo estilo de texto muchas veces —un título de tarjeta, la cabecera de un panel—, eso no es un nivel que le falte al sistema: **es un componente tuyo**. Encapsúlalo una vez con la variante que corresponda más el peso que necesites, en vez de repetir el `sx`.
+
 #### Qué avisa y qué no
 
 El `@deprecated` de los tipos **solo lo marca el editor donde hay acceso a propiedad** —`theme.palette.cta.main`, `theme.typography.h3Medium`—. En las formas de cadena, que son la mayoría de los usos, **no avisa nada**:
