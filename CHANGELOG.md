@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.34.1]
+
 ### Deprecated
 - **La capa de compatibilidad con `theme-gaia` queda marcada en el código**, no solo en prosa. 64 anotaciones `@deprecated` con su equivalente de CEICOL: las 5 claves de paleta en `Palette`/`PaletteOptions` y las 27 variantes tipográficas en `TypographyVariants`/`TypographyVariantsOptions`. La política de deprecación ya lo exigía y el README ya afirmaba que estaban marcadas; ahora es cierto.
 - **Los tres botones de mapa de región no tendrán equivalente.** `gaia-amazonia`, `gaia-panamazonia` y `gaia-macroterritorio` se retirarán en `1.0` **sin sustituto en el sistema**: un distintivo de territorio es del dominio de un visor geográfico, no de la marca, y sus únicos usos estaban en un solo producto. El README documenta cómo reconstruirlo en el producto — sus degradados eran los pares `accent`/`primary`/`warning` del sistema escritos a mano, así que no hace falta ningún literal.
