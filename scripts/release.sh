@@ -31,7 +31,21 @@ TAG="v$VERSION"
 #     quede desincronizado de los tags (Keep a Changelog). Idempotente: si no
 #     hay sección [Unreleased], no hace nada.
 if grep -q '^## \[Unreleased\]' CHANGELOG.md; then
-  PREV_TAG="$(git describe --tags --abbrev=0 2>/dev/null || echo '')"
+  # El tag de la versión anterior. NO se usa `git describe --tags`: el paso 4
+  # crea el tag sobre el commit `build:` y el paso 5 hace `git reset HEAD~1`,
+  # así que TODO tag queda un commit por DELANTE de `main`. `git describe` solo
+  # ve tags alcanzables *desde* HEAD, de modo que aquí devolvía vacío siempre y
+  # este bloque no llegaba a ejecutarse nunca — en silencio, porque el `|| echo
+  # ''` se comía el error. Ocho releases con el enlace `[Unreleased]` clavado en
+  # `v0.27.0` mientras la versión iba por 0.34.1.
+  #
+  # En este punto el tag nuevo todavía no existe (se crea en el paso 4), así que
+  # el más alto por versión ES el anterior.
+  PREV_TAG="$(git tag --list 'v*' --sort=-v:refname | head -1)"
+  if [ -z "$PREV_TAG" ]; then
+    echo "  ⚠ Sin tags previos: no se actualizan los enlaces de comparación del"
+    echo "    CHANGELOG. Normal solo en la PRIMERA publicación del paquete."
+  fi
   perl -0pi -e "s/^## \[Unreleased\]\n/## [Unreleased]\n\n## [$VERSION]\n/m" CHANGELOG.md
   if [ -n "$PREV_TAG" ]; then
     perl -pi -e "s#^\[Unreleased\]:.*#[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/$TAG...HEAD\n[$VERSION]: https://github.com/ceicol/theme-ceicol/compare/$PREV_TAG...$TAG#" CHANGELOG.md
