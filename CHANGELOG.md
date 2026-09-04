@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.35.0]
+
 ### Added
 - **`MuiDialogTitle`, espejo de `.cei-modal__title`.** Un `<DialogTitle>` en React caía en el `h6` por defecto de MUI —Inter 500 a 20 px—: un encabezado en la tipografía de cuerpo y fuera de la escala. Ahora usa display, peso 700 y `fontSizes.h3` (20–24 px), el mismo escalón que ya consumen `.cei-modal__title` y `.cei-empty__title`. La clase CSS existía desde el principio y el espejo en MUI faltaba, que es exactamente lo que el Definition of Done llama un componente sin terminar.
 
@@ -205,7 +207,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.34.1...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.35.0...HEAD
+[0.35.0]: https://github.com/ceicol/theme-ceicol/compare/v0.34.1...v0.35.0
 [0.34.1]: https://github.com/ceicol/theme-ceicol/compare/v0.34.0...v0.34.1
 [0.34.0]: https://github.com/ceicol/theme-ceicol/compare/v0.33.4...v0.34.0
 [0.33.4]: https://github.com/ceicol/theme-ceicol/compare/v0.33.3...v0.33.4
