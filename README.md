@@ -179,6 +179,77 @@ Para facilitar la migración de productos que consumen `theme-gaia`, el tema tam
 
 Estas claves están marcadas como deprecadas; los proyectos nuevos deben usar la API principal de CEICOL.
 
+#### Migrar de la capa compat
+
+Las claves de paleta son **alias literales**: mismo hexadecimal, dígito a dígito, así que el canje no mueve el píxel.
+
+| Deprecado | CEICOL | Nota |
+|---|---|---|
+| `cta` · `green` · `link` | `primary` | `green.button` es `primary.dark` |
+| `tertiary` · `brown` | `contrast` | `brown.light` es `--cei-fg-muted`, que **sí** voltea con el tema |
+
+Las **variantes de botón** no son alias: es un componente por otro, y el relleno, el radio o la sombra pueden diferir. Se comparan en pantalla.
+
+| Deprecado | CEICOL |
+|---|---|
+| `gaia-cta-contained` | `cei-primary` |
+| `gaia-cta-outlined` | `cei-secondary` |
+| `gaia-icon-glass` | `cei-icon-glass` |
+| `gaia-icon-outline` | `cei-icon-outline` |
+| `gaia-amazonia` · `gaia-panamazonia` · `gaia-macroterritorio` | **sin equivalente** — ver abajo |
+
+Las **variantes tipográficas** tampoco son un renombrado: la escala compat cruza tamaño y peso en un solo nombre, y la API de CEICOL separa los dos ejes. El escalón sale de `variant`; el peso, de `sx`:
+
+```tsx
+// antes                          // ahora
+<Typography variant="h3Medium">   <Typography variant="h4" sx={{ fontWeight: 500 }}>
+```
+
+Equivalencia por familia y tamaño: display 64/52/40 → `h1`, 36/32 → `h2`, 28/24 → `h3`, 18 → `h4`; cuerpo 24/18 → `body2`, 16 → `body1`, 14 → `caption`. Cada nombre compat lleva su equivalente en el `@deprecated` de sus tipos.
+
+#### Qué avisa y qué no
+
+El `@deprecated` de los tipos **solo lo marca el editor donde hay acceso a propiedad** —`theme.palette.cta.main`, `theme.typography.h3Medium`—. En las formas de cadena, que son la mayoría de los usos, **no avisa nada**:
+
+```tsx
+<Typography variant="h3Medium">      // sin aviso
+<Typography color="cta">             // sin aviso
+sx={{ color: "cta.main" }}           // sin aviso
+sx={{ typography: "h3Medium" }}      // sin aviso
+```
+
+Es una limitación de TypeScript, no del tema: ahí el valor es un literal dentro de una unión de cadenas, no una referencia a un símbolo. Para cazar esas formas, añade estas reglas al ESLint del producto:
+
+```js
+// eslint.config.js
+const COMPAT_TIPO = "h1xxlBold|h1xlBold|h1lgBold|h1Bold|h2xxlSemibold|h2xxlMedium|h2lgMedium|h2Bold|h3xxlSemibold|h3xlRegular|h3xlSemibold|h3xlMedium|h3lgSemibold|h3Medium|bodyxxlRegular|bodyxxlRegularSpacing|bodyxxlSemiboldSpacing|bodyxlBoldSpacing|bodyxlSemibold|bodyxlMedium|bodyxlMediumSpacing|bodyxlRegular|bodylgMedium|bodylgRegular|bodyRegular|bodyRegularSpacing|bodyMedium";
+
+"no-restricted-syntax": ["error",
+  { selector: `Literal[value=/^(${COMPAT_TIPO})$/]`,
+    message: "theme-ceicol: tipografía compat deprecada. Se retira en 1.0." },
+  { selector: "Literal[value=/^gaia-(cta-contained|cta-outlined|icon-glass|icon-outline|amazonia|panamazonia|macroterritorio)$/]",
+    message: "theme-ceicol: variante de botón deprecada." },
+  { selector: "JSXAttribute[name.name=/^(color|bgcolor)$/] Literal[value=/^(cta|green|brown|link|tertiary)$/]",
+    message: "theme-ceicol: clave de paleta deprecada." },
+  { selector: "Literal[value=/^(cta|green|brown|link|tertiary)\\.(main|light|dark|button|glass|contrastText)$/]",
+    message: "theme-ceicol: clave de paleta deprecada." },
+],
+```
+
+Buscar el literal entrecomillado **en cualquier posición** y no solo en el atributo es deliberado: en un producto real conviven `variant="h3Medium"`, `variant={"h3Medium"}` y `sx={{ typography: "h3Medium" }}`, y un patrón que solo mire el atributo deja fuera un 22 % de los usos.
+
+#### Los botones de mapa de región no tendrán equivalente
+
+`gaia-amazonia`, `gaia-panamazonia` y `gaia-macroterritorio` **se retiran sin sustituto en el sistema**: un distintivo de territorio es del dominio de un visor geográfico, no de la marca.
+
+Sus degradados eran los tokens del sistema escritos a mano, así que un producto que los necesite se construye el componente con ellos:
+
+```tsx
+// turquesa → accent · azul → primary · ámbar → warning
+background: `radial-gradient(54.15% 54.15% at 46% 46%,
+  var(--cei-${tono}-light) 76.92%, var(--cei-${tono}) 100%)`
+```
+
 ## Temas: claro / oscuro (capa semántica)
 
 Sobre los tokens crudos (`--cei-*`), el sistema expone una **capa semántica de roles** (`theme-ceicol/semantic.css`). Los componentes consumen *roles* (el fondo de página, el texto de cuerpo, un borde…) en vez de colores concretos, y **un tema no es más que una reasignación de esos roles**. Cambiar de tema no toca ningún componente.
