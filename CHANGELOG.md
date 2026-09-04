@@ -8,6 +8,15 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Deprecated
+- **La capa de compatibilidad con `theme-gaia` queda marcada en el código**, no solo en prosa. 64 anotaciones `@deprecated` con su equivalente de CEICOL: las 5 claves de paleta en `Palette`/`PaletteOptions` y las 27 variantes tipográficas en `TypographyVariants`/`TypographyVariantsOptions`. La política de deprecación ya lo exigía y el README ya afirmaba que estaban marcadas; ahora es cierto.
+- **Los tres botones de mapa de región no tendrán equivalente.** `gaia-amazonia`, `gaia-panamazonia` y `gaia-macroterritorio` se retirarán en `1.0` **sin sustituto en el sistema**: un distintivo de territorio es del dominio de un visor geográfico, no de la marca, y sus únicos usos estaban en un solo producto. El README documenta cómo reconstruirlo en el producto — sus degradados eran los pares `accent`/`primary`/`warning` del sistema escritos a mano, así que no hace falta ningún literal.
+
+### Documentation
+- **`CONTRIBUTING` › Publicar una versión, corregido.** Tres cosas que la guía no decía o decía al revés: (1) `npm run release` se ejecuta **en `main` y después del merge**, porque su paso 3 hace `git push origin main`; (2) **no hay que mover el `[Unreleased]` a mano** —el paso 1.5 lo hace y es idempotente, así que moverlo antes deja una sección de versión vacía—; y (3) el arreglo automático de los enlaces de comparación del pie **no puede funcionar en este repositorio**: usa `git describe --tags`, pero el paso 4 crea el tag sobre el commit `build:` y el paso 5 retrocede `main`, dejando el tag **un commit por delante**. `git describe` solo ve tags alcanzables desde HEAD. Por eso el enlace `[Unreleased]` sigue en `v0.27.0...HEAD` con la versión en 0.34.0, siete releases. El arreglo del script queda anotado para su propio `fix:`.
+- **Guía de migración de la capa compat en el README**: tabla de canje de claves de paleta (alias literales, el píxel no se mueve), de variantes de botón (componente por otro, se compara en pantalla) y de la escala tipográfica (`variant` da el escalón, `sx` el peso).
+- **Se documenta qué avisa y qué no.** El `@deprecated` de los tipos solo lo marca el editor donde hay **acceso a propiedad** —`theme.palette.cta.main`, `theme.typography.h3Medium`—; en las formas de cadena —`variant="h3Medium"`, `color="cta"`, `sx={{ typography: "…" }}`— TypeScript no emite nada, porque el valor es un literal dentro de una unión y no una referencia a un símbolo. Comprobado con `getSuggestionDiagnostics` de la API del compilador. El README publica las reglas de `no-restricted-syntax` que sí las cazan, y explica por qué buscan el literal en cualquier posición: en un producto real un 22 % de los usos no están en el atributo.
+
 ## [0.34.0]
 
 ### Added

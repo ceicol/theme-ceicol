@@ -64,8 +64,22 @@ Regla práctica: si un consumidor tiene que **cambiar su código** al actualizar
 Solo mantenedores (ver CODEOWNERS). Con el árbol limpio:
 
 ```bash
-npm run release            # patch
-npm run release -- minor   # o major
+git checkout main && git pull
+npm run release           # patch
+npm run release -- minor  # o major
 ```
 
-El script sube la versión, actualiza el comando de instalación del README, compila, publica el tag `vX.Y.Z` con el `dist` y verifica que subió a GitHub. Antes de publicar, asegúrate de haber movido los cambios de `[Unreleased]` a la nueva versión en el `CHANGELOG.md`.
+**Se ejecuta en `main`, después de mergear el PR.** El paso 3 del script hace `git push origin main`, así que lanzarlo desde una rama de trabajo empuja a `main` un commit de versión que no corresponde.
+
+El script hace todo lo demás solo: sube la versión, **mueve el encabezado `[Unreleased]` del CHANGELOG a la versión nueva**, actualiza el comando de instalación del README, compila, corre los tres `check:*` sobre el `dist` recién generado, publica el tag `vX.Y.Z` con el `dist` y verifica que llegó a GitHub.
+
+**No muevas el `[Unreleased]` a mano.** El paso 1.5 lo hace y es idempotente: si ya lo moviste, el encabezado sigue ahí y el script insertará una sección de versión vacía encima.
+
+**Los enlaces de comparación del pie del CHANGELOG hay que arreglarlos a mano.** El paso 1.5 intenta hacerlo con `git describe --tags`, y **eso nunca puede funcionar en este repositorio**: el paso 4 crea el tag sobre el commit `build:` y el paso 5 hace `git reset --mixed HEAD~1`, así que el tag queda **un commit por delante** de `main`. `git describe` solo ve tags alcanzables *desde* HEAD, y este está adelante.
+
+```
+v0.34.0 → 59569e9  "build: v0.34.0"     ← el tag
+main    → 7f15e44  "chore: release v0.34.0"  = padre del tag
+```
+
+Se nota en el propio archivo: el enlace `[Unreleased]` apunta a `v0.27.0...HEAD` con la versión en 0.34.0, siete releases desincronizado. El arreglo es una línea en `scripts/release.sh` —`git tag --sort=-v:refname | head -1` en vez de `git describe`— y va en su propio `fix:`, no de refilón en un PR de documentación.
