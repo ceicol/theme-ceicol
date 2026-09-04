@@ -8,6 +8,12 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Added
+- **`MuiDialogTitle`, espejo de `.cei-modal__title`.** Un `<DialogTitle>` en React caía en el `h6` por defecto de MUI —Inter 500 a 20 px—: un encabezado en la tipografía de cuerpo y fuera de la escala. Ahora usa display, peso 700 y `fontSizes.h3` (20–24 px), el mismo escalón que ya consumen `.cei-modal__title` y `.cei-empty__title`. La clase CSS existía desde el principio y el espejo en MUI faltaba, que es exactamente lo que el Definition of Done llama un componente sin terminar.
+
+### Deprecated
+- **`h5`, `h6`, `subtitle1` y `subtitle2` se desactivarán en `1.0`.** La escala de CEICOL son **cuatro niveles de encabezado**, como declara la propia fuente de `tokens/typography.ts`. Esos cuatro slots los declara MUI, CEICOL no los define, y hoy devuelven los valores de Material Design **en la tipografía de cuerpo**. En `1.0` pasarán a `false` en el augment de tipos, de modo que TypeScript los rechace. Uso actual conocido: 5 en productos Gaia y 33 en un producto que aún no consume el tema. Migración: `h5`/`h6` → `h4`; `subtitle1` → `body1` (hoy es casi idéntico: Inter 400 a 16 px, solo cambia el interlineado); `subtitle2` → `caption`. Si un producto repite el mismo estilo muchas veces, eso es un componente suyo, no un estilo del sistema.
+
 ### Fixed
 - **`release.sh` vuelve a actualizar los enlaces de comparación del CHANGELOG.** El paso 1.5 tomaba el tag anterior con `git describe --tags`, y eso **nunca pudo funcionar aquí**: el paso 4 crea el tag sobre el commit `build:` y el paso 5 hace `git reset --mixed HEAD~1`, así que todo tag queda un commit **por delante** de `main`, y `git describe` solo ve tags alcanzables *desde* HEAD. Devolvía vacío en cada publicación y el bloque se saltaba **en silencio**, porque el `|| echo ''` se comía el error. Ocho releases con el enlace `[Unreleased]` clavado en `v0.27.0` mientras la versión iba por 0.34.1. Ahora usa `git tag --list 'v*' --sort=-v:refname | head -1` —en ese punto el tag nuevo aún no existe, así que el más alto es el anterior— y avisa si no hay ninguno, que solo es normal en la primera publicación del paquete.
 - **Los 13 enlaces de versión que se perdieron mientras tanto**, reconstruidos desde los tags reales: de `0.28.0` a `0.34.1`, más `0.13.0`. El pie pasa de 8 enlaces a 21.

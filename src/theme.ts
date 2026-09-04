@@ -17,7 +17,7 @@ import {
   Shadows,
 } from '@mui/material/styles';
 import { brandColors } from './tokens/colors';
-import { typography, fontFamilies } from './tokens/typography';
+import { typography, fontFamilies, fontSizes } from './tokens/typography';
 import { customShadowsArray, shadows, glassEffect } from './tokens/shadows';
 import { borderRadius, spacingConstants } from './tokens/layout';
 import { transitionStyles, animations } from './tokens/animations';
@@ -682,6 +682,30 @@ const themeOptions: ThemeOptions = {
     MuiDialog: {
       styleOverrides: {
         paper: { borderRadius: borderRadius.lg, boxShadow: shadows.premium },
+      },
+    },
+
+    // Título de diálogo: espejo de `.cei-modal__title` de la capa CSS.
+    //
+    // Sin esto, un `<DialogTitle>` en React caía en el `h6` por defecto de MUI
+    // —Inter 500 a 20 px—, es decir un encabezado en la tipografía de cuerpo y
+    // fuera de la escala. La clase CSS existía desde el principio; el espejo en
+    // MUI faltaba, y eso es justo lo que el Definition of Done llama un
+    // componente sin terminar.
+    //
+    // El tamaño sale de `fontSizes.h3` (20–24 px), que es el escalón que ya
+    // consumen `.cei-modal__title` y `.cei-empty__title`. No es una variante
+    // nueva de la rampa: es un estilo de componente, y por eso vive aquí y no
+    // en `typography`.
+    MuiDialogTitle: {
+      styleOverrides: {
+        root: {
+          fontFamily: fontFamilies.display,
+          fontWeight: 700,
+          fontSize: fontSizes.h3,
+          lineHeight: 1.3,
+          color: `var(--cei-fg-strong, ${brandColors.text.heading})`,
+        },
       },
     },
 
