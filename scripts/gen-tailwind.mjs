@@ -27,11 +27,31 @@ for (const g of COLOR_GROUPS) {
   for (const [k, v] of Object.entries(val)) obj[k === 'main' ? 'DEFAULT' : kebab(k)] = v;
   colors[g] = obj;
 }
-// Roles semánticos de color → var() (theme-aware). Elevación va a boxShadow.
+// Roles semánticos de color → var() (theme-aware). Elevación va a boxShadow,
+// y las sombras de texto a textShadow.
+//
+// La exclusión NO es cosmética: este bucle mete en `colors` todo rol que no
+// empiece por `elevation`, así que un rol cuyo valor es una sombra acabaría
+// publicado como color y Tailwind generaría `bg-text-shadow-media`, que es
+// una utilidad sin sentido con un valor que no es un color. El filtro tiene
+// que enumerar lo que NO es color, no dar por hecho que todo lo demás sí.
+const NO_ES_COLOR = (n) => n.startsWith('elevation') || n.startsWith('text-shadow');
 for (const grp of semanticRoles) {
   for (const name of Object.keys(grp.roles)) {
-    if (name.startsWith('elevation')) continue;
+    if (NO_ES_COLOR(name)) continue;
     colors[name] = `var(--cei-${name})`;
+  }
+}
+
+// Tailwind no trae utilidad de text-shadow, así que se publican bajo su propia
+// clave: quien la quiera la engancha con un plugin, y mientras tanto el valor
+// está disponible y no contamina la paleta.
+const textShadow = {};
+for (const grp of semanticRoles) {
+  for (const name of Object.keys(grp.roles)) {
+    if (name.startsWith('text-shadow')) {
+      textShadow[name.replace(/^text-shadow-?/, '') || 'DEFAULT'] = `var(--cei-${name})`;
+    }
   }
 }
 
@@ -64,6 +84,7 @@ const preset = {
       fontSize,
       fontFamily,
       boxShadow,
+      textShadow,
       transitionDuration,
       transitionTimingFunction,
     },

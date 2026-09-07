@@ -8,6 +8,27 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Added
+- **Escalera de velos como rol semántico**: `--cei-scrim-soft`, `--cei-scrim`, `--cei-scrim-strong` y `--cei-scrim-heavy`, construidos con `color-mix` sobre `surface-slate` (claro) y `surface-deep` (oscuro), así que **voltean con el tema**. Con paridad automática en CSS, DTCG y Tailwind (`bg-scrim-*`), porque los generadores recorren `semanticRoles`.
+
+  Faltaban, y el hueco no era cosmético: los tokens se publican como hex, así que `rgba(var(--cei-…), .55)` no es válido y copiar el valor era la única salida. Medido sobre los cuatro productos Gaia: **242 literales `rgba()`**, de los cuales **173 son negro o blanco con alfa** —cero identidad de producto— repartidos en **60 valores de opacidad distintos**, con `0.3`, `0.30` y `.25` escritos de tres formas para el mismo número. `rgba(0,0,0,0.6)` aparecía en los **cuatro** productos, y `rgba(0,0,0,0.35)`, `rgba(255,255,255,0.2)` y `rgba(0,0,0,0.1)` en tres. Nadie estaba trabajando sobre una escala porque no había ninguna.
+
+  Los cuatro peldaños salen de los picos reales de uso (sobre negro ~0.2, ~0.35 y ~0.6; sobre blanco ~0.1 y ~0.18), no de una preferencia. La técnica ya estaba en el repositorio —`color-mix` en cinco variantes de alerta— y nunca se había aplicado aquí.
+
+  Los velos con tinte de marca o de territorio siguen siendo del producto, mismo criterio que retiró `gaia-amazonia`; lo que cambia es que se derivan de un rol con `color-mix` en vez de mezclarse a mano, para que volteen.
+
+- **Sombra de texto como rol**: `--cei-text-shadow-subtle` y `--cei-text-shadow-media`, para que un titular se lea encima de una fotografía o un mapa. El hermano del velo y el mismo hueco: el sistema publicaba `shadows` para caja y **nada para texto**.
+
+  Los valores salen de lo que ya había escrito a mano, y el reparto lo dice todo: **`0 1px 4px rgba(0,0,0,0.2)` es idéntico en Geovisor, Fichas y DMS**, cuatro veces — el mismo valor inventado tres veces por separado. StoryMap usa los suyos más fuertes (0.7 / 0.6 / 0.6 / 0.45) porque su texto va sobre fotografía a sangre. De ahí los dos peldaños: `subtle` separa texto de interfaz de una superficie con ruido, `media` es para cuando el fondo no se controla.
+
+  Un resplandor de mucho difuminado sobre un hero —StoryMap tiene uno de 24 px— sigue siendo composición del producto; lo que cambia es que se construye con `color-mix` sobre un rol y no con un literal.
+
+### Fixed
+- **`gen-tailwind.mjs` publicaba como color cualquier rol que no empezara por `elevation`.** El filtro daba por hecho que todo lo demás era color, así que un rol cuyo valor es una sombra habría salido en la paleta y Tailwind habría generado `bg-text-shadow-media`: una utilidad sin sentido con un valor que no es un color. Ahora el filtro **enumera lo que no es color** y las sombras de texto van a su propia clave `textShadow`. Se encontró al añadir el primer rol no cromático que no era elevación; con dos familias no se notaba.
+
+### Changed
+- **`.cei-modal__overlay` consume `--cei-scrim-strong`** en vez de `rgba(15, 23, 42, 0.55)`, que era el token `slate` escrito a mano. **En claro el valor es idéntico y no se mueve un píxel.** En oscuro **sí cambia**: antes el velo del modal era el mismo en ambos temas y ahora voltea a `surface-deep` al 68 %. Es el comportamiento correcto —un velo pensado contra un fondo claro se queda corto cuando la interfaz que lo rodea ya es oscura— pero es un cambio visible y hay que mirarlo con ojos. La proporción en oscuro está **elegida, no medida**.
+
 ### Deprecated
 - **`fontSize.xxxs` se retira en `1.0`.** Vale `0.55rem` = **8,8 px**, y el comentario en la fuente decía «~9px»: ese redondeo es parte de por qué nadie lo objetó. No es un tamaño legible ni siquiera para una etiqueta corta. `xxs` (`0.65rem` = 10,4 px) pasa a ser el **mínimo absoluto** del sistema, reservado a microetiqueta —una o dos palabras, mayúsculas, con `letter-spacing`—; el suelo del texto corrido es `xs` (12 px). Migración: `xxxs` → `xxs`. **Consumidores conocidos: 0** — los 7 usos de `Gaia_StoryMap` ya están migrados y los otros tres productos nunca lo usaron, así que el borrado en `1.0` no rompe a nadie.
 

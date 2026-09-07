@@ -317,6 +317,49 @@ Para evitar el parpadeo (FOUC), fija el atributo con un script inline en el `<he
 | `--cei-line` · `--cei-line-strong` | Bordes | sí |
 | `--cei-brand` · `--cei-brand-hover` | Color de marca interactivo | sí |
 | `--cei-elevation-1` · `-2` · `-3` | Sombras por nivel | sí |
+| `--cei-scrim-soft` · `--cei-scrim` · `--cei-scrim-strong` · `--cei-scrim-heavy` | Velos sobre imagen, mapa o detrás de un modal | sí |
+
+### Velos: usa el rol, no un `rgba` a mano
+
+Un velo oscurece lo que hay detrás para que el texto encima se lea. Hay cuatro peldaños y **voltean con el tema**:
+
+| Rol | Para qué |
+| --- | --- |
+| `--cei-scrim-soft` | Insinúa separación: hover sobre una tarjeta con imagen |
+| `--cei-scrim` | Uso general sobre imagen o mapa |
+| `--cei-scrim-strong` | Detrás de un modal o panel |
+| `--cei-scrim-heavy` | Texto largo sobre fotografía a sangre; visor a pantalla completa |
+
+```css
+.mi-portada__velo { background: var(--cei-scrim-heavy); }
+```
+
+En Tailwind son `bg-scrim-soft`, `bg-scrim`, `bg-scrim-strong` y `bg-scrim-heavy`. Para el extremo transparente de un degradado no hay token ni hace falta: `transparent`.
+
+**Por qué existen.** Los tokens se publican como hex, así que `rgba(var(--cei-…), .55)` no es válido y copiar el valor era la única salida. Medido sobre los cuatro productos Gaia: **242 literales `rgba()`, 173 de ellos negro o blanco con alfa, y 60 valores de opacidad distintos** —con `0.3`, `0.30` y `.25` escritos de tres formas para el mismo número—. `rgba(0,0,0,0.6)` aparecía en los cuatro. El sistema hacía lo mismo: `.cei-modal__overlay` llevaba `rgba(15, 23, 42, 0.55)`, que es el token `slate` a mano.
+
+Los peldaños salen de los picos reales de uso, y `scrim-strong` en claro reproduce exacto el velo histórico del modal.
+
+**Si el velo lleva tinte de marca o de territorio, eso es del producto**, no del sistema — mismo criterio que retiró `gaia-amazonia`. Pero derívalo de un rol en vez de mezclarlo a mano, así sigue volteando:
+
+```css
+background: color-mix(in srgb, var(--cei-brand) 40%, transparent);
+```
+
+### Texto sobre imagen: `--cei-text-shadow-*`
+
+El hermano del velo. Un velo oscurece **todo** el fondo; una sombra de texto separa **solo las letras**, y a veces quieres lo segundo para no apagar la fotografía.
+
+| Rol | Para qué |
+| --- | --- |
+| `--cei-text-shadow-subtle` | Texto de interfaz sobre una superficie con ruido |
+| `--cei-text-shadow-media` | Texto encima de fotografía o mapa, donde el fondo no se controla |
+
+```css
+.portada__titular { text-shadow: var(--cei-text-shadow-media); }
+```
+
+Los valores salen de lo que ya estaba a mano, y el reparto explica por qué hacían falta: **`0 1px 4px rgba(0,0,0,0.2)` era idéntico en Geovisor, Fichas y DMS**, el mismo valor inventado tres veces. Un resplandor de mucho difuminado sobre un hero sigue siendo composición del producto — constrúyelo con `color-mix` sobre un rol.
 
 **Vidrio (superficies translúcidas) adaptable:** `--cei-bg-glass-soft` (55%) · `--cei-bg-glass` (72%) · `--cei-bg-glass-strong` (85%). Se tiñen del color de superficie del tema activo; también disponible como primitivo `.cei-glass`.
 

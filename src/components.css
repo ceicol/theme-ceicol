@@ -452,7 +452,11 @@
   align-items: center;
   justify-content: center;
   padding: var(--cei-space-md);
-  background: rgba(15, 23, 42, 0.55);
+  /* Era `rgba(15, 23, 42, 0.55)`: el token `slate` escrito a mano, porque no
+     había forma de aplicarle alfa. En claro el valor es idéntico, así que no
+     se mueve un píxel. En oscuro AHORA VOLTEA —antes era el mismo velo claro
+     en ambos temas— y eso sí es un cambio visible: hay que mirarlo. */
+  background: var(--cei-scrim-strong);
   backdrop-filter: blur(2px);
 }
 .cei-modal {
