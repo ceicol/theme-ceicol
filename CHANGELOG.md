@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.36.0]
+
 ### Added
 - **Escalera de velos como rol semántico**: `--cei-scrim-soft`, `--cei-scrim`, `--cei-scrim-strong` y `--cei-scrim-heavy`, construidos con `color-mix` sobre `surface-slate` (claro) y `surface-deep` (oscuro), así que **voltean con el tema**. Con paridad automática en CSS, DTCG y Tailwind (`bg-scrim-*`), porque los generadores recorren `semanticRoles`.
 
@@ -233,7 +235,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.35.0...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.36.0...HEAD
+[0.36.0]: https://github.com/ceicol/theme-ceicol/compare/v0.35.0...v0.36.0
 [0.35.0]: https://github.com/ceicol/theme-ceicol/compare/v0.34.1...v0.35.0
 [0.34.1]: https://github.com/ceicol/theme-ceicol/compare/v0.34.0...v0.34.1
 [0.34.0]: https://github.com/ceicol/theme-ceicol/compare/v0.33.4...v0.34.0
