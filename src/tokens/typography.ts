@@ -46,8 +46,24 @@ export const fontSizes = {
   bodyLg: '1.125rem',
   small: '0.875rem', // 14px — texto secundario
   xs: '0.75rem', // 12px — captions, metadatos
-  xxs: '0.65rem', // ~10px — etiquetas, badges
-  xxxs: '0.55rem', // ~9px — micro-etiquetas, overlines densas
+  xxs: '0.65rem', // 10.4px — MÍNIMO ABSOLUTO. Microetiqueta: una o dos
+  //                 palabras, mayúsculas, con letter-spacing. Nunca texto
+  //                 corrido; para eso el suelo es `xs` (12px).
+  /**
+   * @deprecated 8.8 px no es un tamaño legible ni siquiera para una etiqueta.
+   * Se retira en `1.0`. Migración: usar `xxs` (10.4 px).
+   *
+   * El comentario que estaba aquí decía «~9px», y ese redondeo es parte del
+   * problema: 0.55rem son **8.8** px. Un producto lo aplicó a 366 elementos
+   * —chips de categoría, contadores, etiquetas de tipo— sin que nada
+   * protestara, porque el token existía y el espécimen de la documentación lo
+   * mostraba con una frase completa, como cualquier tamaño de texto.
+   * Publicar un tamaño es autorizarlo.
+   *
+   * Consumidores conocidos: 0. Los 7 usos de Gaia_StoryMap ya están en `xxs`;
+   * geo-visor, Gaia_Fichas y Gaia_DMS nunca lo usaron.
+   */
+  xxxs: '0.55rem',
 };
 
 export const typography: ThemeOptions['typography'] = {

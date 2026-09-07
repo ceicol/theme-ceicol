@@ -106,6 +106,23 @@ Tres familias, cada una con rol exclusivo: **Big Shoulders Display** (títulos),
 <Typography variant="overline">Servicios</Typography>
 ```
 
+#### El suelo de la escala: `xs` para texto, `xxs` como mínimo absoluto
+
+| Token | Tamaño | Para qué |
+| --- | --- | --- |
+| `xs` | 12 px | **Suelo del texto corrido.** Captions, metadatos, cualquier cosa que se lea como frase. |
+| `xxs` | 10,4 px | **Mínimo absoluto, solo microetiqueta**: una o dos palabras, mayúsculas, con `letter-spacing`. |
+| `xxxs` | 8,8 px | **Deprecado, se retira en `1.0`.** Migrar a `xxs`. |
+
+`xxxs` se va porque 8,8 px no se lee, y porque el sistema lo estaba autorizando
+sin querer: su comentario en la fuente decía «~9px» y el espécimen de la
+documentación lo pintaba con una frase completa, igual que `body`. Un producto
+lo aplicó a 366 elementos y ninguna comprobación protestó — el verificador
+confirma que el valor **salga de la escala**, no que la escala tenga sentido.
+
+Ese es el criterio general: si un tamaño no se puede enseñar con su uso real,
+no debería estar publicado.
+
 ### 3. Layout (espaciado y bordes)
 
 ```ts

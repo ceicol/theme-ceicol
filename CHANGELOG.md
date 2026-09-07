@@ -8,6 +8,11 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Deprecated
+- **`fontSize.xxxs` se retira en `1.0`.** Vale `0.55rem` = **8,8 px**, y el comentario en la fuente decía «~9px»: ese redondeo es parte de por qué nadie lo objetó. No es un tamaño legible ni siquiera para una etiqueta corta. `xxs` (`0.65rem` = 10,4 px) pasa a ser el **mínimo absoluto** del sistema, reservado a microetiqueta —una o dos palabras, mayúsculas, con `letter-spacing`—; el suelo del texto corrido es `xs` (12 px). Migración: `xxxs` → `xxs`. **Consumidores conocidos: 0** — los 7 usos de `Gaia_StoryMap` ya están migrados y los otros tres productos nunca lo usaron, así que el borrado en `1.0` no rompe a nadie.
+
+  Cómo se colaba: el espécimen de la escala en la documentación pintaba **todos** los pasos con la misma frase de doce palabras, `xxxs` incluido. Un tamaño que el sistema enseña con una frase es un tamaño de texto, diga lo que diga la columna «uso». Un producto lo aplicó a 366 elementos y ninguna comprobación protestó, porque el verificador confirma que el valor **salga de la escala**, no que la escala tenga sentido. Publicar un tamaño es autorizarlo. El espécimen ya está corregido en la doc: `xxs` se muestra con una etiqueta corta en mayúsculas, no con la frase.
+
 ## [0.35.0]
 
 ### Added
