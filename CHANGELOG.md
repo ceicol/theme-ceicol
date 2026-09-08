@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.37.0]
+
 ### Added
 - **`h5` y `h6`: la rampa pasa de cuatro niveles a seis.** No se deduce de ningún producto, se deduce de la propia escala. La razón entre escalones consecutivos —que es como se juzga una rampa tipográfica— era regular en **1.24** y saltaba a **1.63** justo entre `h3` y `h4`; y `h4` medía **exactamente lo mismo** que `body2` (18 px), así que el encabezado más pequeño y el cuerpo grande solo se distinguían por familia y peso.
 
@@ -271,7 +273,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.36.0...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.37.0...HEAD
+[0.37.0]: https://github.com/ceicol/theme-ceicol/compare/v0.36.0...v0.37.0
 [0.36.0]: https://github.com/ceicol/theme-ceicol/compare/v0.35.0...v0.36.0
 [0.35.0]: https://github.com/ceicol/theme-ceicol/compare/v0.34.1...v0.35.0
 [0.34.1]: https://github.com/ceicol/theme-ceicol/compare/v0.34.0...v0.34.1
