@@ -158,6 +158,19 @@
 .cei-h2 { font-family: var(--cei-font-display); font-weight: 800; font-size: var(--cei-font-size-h1); line-height: 1.2; color: var(--cei-fg-strong, var(--cei-text-heading)); }
 .cei-h3 { font-family: var(--cei-font-display); font-weight: 700; font-size: var(--cei-font-size-h2); line-height: 1.25; color: var(--cei-fg-strong, var(--cei-text-heading)); }
 .cei-h4 { font-family: var(--cei-font-display); font-weight: 700; font-size: var(--cei-font-size-h4); line-height: 1.3; color: var(--cei-fg-strong, var(--cei-text-heading)); }
+.cei-h5 { font-family: var(--cei-font-display); font-weight: 700; font-size: var(--cei-font-size-h5); line-height: 1.3; color: var(--cei-fg-strong, var(--cei-text-heading)); }
+.cei-h6 { font-family: var(--cei-font-display); font-weight: 600; font-size: var(--cei-font-size-h6); line-height: 1.4; color: var(--cei-fg-strong, var(--cei-text-heading)); }
+/* ⚠ DEFECTO PREEXISTENTE, no de este cambio: las clases de arriba están
+   DESPLAZADAS UN ESCALÓN respecto al token cuyo nombre llevan.
+     .cei-h1 → --cei-font-size-hero
+     .cei-h2 → --cei-font-size-h1
+     .cei-h3 → --cei-font-size-h2
+     .cei-h4 → --cei-font-size-h4   (correcto, y a --cei-font-size-h3 no lo usa nadie)
+   Sumado a que los tokens ya divergen de las variantes MUI en h1–h3, son TRES
+   capas con tres significados distintos para «h3». `.cei-h5` y `.cei-h6` se
+   añaden alineadas con su token, extendiendo la parte que ya estaba bien.
+   Corregir h1–h3 cambia el tamaño de todo consumidor de esas clases: va en el
+   major con su guía de migración, no de refilón aquí. */
 .cei-body { font-family: var(--cei-font-body); font-size: var(--cei-font-size-body); line-height: 1.6; color: var(--cei-fg, var(--cei-text-body)); }
 .cei-body-lg { font-family: var(--cei-font-body); font-size: var(--cei-font-size-body-lg); line-height: 1.7; color: var(--cei-fg, var(--cei-text-body)); }
 .cei-small { font-family: var(--cei-font-body); font-size: var(--cei-font-size-small); color: var(--cei-fg-muted, var(--cei-text-muted)); }

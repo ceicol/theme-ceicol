@@ -262,6 +262,31 @@ declare module '@mui/material/Typography' {
     bodyxlMediumSpacing: true; bodyxlRegular: true;
     bodylgMedium: true; bodylgRegular: true;
     bodyRegular: true; bodyRegularSpacing: true; bodyMedium: true;
+
+    // ── `subtitle1` y `subtitle2` se retiran ──────────────────────────────
+    //
+    // No son variantes de CEICOL: son slots que MUI declara y que este theme
+    // nunca definió, así que devolvían los valores de Material Design **en la
+    // tipografía de cuerpo**. `subtitle1` es Inter 400 a 16 px —casi idéntico
+    // a `body1`, solo cambia el interlineado— y `subtitle2` es Inter 500 a
+    // 14 px, que es `caption`. Publicar dos nombres para lo que ya existe es
+    // lo que produjo las 27 variantes compat.
+    //
+    // Migración: `subtitle1` → `body1`, `subtitle2` → `caption`.
+    //
+    // `false` los saca de la unión de `variant=`, así que TypeScript los
+    // rechaza en el atributo. Y hace falta decirlo porque no basta: en las
+    // formas de cadena —`sx={{ typography: 'subtitle1' }}`— no avisa nada, y
+    // en ejecución MUI cae en `variantMapping || 'span'` y pinta texto sin
+    // estilo, sin error. Las reglas de `no-restricted-syntax` del README son
+    // las que cazan esas.
+    subtitle1: false;
+    subtitle2: false;
+
+    // `h5` y `h6` NO se desactivan: se publican. La nota de 0.35.0 que decía
+    // lo contrario contradecía la propuesta del major y queda retirada — el
+    // hueco entre `h3` y `h4` estaba medido (razón 1.63 frente a 1.24 del
+    // resto de la rampa) y estos dos son los escalones que lo llenan.
   }
   interface TypographyPropsColorOverrides {
     accent: true; contrast: true;
