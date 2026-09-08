@@ -8,6 +8,42 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Added
+- **`h5` y `h6`: la rampa pasa de cuatro niveles a seis.** No se deduce de ningún producto, se deduce de la propia escala. La razón entre escalones consecutivos —que es como se juzga una rampa tipográfica— era regular en **1.24** y saltaba a **1.63** justo entre `h3` y `h4`; y `h4` medía **exactamente lo mismo** que `body2` (18 px), así que el encabezado más pequeño y el cuerpo grande solo se distinguían por familia y peso.
+
+  ```
+              @375    @1440
+    h1 / h2    1.25     1.89
+    h2 / h3    1.23     1.27
+    h3 / h4    1.63  ←  1.67  ←
+    h4 / body2 0.89     1.00  ←
+  ```
+
+  La media geométrica entre `h3` y `h4` cae en 20 px a 375 y 23 a 1440, que es `fluid(24, 20)`. Ahí va `h4`, y **el `h4` anterior pasa a ser `h5`**: ningún tamaño desaparece de la rampa, se le pone el nombre que le corresponde por posición. `h6` entra fijo en 16 px, porque por debajo de eso un encabezado en display deja de leerse como encabezado.
+
+  Dos productos señalaron el mismo hueco por caminos opuestos: Gaia escribía 24 px a mano con `h3xlSemibold` de la capa compat, y un producto que aún no consume el tema usa `h5` **33 veces** porque cuatro niveles no le alcanzan.
+
+  Con tokens CSS en paridad —`--cei-font-size-h5`, `--cei-font-size-h6`— y `h4` movido también ahí, de modo que las tres capas coinciden en estos tres escalones.
+
+### Removed
+- **`subtitle1` y `subtitle2` salen de `variant=`.** Nunca fueron variantes de CEICOL: son slots que MUI declara y que este theme no definía, así que devolvían los valores de Material Design **en la tipografía de cuerpo**. `subtitle1` es Inter 400 a 16 px, casi idéntico a `body1` salvo el interlineado; `subtitle2` es Inter 500 a 14 px, que es `caption` con peso. Publicar dos nombres para lo que ya existe es exactamente lo que produjo las 27 variantes compat.
+
+  Migración: **`subtitle1` → `body1`** y **`subtitle2` → `caption`**. Uso medido: 2 en Fichas y 3 en DMS.
+
+  `false` en el augment los saca de la unión de `variant=` y TypeScript los rechaza ahí. **No basta**: en `sx={{ typography: 'subtitle1' }}` no avisa nada y en ejecución MUI cae en `variantMapping || 'span'`, que pinta texto sin estilo y sin error. Para esas formas están las reglas de `no-restricted-syntax` del README.
+
+### Changed
+- **BREAKING · `h4` pasa de `fluid(18, 16)` a `fluid(24, 20)`** y crece de 18 a 24 px a 1440. Son **124 usos medidos** en los cuatro productos Gaia —16 en StoryMap más 18 dentro de `CardTitle`/`ItemLabel`, 26 en geo-visor, 24 en Fichas y 40 en DMS—, y cada producto necesita su ronda visual con la compuerta del censo de texto a tres anchos.
+
+  Quien quiera el tamaño anterior sin mover nada: **`variant="h5"` es el mismo valor exacto.**
+
+- **La nota de `0.35.0` que anunciaba desactivar `h5` y `h6` en `1.0` queda retirada.** Contradecía la propuesta del major, que pedía publicarlos con el hueco de la rampa ya medido. Se mantiene la deprecación de `subtitle1` y `subtitle2`, que sí se retiran, y en esta versión ya salen de `variant=`.
+
+  El riesgo de dejarla publicada no era teórico: un producto que la leyera migraría sus 33 usos de `h5` hacia `h4` para que el major obligara a devolverlos.
+
+### Nota sobre las dos escalas que se llaman igual
+- `h4`, `h5` y `h6` quedan alineados entre la capa de tokens y la de variantes. **`h1`, `h2` y `h3` no lo están, y viene de antes**: `--cei-font-size-h3` vale `clamp(1.25rem, 2.5vw, 1.5rem)` = 20–24 px mientras `variant="h3"` vale `fluid(30, 26)` = 26–30 px. Hasta 6 px de diferencia bajo el mismo nombre, y ya costó una tabla de canje escrita con los valores equivocados. Unificarlos mueve `--cei-font-size-h1` de 38 a 72 px para quien escriba CSS a mano: es otro cambio, con su propio alcance, y queda anotado sin hacerse aquí.
+
 ## [0.36.0]
 
 ### Added

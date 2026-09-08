@@ -89,16 +89,35 @@ Los colores son accesibles vía `color="..."` en componentes o `palette.nombre` 
 
 Tres familias, cada una con rol exclusivo: **Big Shoulders Display** (títulos), **Inter** (cuerpo e interfaz), **JetBrains Mono** (valores técnicos). Se usan con las variantes estándar de MUI.
 
-| Variante | Familia | Uso |
-| --- | --- | --- |
-| `h1` | Big Shoulders | Título de pantalla / hero |
-| `h2` | Big Shoulders | Título de sección |
-| `h3` | Big Shoulders | Subtítulo |
-| `h4` | Big Shoulders | Nombre de componente |
-| `body1` | Inter | Texto de cuerpo (16px) |
-| `body2` | Inter | Lectura destacada (18px) |
-| `overline` | Inter | Etiqueta de categoría (uppercase) |
-| `caption` | Inter | Texto de apoyo (labels, fechas) |
+| Variante | Familia | @375 → @1440 | Uso |
+| --- | --- | --- | --- |
+| `h1` | Big Shoulders | 40 → 72 | Título de pantalla / hero |
+| `h2` | Big Shoulders | 32 → 38 | Título de sección |
+| `h3` | Big Shoulders | 26 → 30 | Subtítulo |
+| `h4` | Big Shoulders | 20 → 24 | Subtítulo de sección |
+| `h5` | Big Shoulders | 16 → 18 | Título compacto: panel, collapse, tarjeta |
+| `h6` | Big Shoulders | 16 fijo | El más pequeño en display |
+| `body1` | Inter | 16 fijo | Texto de cuerpo |
+| `body2` | Inter | 18 fijo | Lectura destacada |
+| `overline` | Inter | 14 fijo | Etiqueta de categoría (uppercase) |
+| `caption` | Inter | 14 fijo | Texto de apoyo (labels, fechas) |
+
+**La rampa son seis niveles**, no cuatro. `h5` y `h6` no son huecos de MUI que
+CEICOL deje sin usar: llenan un salto medido. La razón entre escalones era
+regular en 1.24 y saltaba a **1.63** entre `h3` y `h4`, y `h4` medía lo mismo
+que `body2` — el encabezado más pequeño y el cuerpo grande se distinguían solo
+por familia y peso.
+
+**`subtitle1` y `subtitle2` no existen** en este theme: están fuera de `variant=`
+y TypeScript los rechaza. Usa `body1` y `caption`.
+
+**El nivel de encabezado no sale del tamaño.** `variant` elige el aspecto y
+`component` el elemento: `variant="h4"` sin `component` pinta un `<h4>` esté
+donde esté en el documento. Pasa el nivel que le toque por su posición:
+
+```tsx
+<Typography variant="h4" component="h2">Título de la sección</Typography>
+```
 
 ```tsx
 <Typography variant="h1">Territorio, datos y decisiones</Typography>
