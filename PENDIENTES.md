@@ -37,18 +37,36 @@ StoryMap             0        0        0           39      39
 Geo-visor            0        0        0            0       0
 ```
 
+**Cerrado.** Remedido el 2026-09-09 con `verificar.sh` receta 30 sobre los cuatro
+árboles limpios, contando además la forma que faltaba —el acceso **por
+propiedad**, `theme.typography.<compat>`, que la receta anterior no veía—:
+
+```
+                gaia-*   paleta   por JS   tipografía   total
+Gaia DMS             0        0        0            0       0
+Fichas               0        0        0            0       0
+StoryMap             0        0        0            0       0
+Geo-visor            0        0        0            0       0
+```
+
+Los 234 usos se migraron entre el 7 y el 9 de septiembre, en la ronda de subida
+a `0.37.0` de cada producto.
+
 En orden, y los tres primeros **no dependen de ningún producto**:
 
 - [x] **`@deprecated` en los tipos**, con su equivalente. Hecho: 64 anotaciones.
       Solo avisan en acceso a propiedad; las formas de cadena las cubren las
       reglas de ESLint que documenta el README.
-- [ ] **Publicar los escalones que faltan de la rampa.** La razón entre
+- [x] **Publicar los escalones que faltan de la rampa.** — **hecho en `0.37.0`.**
+      `h4` pasó a `fluid(24,20)`, entró `h5` con el 16–18 y `h6` en 16. La razón entre
       escalones es 1.25, 1.23, **1.63**, 0.89: hay un hueco entre `h3` (26–30) y
       `h4` (16–18), y la media geométrica cae en 20–23 px. Además `h4` mide lo
       mismo que `body2` (18). Propuesta: `h4` pasa a `fluid(24,20)`, entra `h5`
       con el 16–18 de hoy y entra `h6` en 16. **Cuesta 39 usos de `h4`** que
       crecen un escalón —24 en geo-visor, 15 en TerraInfo—.
-- [ ] **Decidir `subtitle1` y `subtitle2`.** Hoy están declaradas por MUI y sin
+- [x] **Decidir `subtitle1` y `subtitle2`.** — **decidido: se retiran en el `1.0`**,
+      con su tabla de canje en la política de deprecación. `h5` y `h6` NO: se
+      publican, y la nota que decía lo contrario quedó retirada en `0.37.0`. Hoy están declaradas por MUI y sin
       definir por CEICOL, así que devuelven los valores de Material **en la
       familia de cuerpo**: son encabezados fuera de marca. Lo mismo con `h5` y
       `h6`. Son 38 usos, 33 de ellos en TerraInfo. O se publican o se desactivan

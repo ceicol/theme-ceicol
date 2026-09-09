@@ -243,20 +243,31 @@ Las **variantes tipográficas** tampoco son un renombrado: la escala compat cruz
 
 Equivalencia por familia y tamaño: display 64/52/40 → `h1`, 36/32 → `h2`, 28/24 → `h3`, 18 → `h4`; cuerpo 24/18 → `body2`, 16 → `body1`, 14 → `caption`. Cada nombre compat lleva su equivalente en el `@deprecated` de sus tipos.
 
-#### La escala son cuatro niveles, y `h5`/`h6`/`subtitle1`/`subtitle2` no existen
+#### La escala son seis niveles desde `0.37.0`, y `subtitle1`/`subtitle2` no existen
 
-MUI declara trece slots de tipografía y CEICOL define nueve. Los cuatro que faltan **no son huecos que rellenar**: la escala de CEICOL es una jerarquía de cuatro niveles de encabezado, a propósito.
+La jerarquía de encabezados de CEICOL son **seis niveles**, los seis en Big Shoulders Display. `h5` y `h6` entraron en `0.37.0` para llenar el hueco entre `h4` y el cuerpo — ver la entrada de esa versión en el `CHANGELOG.md`:
 
-Pero al estar declarados por MUI se pueden escribir, y entonces devuelven los valores de **Material Design en la tipografía de cuerpo** — encabezados en Inter:
+| | Familia | Peso | Tamaño |
+|---|---|---|---|
+| `h1` | Big Shoulders Display | 800 | `clamp(2.5rem … 4.5rem)` |
+| `h2` | Big Shoulders Display | 800 | `clamp(2rem … 2.375rem)` |
+| `h3` | Big Shoulders Display | 700 | `clamp(1.625rem … 1.875rem)` |
+| `h4` | Big Shoulders Display | 700 | `clamp(1.25rem … 1.5rem)` |
+| `h5` | Big Shoulders Display | 700 | `clamp(1rem … 1.125rem)` |
+| `h6` | Big Shoulders Display | 600 | `1rem` |
+
+> Una nota de `0.35.0` anunciaba desactivar `h5` y `h6` en el `1.0`. **Quedó retirada en `0.37.0`**: son los dos escalones que llenan el hueco de la rampa, no slots de Material filtrándose. Si vienes de esa nota, la migración es al revés de lo que decía — `h4` en un texto que pide 16–18 px va a `h5`.
+
+Los que **no** existen son dos, y esos sí los declara MUI sin que CEICOL los defina, así que devuelven valores de **Material Design en la tipografía de cuerpo**:
 
 | | Hoy devuelve | Usa en su lugar |
 |---|---|---|
-| `h5` | Inter 400 · 24 px | `h4` |
-| `h6` | Inter 500 · 20 px | `h4` |
 | `subtitle1` | Inter 400 · 16 px | `body1` — es casi idéntico, solo cambia el interlineado |
 | `subtitle2` | Inter 500 · 14 px | `caption` |
 
-**Se desactivarán en `1.0`** con `h5: false` en el augment de tipos, para que TypeScript los rechace en vez de dejarlos filtrar Material.
+**Se desactivarán en `1.0`** con `subtitle1: false` en el augment de tipos, para que TypeScript los rechace en vez de dejarlos filtrar Material.
+
+> Y ojo con el cuerpo, porque va al revés de la convención de MUI: en CEICOL **`body2` es 18 px y `body1` es 16 px**. Un `{ xs: 'body2', md: 'body1' }` deja el texto más grande en móvil que en escritorio.
 
 Y si tu producto repite el mismo estilo de texto muchas veces —un título de tarjeta, la cabecera de un panel—, eso no es un nivel que le falte al sistema: **es un componente tuyo**. Encapsúlalo una vez con la variante que corresponda más el peso que necesites, en vez de repetir el `sx`.
 

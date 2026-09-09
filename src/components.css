@@ -165,7 +165,9 @@
      .cei-h1 → --cei-font-size-hero
      .cei-h2 → --cei-font-size-h1
      .cei-h3 → --cei-font-size-h2
-     .cei-h4 → --cei-font-size-h4   (correcto, y a --cei-font-size-h3 no lo usa nadie)
+     .cei-h4 → --cei-font-size-h4   (correcto). Y `--cei-font-size-h3` SÍ lo usan 3 reglas de este mismo
+     archivo: el comentario que decía «no lo usa nadie» era falso, medido el
+     2026-09-09 con `grep -c`.
    Sumado a que los tokens ya divergen de las variantes MUI en h1–h3, son TRES
    capas con tres significados distintos para «h3». `.cei-h5` y `.cei-h6` se
    añaden alineadas con su token, extendiendo la parte que ya estaba bien.
