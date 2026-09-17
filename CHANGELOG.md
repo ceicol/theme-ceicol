@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.38.0]
+
 ### Fixed
 
 - **`typography.body2` deja de repartir la decisión de autor a diez componentes de MUI.** El slot pasa de **18 px a 14**, y los 18 px de «lectura destacada» se publican en `components.MuiTypography.styleOverrides.body2`. **`variant="body2"` sigue midiendo 18: ningún producto cambia una línea de código.**
@@ -315,7 +317,8 @@ La única forma que no distingue las dos puertas es `sx={{ typography: 'body2' }
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.37.0...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.38.0...HEAD
+[0.38.0]: https://github.com/ceicol/theme-ceicol/compare/v0.37.0...v0.38.0
 [0.37.0]: https://github.com/ceicol/theme-ceicol/compare/v0.36.0...v0.37.0
 [0.36.0]: https://github.com/ceicol/theme-ceicol/compare/v0.35.0...v0.36.0
 [0.35.0]: https://github.com/ceicol/theme-ceicol/compare/v0.34.1...v0.35.0
