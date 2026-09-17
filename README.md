@@ -111,6 +111,25 @@ por familia y peso.
 **`subtitle1` y `subtitle2` no existen** en este theme: están fuera de `variant=`
 y TypeScript los rechaza. Usa `body1` y `caption`.
 
+**`body2` tiene dos puertas, y son distintas a propósito.** Esos 18 px son lo
+que recibe quien escribe `<Typography variant="body2">`. El slot
+`theme.typography.body2` vale **14 px**, porque no es solo un nombre del
+vocabulario: es lo que **diez componentes de MUI leen por dentro** para vestir
+su propio texto sin que nadie escriba nada — `TableCell` lo reparte en cada
+celda de cada tabla, y también lo leen `Alert`, `MenuItem`, `PaginationItem`,
+`Slider`, `SnackbarContent`, `StepLabel`, `Table`, `TablePagination` y
+`ListItemText`.
+
+Mientras el slot llevó los 18, esos diez recibían una decisión que nadie tomó
+para ellos: una tabla entera a 18 px sin un solo número escrito en el producto.
+Ahora el slot lleva lo que su papel pide y `variant="body2"` sigue valiendo 18.
+
+La única forma que no distingue las dos puertas es `sx={{ typography: 'body2' }}`,
+que lee el slot y recibe 14. Para lectura destacada, usa `variant`.
+
+`check:mui-parity` comprueba esto: si el theme mueve un slot que algún
+componente de MUI lee y no separa las dos puertas, falla y dice quiénes lo leen.
+
 **El nivel de encabezado no sale del tamaño.** `variant` elige el aspecto y
 `component` el elemento: `variant="h4"` sin `component` pinta un `<h4>` esté
 donde esté en el documento. Pasa el nivel que le toque por su posición:

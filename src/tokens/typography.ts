@@ -167,11 +167,30 @@ export const typography: ThemeOptions['typography'] = {
     fontSize: '1rem', // 16px
     lineHeight: 1.6,
   },
+  // ⚠ ESTE SLOT ES UN CONTRATO, NO SOLO UN NOMBRE DEL VOCABULARIO.
+  //
+  // `typography.body2` lo leen DIEZ componentes de MUI por dentro para vestir
+  // su propio texto, sin que nadie escriba `variant="body2"`: `TableCell.js`
+  // reparte `...theme.typography.body2` en CADA celda de CADA tabla, y otros
+  // ocho hacen lo mismo. `ListItemText` lo pide por su nombre.
+  //
+  // Mientras aquí vivió el valor de autor —18 px, lectura destacada— esos diez
+  // recibían una decisión que nadie tomó para ellos. Medido en TerraInfo: toda
+  // celda de tabla a 18 px donde MUI de fábrica pone 14, sin un solo número
+  // escrito en el producto, y `ListItemText` con el texto SECUNDARIO más
+  // grande que el principal.
+  //
+  // Así que este slot lleva lo que su PAPEL pide dentro de MUI —el cuerpo
+  // pequeño— con el valor de CEICOL. El valor de AUTOR se publica aparte, en
+  // `MuiTypography.styleOverrides.body2` (src/theme.ts): `variant="body2"`
+  // sigue midiendo 18 px y ningún producto cambia una línea.
+  //
+  // Las dos puertas son distintas y se comprueban en `check-mui-parity.mjs`.
   body2: {
     fontFamily: FONT_BODY,
     fontWeight: WEIGHTS.regular,
-    fontSize: '1.125rem', // 18px — variante de lectura destacada
-    lineHeight: 1.7,
+    fontSize: fontSizes.small, // 14px — el cuerpo pequeño que esos diez suponen
+    lineHeight: 1.5,
   },
 
   // Etiqueta de categoría (uppercase, el ".subtitle" de la landing)

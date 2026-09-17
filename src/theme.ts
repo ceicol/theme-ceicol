@@ -309,6 +309,39 @@ const themeOptions: ThemeOptions = {
       },
     },
 
+    // LA PUERTA DEL AUTOR.
+    //
+    // `theme.typography.body2` es un CONTRATO que diez componentes de MUI leen
+    // por dentro, así que allí vive el cuerpo pequeño (ver el comentario en
+    // `src/tokens/typography.ts`). Lo que el autor escribe —`variant="body2"`,
+    // lectura destacada— pasa por aquí, que es otro sitio.
+    //
+    // Resultado, medido renderizando con este tema:
+    //   <Typography variant="body2">  → 1.125rem   18 px, como siempre
+    //   <TableCell>, <Alert>, …       → 0.875rem   14 px, lo que su papel pide
+    //
+    // Ningún producto cambia una línea: los 299 `variant=` siguen valiendo lo
+    // mismo. Y un componente que MUI publique mañana leyendo `body2` nace bien,
+    // sin añadir nada aquí — que es la diferencia con fijar los diez a mano.
+    MuiTypography: {
+      styleOverrides: {
+        body2: {
+          fontSize: fontSizes.bodyLg, // 18px — lectura destacada
+          lineHeight: 1.7,
+        },
+      },
+    },
+
+    // El único de los diez que no lee el slot: pide la variante por su NOMBRE,
+    // así que recibiría la puerta del autor. Su texto secundario es texto de
+    // apoyo —`caption` en el vocabulario de CEICOL—, no lectura destacada.
+    // Sin esto, `secondary` sale a 18 px y `primary` a 16: la jerarquía al revés.
+    MuiListItemText: {
+      defaultProps: {
+        slotProps: { secondary: { variant: 'caption' } },
+      },
+    },
+
     MuiButton: {
       styleOverrides: {
         // Radio y tipografía desde tokens: borderRadius.md = 12px (igual que .cei-btn).
