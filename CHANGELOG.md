@@ -8,6 +8,48 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Fixed
+
+- **`typography.body2` deja de repartir la decisión de autor a diez componentes de MUI.** El slot pasa de **18 px a 14**, y los 18 px de «lectura destacada» se publican en `components.MuiTypography.styleOverrides.body2`. **`variant="body2"` sigue midiendo 18: ningún producto cambia una línea de código.**
+
+  `theme.typography` son dos cosas fundidas en un objeto: un **vocabulario** de autor —lo que se escribe en `variant=`— y un **contrato** que los componentes de MUI leen por dentro para vestir su propio texto. Medido sobre el paquete instalado, se parten limpiamente:
+
+  ```
+  0 consumidores — vocabulario puro
+     h1  h2  h3  h4  h5  overline  subtitle1  subtitle2
+
+  24 consumidores — contrato
+     body2   10   Alert MenuItem PaginationItem Slider SnackbarContent
+                  StepLabel Table TableCell TablePagination ListItemText
+     body1    7   caption 2   button 4   h6 1
+  ```
+
+  `TableCell.js` reparte `...theme.typography.body2` en **cada celda de cada tabla**. Con el slot en 18 px, un producto renderizaba todas sus tablas un **29 % más grandes** sin un solo tamaño escrito en su código —y por eso ninguna compuerta lo veía—. `ListItemText` salía **invertido**: `primary` con `body1` a 16 px y `secondary` con `body2` a 18, el texto secundario más grande que el principal.
+
+  Verificado renderizando con el paquete construido:
+
+  ```
+  <Typography variant="body2">   18 px   ← igual que antes
+  <TableCell>                    14 px
+  <Alert> <PaginationItem>       14 px
+  <ListItemText>                 primary 16 · secondary 14
+  ```
+
+- **`MuiListItemText` pasa su texto secundario por `caption`.** Es el único de los diez que pide la variante por su nombre en vez de leer el slot, así que recibiría la puerta de autor. Su texto secundario es texto de apoyo, que en el vocabulario de CEICOL es `caption`.
+
+### Added
+
+- **`check:mui-parity` comprueba también la tipografía.** Antes solo miraba el color, y por eso esto pudo existir sin que nada protestara. Ahora enumera, desde el `@mui/material` instalado, qué slots leen los componentes, y **falla** si el theme mueve uno sin separar las dos puertas o sin declararlo aceptado con su motivo. La lista de consumidores sale del paquete, no de una constante escrita a mano que envejece en la siguiente versión de MUI.
+
+  Quedan cuatro aceptados y escritos en el script: `h6` (lo lee solo `DialogTitle`, que fija su propio tamaño aquí mismo), `body1` (solo interlineado), `caption` (12 → 14 px: 12 no es legible para un texto de ayuda) y `button` (solo peso e interlineado).
+
+### Migración
+
+Ninguna en código. **Pero hay efecto visible**: en cualquier producto que actualice, las tablas, alertas, menús, paginación y el texto secundario de las listas pasan de 18 px a 14 — que es el tamaño para el que MUI maquetó esos componentes. Cada producto necesita su ronda visual al subir.
+
+La única forma que no distingue las dos puertas es `sx={{ typography: 'body2' }}`, que lee el slot y recibe 14. Uso medido en los cinco productos de CEICOL: **6** —2 en Gaia DMS, 4 en Gaia StoryMap, 0 en el resto—. Para lectura destacada, `variant="body2"`.
+
+
 ## [0.37.0]
 
 ### Added
