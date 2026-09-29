@@ -123,6 +123,71 @@ const createMapButtonVariant = (
   };
 };
 
+// ─── Chip: espejo de `.cei-badge` ───
+// Cada color de MUI se pinta como su badge: el velo del 14 % del tono sobre la
+// superficie elevada, y el texto por su rol `--cei-fg-<tono>`, que da 4,5:1 o
+// más en claro y en oscuro. Sin esto, `<Chip color="success">` era el chip
+// relleno de MUI —verde `#10b981` con texto blanco, 2,54:1— y no el badge que
+// la documentación enseña a su lado. `outlined` lleva el tono en el texto y en
+// el trazo, sin velo. Un icono dentro hereda el color del texto.
+const chipTones = [
+  { color: 'primary', tone: 'primary', raw: brandColors.primary },
+  { color: 'secondary', tone: 'accent', raw: brandColors.accent },
+  { color: 'accent', tone: 'accent', raw: brandColors.accent },
+  { color: 'success', tone: 'success', raw: brandColors.success },
+  { color: 'warning', tone: 'warning', raw: brandColors.warning },
+  { color: 'error', tone: 'error', raw: brandColors.error },
+  { color: 'info', tone: 'info', raw: brandColors.info },
+] as const;
+
+const raisedSurface = `var(--cei-bg-raised, ${brandColors.background.paper})`;
+const toneTint = (tone: string, main: string, percent: number) =>
+  `color-mix(in srgb, var(--cei-${tone}, ${main}) ${percent}%, ${raisedSurface})`;
+const chipInnerIcons = {
+  '& .MuiChip-icon': { color: 'inherit' },
+  '& .MuiChip-deleteIcon': { color: 'inherit', opacity: 0.7, '&:hover': { color: 'inherit', opacity: 1 } },
+};
+
+const createChipVariants = () => [
+  {
+    props: { variant: 'filled' as const, color: 'default' as const },
+    style: {
+      backgroundColor: `var(--cei-bg-sunken, ${brandColors.background.subtle})`,
+      color: `var(--cei-fg-neutral, ${brandColors.text.body})`,
+      '&.MuiChip-clickable:hover, &.Mui-focusVisible': {
+        backgroundColor: `var(--cei-line, ${brandColors.border.light})`,
+      },
+      ...chipInnerIcons,
+    },
+  },
+  {
+    props: { variant: 'outlined' as const, color: 'default' as const },
+    style: {
+      color: `var(--cei-fg-neutral, ${brandColors.text.body})`,
+      borderColor: `var(--cei-line-strong, ${brandColors.border.medium})`,
+      ...chipInnerIcons,
+    },
+  },
+  ...chipTones.flatMap(({ color, tone, raw }) => {
+    const text = `var(--cei-fg-${tone}, ${raw.dark})`;
+    return [
+      {
+        props: { variant: 'filled' as const, color },
+        style: {
+          backgroundColor: toneTint(tone, raw.main, 14),
+          color: text,
+          '&.MuiChip-clickable:hover, &.Mui-focusVisible': { backgroundColor: toneTint(tone, raw.main, 22) },
+          ...chipInnerIcons,
+        },
+      },
+      {
+        props: { variant: 'outlined' as const, color },
+        style: { color: text, borderColor: text, ...chipInnerIcons },
+      },
+    ];
+  }),
+];
+
 // Colores de marca/estado/compat — ESTABLES en ambos esquemas (hex reales).
 const brandPalette = {
     primary: {
@@ -137,6 +202,7 @@ const brandPalette = {
     secondary: {
       main: brandColors.accent.main,
       light: brandColors.accent.light,
+      dark: brandColors.accent.dark,
       bg: brandColors.accent.bg,
       glass: 'rgba(13, 148, 136, 0.12)',
       contrastText: brandColors.text.white,
@@ -145,6 +211,7 @@ const brandPalette = {
     accent: {
       main: brandColors.accent.main,
       light: brandColors.accent.light,
+      dark: brandColors.accent.dark,
       bg: brandColors.accent.bg,
       glass: 'rgba(13, 148, 136, 0.12)',
       contrastText: brandColors.text.white,
@@ -161,24 +228,28 @@ const brandPalette = {
     success: {
       main: brandColors.success.main,
       light: brandColors.success.light,
+      dark: brandColors.success.dark,
       bg: brandColors.success.bg,
       contrastText: brandColors.text.white,
     },
     warning: {
       main: brandColors.warning.main,
       light: brandColors.warning.light,
+      dark: brandColors.warning.dark,
       bg: brandColors.warning.bg,
       contrastText: brandColors.text.heading,
     },
     error: {
       main: brandColors.error.main,
       light: brandColors.error.light,
+      dark: brandColors.error.dark,
       bg: brandColors.error.bg,
       contrastText: brandColors.text.white,
     },
     info: {
       main: brandColors.info.main,
       light: brandColors.info.light,
+      dark: brandColors.info.dark,
       bg: brandColors.info.bg,
       contrastText: brandColors.text.white,
     },
@@ -704,11 +775,12 @@ const themeOptions: ThemeOptions = {
       ],
     },
 
-    // Chip — pill con la gama CEICOL
+    // Chip — pill con la gama CEICOL; cada color es su `.cei-badge` (ver createChipVariants)
     MuiChip: {
       styleOverrides: {
         root: { borderRadius: borderRadius.pill, fontWeight: 600 },
       },
+      variants: createChipVariants(),
     },
 
     // Dialog / Modal — radio y sombra premium (paper hereda background.paper → rol)

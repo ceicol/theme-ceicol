@@ -121,6 +121,40 @@ export const semanticRoles: SemanticGroup[] = [
     },
   },
   {
+    // ── Por qué existe este grupo ─────────────────────────────────────────
+    //
+    // El badge de estado —`.cei-badge--success` y `<Chip color="success">`—
+    // pintaba su texto con el tono crudo sobre un velo del 14 % del mismo
+    // tono. Como fondo el tono funciona; como texto no. Medido sobre el velo:
+    //
+    //   claro    primary 4,45  info 4,24  error 3,89  accent 3,17  warning 2,75  success 2,22
+    //   oscuro   warning 4,27  accent 3,53  error 3,12  info 2,69
+    //
+    // Ninguno llegaba a 4,5:1 en claro, y el verde, el tono de «completado»,
+    // se quedaba en la mitad. Los productos lo copiaban tal cual —ili-otl
+    // pinta sus estados a 2,22:1— o inventaban otro chip con tonos elegidos a
+    // mano, que es justo lo que un sistema de diseño tiene que ahorrar.
+    //
+    // Estos roles son el tono cuando tiene que leerse: el paso 800 de su
+    // familia en claro y el 300 en oscuro —de 6,10 a 9,44:1 sobre el velo, y
+    // más sobre `--cei-bg-raised`—. La marca usa sus propios `primary-dark` y
+    // `primary-lighter`. Sirven para texto, iconos y trazos de estado. Para
+    // enlaces y acciones sigue siendo `--cei-brand`.
+    title: 'Texto de estado — el tono cuando tiene que leerse',
+    roles: {
+      'fg-primary': { light: 'var(--cei-primary-dark)', dark: 'var(--cei-primary-lighter)', comment: 'texto de marca sobre su velo (badge base)' },
+      'fg-accent': { light: 'var(--cei-accent-dark)', dark: 'var(--cei-accent-lighter)', comment: 'texto del turquesa sobre su velo' },
+      'fg-success': { light: 'var(--cei-success-dark)', dark: 'var(--cei-success-lighter)', comment: 'texto de éxito: completado, publicado' },
+      'fg-warning': { light: 'var(--cei-warning-dark)', dark: 'var(--cei-warning-lighter)', comment: 'texto de advertencia: pendiente' },
+      'fg-error': { light: 'var(--cei-error-dark)', dark: 'var(--cei-error-lighter)', comment: 'texto de error: fallido, rechazado' },
+      'fg-info': { light: 'var(--cei-info-dark)', dark: 'var(--cei-info-lighter)', comment: 'texto informativo: en proceso' },
+      // El neutro no tiene tono: en claro el secundario se quedaba en 4,34:1
+      // sobre `--cei-bg-sunken`, y en oscuro el de cuerpo, blanco, lo volvía el
+      // badge más llamativo de la fila. Cuerpo en claro, secundario en oscuro.
+      'fg-neutral': { light: 'var(--cei-text-body)', dark: 'var(--cei-text-muted-light)', comment: 'texto del estado neutro: borrador' },
+    },
+  },
+  {
     title: 'Bordes',
     roles: {
       line: { light: 'var(--cei-border-light)', dark: 'color-mix(in srgb, var(--cei-text-white) 12%, transparent)' },

@@ -20,6 +20,8 @@ export const brandColors = {
   accent: {
     main: '#0d9488', // Turquesa
     light: '#2dd4bf',
+    dark: '#115e59', // teal-800 — texto del tono en claro (ver `--cei-fg-accent`)
+    lighter: '#5eead4', // teal-300 — texto del tono en oscuro
     bg: '#f0fdfa',
   },
   // ─── Acento tech (cian/sky) — secciones oscuras y visualizaciones ───
@@ -34,24 +36,37 @@ export const brandColors = {
   },
 
   // ─── Colores funcionales (estado del sistema) ───
+  //  `main` es el tono de fondo, trazo e icono grande. Como TEXTO no llega:
+  //  sobre su propio velo del 14 % da de 2,22 a 3,89:1 en claro. `dark` (el
+  //  paso 800 de su familia) es el texto en claro y `lighter` (el 300) el
+  //  texto en oscuro: sobre el velo, de 6,10 a 9,44:1. Se consumen por los
+  //  roles `--cei-fg-<tono>`, que voltean solos.
   success: {
     main: '#10b981', // Verde — éxito
     light: '#34d399',
+    dark: '#065f46', // emerald-800
+    lighter: '#6ee7b7', // emerald-300
     bg: '#ecfdf5',
   },
   warning: {
     main: '#d97706', // Ámbar — advertencia
     light: '#f59e0b',
+    dark: '#92400e', // amber-800 — el 700 se queda en 4,32:1 sobre el velo
+    lighter: '#fcd34d', // amber-300
     bg: '#fffbeb',
   },
   error: {
     main: '#dc2626', // Rojo — error / destructivo (definido en esta fase)
     light: '#ef4444',
+    dark: '#991b1b', // red-800
+    lighter: '#fca5a5', // red-300
     bg: '#fef2f2',
   },
   info: {
     main: '#2563eb', // Azul informativo (distinto del azul de marca)
     light: '#3b82f6',
+    dark: '#1e40af', // blue-800
+    lighter: '#93c5fd', // blue-300
     bg: '#eff6ff',
   },
 

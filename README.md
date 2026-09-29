@@ -363,6 +363,7 @@ Para evitar el parpadeo (FOUC), fija el atributo con un script inline en el `<he
 | `--cei-fg-strong` | Títulos / máximo énfasis | sí |
 | `--cei-fg-muted` | Texto secundario | sí |
 | `--cei-fg-on-inverse` · `--cei-fg-on-brand` | Texto sobre superficie oscura / sobre marca | estable |
+| `--cei-fg-success` · `-warning` · `-error` · `-info` · `-accent` · `-primary` · `-neutral` | Texto, icono o trazo de estado: el tono cuando tiene que leerse | sí |
 | `--cei-line` · `--cei-line-strong` | Bordes | sí |
 | `--cei-brand` · `--cei-brand-hover` | Color de marca interactivo | sí |
 | `--cei-elevation-1` · `-2` · `-3` | Sombras por nivel | sí |
@@ -394,6 +395,29 @@ Los peldaños salen de los picos reales de uso, y `scrim-strong` en claro reprod
 ```css
 background: color-mix(in srgb, var(--cei-brand) 40%, transparent);
 ```
+
+### Estados: el tono se lee por su rol
+
+El tono crudo de un estado —`--cei-success`, `--cei-warning`…— sirve de **fondo, trazo o icono grande**. Como **texto** no llega: sobre su propio velo del 14 % daba entre **2,22 y 4,45:1 en claro**, y el verde de «completado» se quedaba en la mitad del mínimo. Para leerse, cada tono tiene su rol, que **voltea con el tema**:
+
+| Rol | Claro | Oscuro | Sobre su velo |
+| --- | --- | --- | --- |
+| `--cei-fg-success` | `success-dark` (800) | `success-lighter` (300) | 6,73 · 8,19 |
+| `--cei-fg-warning` | `warning-dark` (800) | `warning-lighter` (300) | 6,10 · 9,44 |
+| `--cei-fg-error` | `error-dark` (800) | `error-lighter` (300) | 6,68 · 7,95 |
+| `--cei-fg-info` | `info-dark` (800) | `info-lighter` (300) | 7,17 · 7,72 |
+| `--cei-fg-accent` | `accent-dark` (800) | `accent-lighter` (300) | 6,42 · 8,94 |
+| `--cei-fg-primary` | `primary-dark` | `primary-lighter` | 6,26 · 6,45 |
+| `--cei-fg-neutral` | `text-body` | `text-muted-light` | 9,45 · 6,96 (sobre `--cei-bg-sunken`) |
+
+```css
+.mi-tabla__estado { color: var(--cei-fg-error); }           /* texto de «Fallido» */
+.mi-tabla__estado svg { color: var(--cei-fg-success); }      /* icono de «Completado» */
+```
+
+En Tailwind son `text-fg-success`, `text-fg-error`… En MUI no hace falta escribirlos: `<Chip color="success">` ya los usa (ver [Badges](#superficies-badges-y-alertas)). **Para enlaces y acciones sigue siendo `--cei-brand`**: estos roles son para estado.
+
+`npm run check:tokens` mide el contraste del badge de cada tono en claro y en oscuro, con los valores publicados, y falla por debajo de 4,5:1.
 
 ### Texto sobre imagen: `--cei-text-shadow-*`
 
@@ -561,11 +585,22 @@ Utilidades: `cei-h1`…`cei-h4`, `cei-body`, `cei-body-lg`, `cei-small`, `cei-ov
 
 <span class="cei-badge">Nuevo</span>
 <span class="cei-badge cei-badge--success">Activo</span>
+<span class="cei-badge cei-badge--info"><svg aria-hidden="true">…</svg> En proceso</span>
 
 <div class="cei-alert cei-alert--error">Algo salió mal.</div>
 ```
 
-Badge: `--accent`, `--success`, `--warning`, `--error`, `--neutral`. Alert: `--success`, `--warning`, `--error`, `--info`. `cei-card` y `cei-glass` se adaptan al tema si `semantic.css` está cargado.
+Badge: `--accent`, `--success`, `--warning`, `--error`, `--info`, `--neutral`. El fondo es el velo del 14 % del tono y el texto su rol `--cei-fg-<tono>` ([Estados](#estados-el-tono-se-lee-por-su-rol)); un icono dentro hereda el color del texto. Alert: `--success`, `--warning`, `--error`, `--info`. `cei-card` y `cei-glass` se adaptan al tema si `semantic.css` está cargado.
+
+**En React, `<Chip>` es el badge**, con el mismo aspecto en las dos capas:
+
+```tsx
+<Chip label="Completado" color="success" icon={<CheckCircleOutlineIcon />} />  // = .cei-badge--success
+<Chip label="Borrador" />                                                       // = .cei-badge--neutral
+<Chip label="Pendiente" color="warning" variant="outlined" />                   // tono en texto y trazo, sin velo
+```
+
+Hasta la 0.38.0, `<Chip color="success">` era el chip relleno de MUI —verde `#10b981` con texto blanco, 2,54:1— y no el badge que esta misma documentación ponía a su lado.
 
 ### Formularios
 
