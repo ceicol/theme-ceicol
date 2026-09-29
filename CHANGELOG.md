@@ -8,6 +8,32 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Added
+
+- **Roles de texto de estado: `--cei-fg-success`, `-warning`, `-error`, `-info`, `-accent`, `-primary` y `-neutral`.** Son el tono cuando tiene que leerse —texto, icono o trazo de estado— y voltean con el tema: el paso 800 de su familia en claro y el 300 en oscuro; la marca usa `primary-dark` y `primary-lighter`, y el neutro el texto de cuerpo en claro y el secundario en oscuro. En Tailwind, `text-fg-success` y los demás.
+- **Tokens `dark` y `lighter` para `success`, `warning`, `error`, `info` y `accent`** (`--cei-success-dark`, `--cei-success-lighter`…), de donde salen esos roles. `palette.<tono>.dark` de MUI deja de calcularlo MUI y pasa a ser el token.
+- **`.cei-badge--info`**, para «en proceso». El badge tiene ahora siete tonos, los mismos que `<Chip color>`.
+- **`npm run check:tokens` mide el contraste del badge** de cada tono, en claro y en oscuro, con el velo del 14 % y el del hover del Chip clicable. Falla por debajo de 4,5:1.
+
+### Fixed
+
+- **El texto del badge se lee.** Pintaba el tono crudo sobre su propio velo del 14 %, y ninguno llegaba a 4,5:1 en claro:
+
+  ```
+                    antes (tono crudo)        ahora (rol)
+                    claro    oscuro           claro    oscuro
+  success           2,22     4,92             6,73     8,19
+  warning           2,75     4,27             6,10     9,44
+  accent            3,17     3,53             6,42     8,94
+  error             3,89     3,12             6,68     7,95
+  info              4,24     2,69             7,17     7,72
+  primary (base)    4,45     6,45             6,26     6,45
+  neutral           4,34     6,96             9,45     6,96
+  ```
+
+  El verde, el tono de «completado», se quedaba en la mitad del mínimo. Los productos lo copiaban tal cual o inventaban otro chip con tonos elegidos a mano. El neutro pasa de `--cei-fg-muted` a `--cei-fg-neutral`: en oscuro sigue siendo el secundario, que ya pasaba, y el badge no se vuelve el más llamativo de la fila.
+- **`<Chip color>` es el badge.** El theme solo le ponía el radio, así que `<Chip color="success">` era el chip relleno de MUI —verde `#10b981` con texto blanco, 2,54:1— y no el `.cei-badge--success` que la documentación mostraba como su equivalente. Ahora cada color pinta el velo del tono y el texto por su rol, el hover del chip clicable sube el velo al 22 %, `variant="outlined"` lleva el tono en el texto y en el trazo, y `<Chip>` sin color es el badge neutro. Un icono dentro hereda el color del texto. **Ningún producto cambia una línea de código**: cambia lo que ya pintaba.
+
 ## [0.38.0]
 
 ### Fixed

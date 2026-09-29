@@ -213,7 +213,12 @@
   border-radius: var(--cei-radius-lg);
 }
 
-/* ─── CHIP / BADGE ─── */
+/* ─── CHIP / BADGE ───
+   El velo del 14 % es del tono; el texto, de su rol `--cei-fg-<tono>`, que
+   voltea con el tema y da 4,5:1 o más sobre el velo en los dos (el tono crudo
+   como texto se quedaba entre 2,22 y 4,45:1). El neutro va en `--cei-fg-neutral`:
+   `--cei-fg-muted` sobre `--cei-bg-sunken` daba 4,34:1 en claro. Un icono
+   dentro hereda el color del texto. Espejo MUI: `MuiChip` en theme.ts. */
 .cei-badge {
   display: inline-flex;
   align-items: center;
@@ -225,13 +230,14 @@
   line-height: 1.6;
   border-radius: var(--cei-radius-pill);
   background: color-mix(in srgb, var(--cei-primary) 14%, var(--cei-bg-raised, var(--cei-background-paper)));
-  color: var(--cei-brand, var(--cei-primary-dark));
+  color: var(--cei-fg-primary, var(--cei-primary-dark));
 }
-.cei-badge--accent { background: color-mix(in srgb, var(--cei-accent) 14%, var(--cei-bg-raised, var(--cei-background-paper))); color: var(--cei-accent); }
-.cei-badge--success { background: color-mix(in srgb, var(--cei-success) 14%, var(--cei-bg-raised, var(--cei-background-paper))); color: var(--cei-success); }
-.cei-badge--warning { background: color-mix(in srgb, var(--cei-warning) 14%, var(--cei-bg-raised, var(--cei-background-paper))); color: var(--cei-warning); }
-.cei-badge--error { background: color-mix(in srgb, var(--cei-error) 14%, var(--cei-bg-raised, var(--cei-background-paper))); color: var(--cei-error); }
-.cei-badge--neutral { background: var(--cei-bg-sunken, var(--cei-background-subtle)); color: var(--cei-fg-muted, var(--cei-text-muted)); }
+.cei-badge--accent { background: color-mix(in srgb, var(--cei-accent) 14%, var(--cei-bg-raised, var(--cei-background-paper))); color: var(--cei-fg-accent, var(--cei-accent-dark)); }
+.cei-badge--success { background: color-mix(in srgb, var(--cei-success) 14%, var(--cei-bg-raised, var(--cei-background-paper))); color: var(--cei-fg-success, var(--cei-success-dark)); }
+.cei-badge--warning { background: color-mix(in srgb, var(--cei-warning) 14%, var(--cei-bg-raised, var(--cei-background-paper))); color: var(--cei-fg-warning, var(--cei-warning-dark)); }
+.cei-badge--error { background: color-mix(in srgb, var(--cei-error) 14%, var(--cei-bg-raised, var(--cei-background-paper))); color: var(--cei-fg-error, var(--cei-error-dark)); }
+.cei-badge--info { background: color-mix(in srgb, var(--cei-info) 14%, var(--cei-bg-raised, var(--cei-background-paper))); color: var(--cei-fg-info, var(--cei-info-dark)); }
+.cei-badge--neutral { background: var(--cei-bg-sunken, var(--cei-background-subtle)); color: var(--cei-fg-neutral, var(--cei-text-body)); }
 
 /* ─── ALERT / MENSAJE DE ESTADO ─── */
 .cei-alert {
