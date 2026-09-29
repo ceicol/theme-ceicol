@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.39.0]
+
 ### Added
 
 - **Roles de texto de estado: `--cei-fg-success`, `-warning`, `-error`, `-info`, `-accent`, `-primary` y `-neutral`.** Son el tono cuando tiene que leerse —texto, icono o trazo de estado— y voltean con el tema: el paso 800 de su familia en claro y el 300 en oscuro; la marca usa `primary-dark` y `primary-lighter`, y el neutro el texto de cuerpo en claro y el secundario en oscuro. En Tailwind, `text-fg-success` y los demás.
@@ -343,7 +345,8 @@ La única forma que no distingue las dos puertas es `sx={{ typography: 'body2' }
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.38.0...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.39.0...HEAD
+[0.39.0]: https://github.com/ceicol/theme-ceicol/compare/v0.38.0...v0.39.0
 [0.38.0]: https://github.com/ceicol/theme-ceicol/compare/v0.37.0...v0.38.0
 [0.37.0]: https://github.com/ceicol/theme-ceicol/compare/v0.36.0...v0.37.0
 [0.36.0]: https://github.com/ceicol/theme-ceicol/compare/v0.35.0...v0.36.0
