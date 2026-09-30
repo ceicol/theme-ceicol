@@ -8,6 +8,23 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Fixed
+
+- **El número del stepper se lee.** Era blanco sobre el relleno del paso, y en MUI el activo iba sobre `--cei-brand`, que en oscuro aclara. El pendiente llevaba `--cei-fg-muted` sobre el fondo hundido, el mismo par que el badge neutro de la 0.39.0. Ahora el pendiente lleva `--cei-fg-neutral`, completado y error se rellenan con su rol de texto de estado (`--cei-fg-success`, `--cei-fg-error`), y el número toma la superficie, igual que el recorte del check y del «!» de MUI. Relación de contraste del número, o del recorte, sobre su círculo:
+
+  ```
+                            antes                        ahora
+                            claro         oscuro         claro         oscuro
+  pendiente                 4,34          6,96           9,45          6,96
+  activo                    5,44          2,16           5,44          7,36
+  completado  (MUI · CSS)   2,42 · 2,54   7,95 · 2,54    7,34 · 7,68   13,23 · 10,44
+  con error   (MUI · CSS)   4,62 · 4,83   4,18 · 4,83    7,94 · 8,31   10,63 · 8,38
+  ```
+
+  El círculo pendiente de MUI no tenía el borde `--cei-line-strong` que el CSS sí trae, y contra la página no se veía (1,05:1); ahora lo lleva. La etiqueta de un paso con error se pinta en `--cei-fg-error`, en MUI iba en marca. En el CSS, la etiqueta activa va en marca a 700 y la del paso hecho en `--cei-fg`, y el tramo que sigue a un paso hecho va en marca, como hacía ya `<Stepper>`. `npm run check:tokens` mide ahora estos pares en los dos temas.
+- **Un botón `cei-*` deshabilitado es el mismo botón a media opacidad**, como `.cei-btn:disabled`. MUI solo repinta el deshabilitado de sus propias variantes: en las `cei-*` dejaba el fondo y apagaba el texto a gris translúcido, y un `<Button variant="cei-destructive" disabled>` salía rojo sobre rojo.
+- **`<IconButton>` y `.cei-icon-btn` dicen lo mismo: neutros, `--cei-fg-muted`, y en marca al pasar.** La documentación y el CSS decían marca por defecto, y MUI pintaba `action.active`, un negro al 54 % en claro y blanco en oscuro. En oscuro, un `<IconButton>` sin color pasa de blanco a `--cei-fg-muted` (7,87:1 sobre la página). El icono que va en marca de reposo es `cei-icon-outline` o `cei-icon-glass`, que no cambian.
+
 ## [0.39.0]
 
 ### Added

@@ -117,8 +117,39 @@ for (const [name, roles] of Object.entries(scheme)) {
   if (ratio < 4.5) errors.push(`Badge neutral en ${name}: ${ratio.toFixed(2)}:1, bajo 4,5`);
 }
 
+// 4) El número del stepper sobre su círculo, en claro y en oscuro.
+//
+// El CSS pinta el número con la superficie elevada; MUI recorta el check y el
+// «!», así que ahí se ve la superficie que haya debajo: la de la página o la de
+// la tarjeta. Hasta la 0.39.0 el número era blanco y daba 2,54:1 sobre el verde
+// de completado y 2,16:1 sobre la marca en oscuro.
+const stepRules = {
+  '.cei-step__num {': '--cei-fg-neutral',
+  '.cei-step--active .cei-step__num {': '--cei-bg-raised',
+  '.cei-step--done .cei-step__num {': '--cei-fg-success',
+  '.cei-step--error .cei-step__num {': '--cei-fg-error',
+};
+for (const [selector, role] of Object.entries(stepRules)) {
+  const rule = badgeCss.includes(selector) ? badgeCss.slice(badgeCss.indexOf(selector)).split('}')[0] : '';
+  if (!rule.includes(`var(${role}`)) errors.push(`components.css: ${selector.replace(' {', '')} no usa ${role}`);
+}
+const stepPairs = [
+  ['pendiente', 'var(--cei-fg-neutral)', 'var(--cei-bg-sunken)'],
+  ['activo', 'var(--cei-bg-raised)', 'var(--cei-brand)'],
+  ['completado', 'var(--cei-bg-raised)', 'var(--cei-fg-success)'],
+  ['completado, recorte sobre la página', 'var(--cei-bg)', 'var(--cei-fg-success)'],
+  ['con error', 'var(--cei-bg-raised)', 'var(--cei-fg-error)'],
+  ['con error, recorte sobre la página', 'var(--cei-bg)', 'var(--cei-fg-error)'],
+];
+for (const [name, roles] of Object.entries(scheme)) {
+  for (const [step, fg, bg] of stepPairs) {
+    const ratio = contrast(rgb(resolveColor(fg, roles)), rgb(resolveColor(bg, roles)));
+    if (ratio < 4.5) errors.push(`Paso ${step} del stepper en ${name}: ${ratio.toFixed(2)}:1, bajo 4,5`);
+  }
+}
+
 if (errors.length) {
   console.error('✗ Contrato de tokens ROTO:\n  - ' + errors.join('\n  - '));
   process.exit(1);
 }
-console.log('✓ Contrato de tokens OK (exports + tokens.css + semantic.css + components.css + contraste del badge en claro y oscuro)');
+console.log('✓ Contrato de tokens OK (exports + tokens.css + semantic.css + components.css + contraste del badge y del stepper en claro y oscuro)');

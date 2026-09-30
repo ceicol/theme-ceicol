@@ -562,7 +562,9 @@ O en un `.css`/`.astro`:
 <a class="cei-link" href="#">Ver más</a>
 ```
 
-Variantes: `--primary`, `--secondary`, `--ghost`, `--destructive`; tamaños: `--large`, `--sm`.
+Variantes: `--primary`, `--secondary`, `--ghost`, `--destructive`; tamaños: `--large`, `--sm`. Deshabilitado, cualquiera baja a media opacidad; en React, `<Button variant="cei-*" disabled>` hace lo mismo.
+
+`.cei-icon-btn` es neutro y toma la marca al pasar, como `<IconButton>` sin color. El icono que va en marca de reposo, como las acciones de una fila, es `.cei-icon-btn--outline` o `--glass`; en React, `className="cei-icon-outline"` o `"cei-icon-glass"`.
 
 ### Tipografía
 
@@ -679,9 +681,11 @@ Avatar: `--sm`, `--lg`. Skeleton: `--text`, `--circle`.
 </div>
 
 <div class="cei-stepper">
-  <span class="cei-step cei-step--done"><span class="cei-step__num">1</span></span>
+  <span class="cei-step cei-step--done"><span class="cei-step__num">✓</span> Cargar</span>
   <span class="cei-step__line"></span>
-  <span class="cei-step cei-step--active"><span class="cei-step__num">2</span></span>
+  <span class="cei-step cei-step--active"><span class="cei-step__num">2</span> Validar</span>
+  <span class="cei-step__line"></span>
+  <span class="cei-step"><span class="cei-step__num">3</span> Publicar</span>
 </div>
 
 <table class="cei-table">
@@ -690,7 +694,7 @@ Avatar: `--sm`, `--lg`. Skeleton: `--text`, `--circle`.
 </table>
 ```
 
-Toast: `--success`, `--warning`, `--error`, `--info`. Tabs/paginación: estado activo con `--active`. Stepper: `--active`, `--done`.
+Toast: `--success`, `--warning`, `--error`, `--info`. Tabs/paginación: estado activo con `--active`. Stepper: `--active`, `--done` y `--error`; el tramo que sigue a un paso hecho va en marca, y en React `<Stepper>` pinta lo mismo.
 
 ## Publicar una versión
 
