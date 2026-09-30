@@ -662,10 +662,17 @@ const themeOptions: ThemeOptions = {
     // IconButton no expone prop `variant` en MUI. Por eso:
     //  · root   → default global sutil: todos los <IconButton> se sienten CEICOL
     //             (color de marca en hover + transición), respetando su color prop.
+    //             Sin color es neutro, `--cei-fg-muted`, como `.cei-icon-btn`.
     //  · clases → variantes opt-in por className (`cei-icon-outline`/`cei-icon-glass`),
     //             con el mismo aspecto que sus equivalentes de MuiButton, para los
     //             iconos prominentes. Hovers autocontenidos (no heredan el default).
     MuiIconButton: {
+      variants: [
+        {
+          props: { color: 'default' },
+          style: { color: `var(--cei-fg-muted, ${brandColors.text.muted})` },
+        },
+      ],
       styleOverrides: {
         root: {
           transition: `all ${durFast}ms ${easeOut}`,

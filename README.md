@@ -564,6 +564,8 @@ O en un `.css`/`.astro`:
 
 Variantes: `--primary`, `--secondary`, `--ghost`, `--destructive`; tamaños: `--large`, `--sm`. Deshabilitado, cualquiera baja a media opacidad; en React, `<Button variant="cei-*" disabled>` hace lo mismo.
 
+`.cei-icon-btn` es neutro y toma la marca al pasar, como `<IconButton>` sin color. El icono que va en marca de reposo, como las acciones de una fila, es `.cei-icon-btn--outline` o `--glass`; en React, `className="cei-icon-outline"` o `"cei-icon-glass"`.
+
 ### Tipografía
 
 ```html

@@ -88,7 +88,8 @@
   font-size: var(--cei-font-size-small);
 }
 
-/* Icon button (circular, solo ícono) */
+/* Icon button (circular, solo ícono). Neutro, y en marca al pasar, como
+   <IconButton>; el icono en marca de reposo es --outline o --glass. */
 .cei-icon-btn {
   display: inline-flex;
   align-items: center;
@@ -99,12 +100,13 @@
   border: 1px solid transparent;
   border-radius: var(--cei-radius-round);
   background: transparent;
-  color: var(--cei-brand, var(--cei-primary));
+  color: var(--cei-fg-muted, var(--cei-text-muted));
   cursor: pointer;
   transition: var(--cei-transition-fast);
 }
 .cei-icon-btn:hover {
   background: var(--cei-bg-sunken, var(--cei-background-subtle));
+  color: var(--cei-brand, var(--cei-primary));
 }
 .cei-icon-btn:active {
   transform: scale(0.94);
@@ -114,6 +116,7 @@
 .cei-icon-btn--outline {
   background: var(--cei-bg-raised);
   border-color: var(--cei-brand, var(--cei-primary));
+  color: var(--cei-brand, var(--cei-primary));
 }
 .cei-icon-btn--outline:hover {
   background: var(--cei-bg-raised);
@@ -130,6 +133,7 @@
 .cei-icon-btn--glass {
   background: var(--cei-bg-raised);
   border-color: transparent;
+  color: var(--cei-brand, var(--cei-primary));
 }
 .cei-icon-btn--glass:hover {
   background: var(--cei-bg-raised);
