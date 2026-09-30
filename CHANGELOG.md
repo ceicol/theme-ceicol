@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.39.1]
+
 ### Fixed
 
 - **El número del stepper se lee.** Era blanco sobre el relleno del paso, y en MUI el activo iba sobre `--cei-brand`, que en oscuro aclara. El pendiente llevaba `--cei-fg-muted` sobre el fondo hundido, el mismo par que el badge neutro de la 0.39.0. Ahora el pendiente lleva `--cei-fg-neutral`, completado y error se rellenan con su rol de texto de estado (`--cei-fg-success`, `--cei-fg-error`), y el número toma la superficie, igual que el recorte del check y del «!» de MUI. Relación de contraste del número, o del recorte, sobre su círculo:
@@ -362,7 +364,8 @@ La única forma que no distingue las dos puertas es `sx={{ typography: 'body2' }
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.39.0...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.39.1...HEAD
+[0.39.1]: https://github.com/ceicol/theme-ceicol/compare/v0.39.0...v0.39.1
 [0.39.0]: https://github.com/ceicol/theme-ceicol/compare/v0.38.0...v0.39.0
 [0.38.0]: https://github.com/ceicol/theme-ceicol/compare/v0.37.0...v0.38.0
 [0.37.0]: https://github.com/ceicol/theme-ceicol/compare/v0.36.0...v0.37.0
