@@ -637,6 +637,10 @@
 /* ─── STEPPER (proceso por pasos) ─── */
 .cei-stepper { display: flex; align-items: center; gap: var(--cei-space-xs); font-family: var(--cei-font-body); }
 .cei-step { display: inline-flex; align-items: center; gap: var(--cei-space-xs); color: var(--cei-fg-muted, var(--cei-text-muted)); font-size: var(--cei-font-size-small); }
+.cei-step--active { color: var(--cei-brand, var(--cei-primary)); font-weight: 700; }
+.cei-step--done { color: var(--cei-fg, var(--cei-text-body)); }
+/* Sobre los rellenos, el número toma la superficie. En blanco daba 2,54:1
+   sobre el verde de completado y 2,16:1 sobre la marca en oscuro. */
 .cei-step__num {
   display: inline-flex;
   align-items: center;
@@ -645,13 +649,14 @@
   height: 28px;
   border-radius: 50%;
   background: var(--cei-bg-sunken, var(--cei-background-subtle));
-  color: var(--cei-fg-muted, var(--cei-text-muted));
+  color: var(--cei-fg-neutral, var(--cei-text-body));
   font-weight: 700;
   border: 1px solid var(--cei-line-strong, var(--cei-border-medium));
 }
-.cei-step--active .cei-step__num { background: var(--cei-primary); color: var(--cei-text-white); border-color: var(--cei-primary); }
-.cei-step--done .cei-step__num { background: var(--cei-success); color: var(--cei-text-white); border-color: var(--cei-success); }
+.cei-step--active .cei-step__num { background: var(--cei-brand, var(--cei-primary)); color: var(--cei-bg-raised, var(--cei-background-paper)); border-color: var(--cei-brand, var(--cei-primary)); }
+.cei-step--done .cei-step__num { background: var(--cei-fg-success, var(--cei-success-dark)); color: var(--cei-bg-raised, var(--cei-background-paper)); border-color: var(--cei-fg-success, var(--cei-success-dark)); }
 .cei-step__line { flex: 1; height: 1px; min-width: 24px; background: var(--cei-line-strong, var(--cei-border-medium)); }
+.cei-step--done + .cei-step__line { background: var(--cei-brand, var(--cei-primary)); }
 
 /* ─── TABLA DE DATOS ─── */
 .cei-table {
@@ -716,10 +721,11 @@
   cursor: not-allowed;
 }
 /* Paso con error (validación fallida en un wizard). */
+.cei-step--error { color: var(--cei-fg-error, var(--cei-error-dark)); }
 .cei-step--error .cei-step__num {
-  background: var(--cei-error);
-  color: var(--cei-text-white);
-  border-color: var(--cei-error);
+  background: var(--cei-fg-error, var(--cei-error-dark));
+  color: var(--cei-bg-raised, var(--cei-background-paper));
+  border-color: var(--cei-fg-error, var(--cei-error-dark));
 }
 
 /* ─── ACCESIBILIDAD (foco visible + movimiento reducido) ─── */

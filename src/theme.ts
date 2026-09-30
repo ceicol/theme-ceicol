@@ -904,8 +904,11 @@ const themeOptions: ThemeOptions = {
     },
 
     // Stepper — espejo de .cei-stepper/.cei-step. MUI dibuja el icono como SVG
-    // relleno (no un círculo con borde como el CSS); se aproxima con los mismos
-    // roles: inactivo = hundido/tenue, activo = marca, completado = éxito.
+    // relleno, y el borde del pendiente es un outline redondo. Pendiente =
+    // hundido con el número neutro; activo = marca; completado y error = su rol
+    // de texto de estado, que oscurece en claro y aclara en oscuro. El número y
+    // el recorte del check y del «!» toman la superficie: 4,5:1 o más en los dos
+    // temas. Con el blanco sobre `--cei-brand`, el activo daba 2,16:1 en oscuro.
     MuiStepConnector: {
       styleOverrides: {
         line: { borderColor: `var(--cei-line-strong, ${brandColors.border.medium})` },
@@ -920,15 +923,19 @@ const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           color: `var(--cei-bg-sunken, ${brandColors.background.subtle})`,
+          borderRadius: '50%',
+          outline: `1px solid var(--cei-line-strong, ${brandColors.border.medium})`,
+          outlineOffset: '-1px',
           '& .MuiStepIcon-text': {
-            fill: `var(--cei-fg-muted, ${brandColors.text.muted})`,
+            fill: `var(--cei-fg-neutral, ${brandColors.text.body})`,
           },
           '&.Mui-active': {
             color: `var(--cei-brand, ${brandColors.primary.main})`,
-            '& .MuiStepIcon-text': { fill: brandColors.text.white },
+            outline: 'none',
+            '& .MuiStepIcon-text': { fill: raisedSurface },
           },
-          '&.Mui-completed': { color: `var(--cei-success, ${brandColors.success.main})` },
-          '&.Mui-error': { color: `var(--cei-error, ${brandColors.error.main})` },
+          '&.Mui-completed': { color: `var(--cei-fg-success, ${brandColors.success.dark})`, outline: 'none' },
+          '&.Mui-error': { color: `var(--cei-fg-error, ${brandColors.error.dark})`, outline: 'none' },
         },
       },
     },
@@ -942,6 +949,7 @@ const themeOptions: ThemeOptions = {
             fontWeight: 700,
           },
           '&.Mui-completed': { color: `var(--cei-fg, ${brandColors.text.body})` },
+          '&.Mui-error': { color: `var(--cei-fg-error, ${brandColors.error.dark})` },
         },
       },
     },

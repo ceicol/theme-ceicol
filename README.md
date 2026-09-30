@@ -679,9 +679,11 @@ Avatar: `--sm`, `--lg`. Skeleton: `--text`, `--circle`.
 </div>
 
 <div class="cei-stepper">
-  <span class="cei-step cei-step--done"><span class="cei-step__num">1</span></span>
+  <span class="cei-step cei-step--done"><span class="cei-step__num">✓</span> Cargar</span>
   <span class="cei-step__line"></span>
-  <span class="cei-step cei-step--active"><span class="cei-step__num">2</span></span>
+  <span class="cei-step cei-step--active"><span class="cei-step__num">2</span> Validar</span>
+  <span class="cei-step__line"></span>
+  <span class="cei-step"><span class="cei-step__num">3</span> Publicar</span>
 </div>
 
 <table class="cei-table">
@@ -690,7 +692,7 @@ Avatar: `--sm`, `--lg`. Skeleton: `--text`, `--circle`.
 </table>
 ```
 
-Toast: `--success`, `--warning`, `--error`, `--info`. Tabs/paginación: estado activo con `--active`. Stepper: `--active`, `--done`.
+Toast: `--success`, `--warning`, `--error`, `--info`. Tabs/paginación: estado activo con `--active`. Stepper: `--active`, `--done` y `--error`; el tramo que sigue a un paso hecho va en marca, y en React `<Stepper>` pinta lo mismo.
 
 ## Publicar una versión
 
