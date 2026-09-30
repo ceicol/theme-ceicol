@@ -562,7 +562,7 @@ O en un `.css`/`.astro`:
 <a class="cei-link" href="#">Ver más</a>
 ```
 
-Variantes: `--primary`, `--secondary`, `--ghost`, `--destructive`; tamaños: `--large`, `--sm`.
+Variantes: `--primary`, `--secondary`, `--ghost`, `--destructive`; tamaños: `--large`, `--sm`. Deshabilitado, cualquiera baja a media opacidad; en React, `<Button variant="cei-*" disabled>` hace lo mismo.
 
 ### Tipografía
 

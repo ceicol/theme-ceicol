@@ -188,6 +188,12 @@ const createChipVariants = () => [
   }),
 ];
 
+// ─── Botón deshabilitado: espejo de `.cei-btn:disabled` ───
+// El mismo botón a media opacidad. MUI solo repinta el deshabilitado de sus
+// propias variantes; en las cei-* dejaba el fondo y apagaba el texto a gris
+// translúcido, y un «Eliminar» deshabilitado salía rojo sobre rojo.
+const disabledAs = (color: string) => ({ '&.Mui-disabled': { color, opacity: 0.5 } });
+
 // Colores de marca/estado/compat — ESTABLES en ambos esquemas (hex reales).
 const brandPalette = {
     primary: {
@@ -437,6 +443,7 @@ const themeOptions: ThemeOptions = {
           style: {
             backgroundColor: brandColors.primary.main,
             color: brandColors.text.white,
+            ...disabledAs(brandColors.text.white),
             boxShadow: shadows.button,
             '&:hover': {
               backgroundColor: brandColors.primary.dark,
@@ -452,6 +459,7 @@ const themeOptions: ThemeOptions = {
           style: {
             backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
             color: `var(--cei-fg-strong, ${brandColors.text.heading})`,
+            ...disabledAs(`var(--cei-fg-strong, ${brandColors.text.heading})`),
             border: `1px solid var(--cei-line, ${brandColors.border.light})`,
             boxShadow: shadows.sm,
             '&:hover': {
@@ -468,6 +476,7 @@ const themeOptions: ThemeOptions = {
           style: {
             backgroundColor: 'transparent',
             color: `var(--cei-fg-strong, ${brandColors.text.heading})`,
+            ...disabledAs(`var(--cei-fg-strong, ${brandColors.text.heading})`),
             border: 'none',
             boxShadow: 'none',
             '&:hover': {
@@ -482,6 +491,7 @@ const themeOptions: ThemeOptions = {
           style: {
             backgroundColor: brandColors.error.main,
             color: brandColors.text.white,
+            ...disabledAs(brandColors.text.white),
             '&:hover': {
               backgroundColor: brandColors.error.main,
               filter: 'brightness(0.93)',
@@ -496,6 +506,7 @@ const themeOptions: ThemeOptions = {
           style: {
             backgroundColor: brandColors.primary.main,
             color: brandColors.text.white,
+            ...disabledAs(brandColors.text.white),
             padding: '1rem 2rem',
             fontSize: '1rem',
             borderRadius: borderRadius.lg,
@@ -522,6 +533,7 @@ const themeOptions: ThemeOptions = {
             borderRadius: borderRadius.round,
             backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
             color: `var(--cei-brand, ${brandColors.primary.main})`,
+            ...disabledAs(`var(--cei-brand, ${brandColors.primary.main})`),
             border: '1px solid transparent',
             '&:hover': { boxShadow: shadows.sm },
             '&:active, &.Mui-active, &[aria-pressed="true"]': {
@@ -541,6 +553,7 @@ const themeOptions: ThemeOptions = {
             borderRadius: borderRadius.round,
             backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
             color: `var(--cei-brand, ${brandColors.primary.main})`,
+            ...disabledAs(`var(--cei-brand, ${brandColors.primary.main})`),
             border: `1px solid var(--cei-brand, ${brandColors.primary.main})`,
             '&:hover': { boxShadow: shadows.sm, borderColor: 'transparent' },
             '&:active, &.Mui-active, &[aria-pressed="true"]': {
@@ -560,6 +573,7 @@ const themeOptions: ThemeOptions = {
           style: {
             backgroundColor: brandColors.primary.main,
             color: brandColors.text.white,
+            ...disabledAs(brandColors.text.white),
             borderRadius: borderRadius.md,
             boxShadow: shadows.button,
             '&:hover': {
@@ -574,6 +588,7 @@ const themeOptions: ThemeOptions = {
           style: {
             backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
             color: `var(--cei-fg-strong, ${brandColors.text.heading})`,
+            ...disabledAs(`var(--cei-fg-strong, ${brandColors.text.heading})`),
             border: `1px solid var(--cei-line, ${brandColors.border.light})`,
             borderRadius: borderRadius.md,
             boxShadow: shadows.sm,
@@ -594,6 +609,7 @@ const themeOptions: ThemeOptions = {
             borderRadius: borderRadius.round,
             backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
             color: brandColors.primary.main,
+            ...disabledAs(brandColors.primary.main),
             border: '1px solid transparent',
             '&:hover': { boxShadow: shadows.sm },
             '&:active, &.Mui-active, &[aria-pressed="true"]': {
@@ -613,6 +629,7 @@ const themeOptions: ThemeOptions = {
             borderRadius: borderRadius.round,
             backgroundColor: `var(--cei-bg-raised, ${brandColors.background.paper})`,
             color: brandColors.primary.main,
+            ...disabledAs(brandColors.primary.main),
             border: `1px solid ${brandColors.primary.main}`,
             '&:hover': { boxShadow: shadows.sm, borderColor: 'transparent' },
             '&:active, &.Mui-active, &[aria-pressed="true"]': {

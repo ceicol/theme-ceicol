@@ -22,6 +22,7 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
   ```
 
   El círculo pendiente de MUI no tenía el borde `--cei-line-strong` que el CSS sí trae, y contra la página no se veía (1,05:1); ahora lo lleva. La etiqueta de un paso con error se pinta en `--cei-fg-error`, en MUI iba en marca. En el CSS, la etiqueta activa va en marca a 700 y la del paso hecho en `--cei-fg`, y el tramo que sigue a un paso hecho va en marca, como hacía ya `<Stepper>`. `npm run check:tokens` mide ahora estos pares en los dos temas.
+- **Un botón `cei-*` deshabilitado es el mismo botón a media opacidad**, como `.cei-btn:disabled`. MUI solo repinta el deshabilitado de sus propias variantes: en las `cei-*` dejaba el fondo y apagaba el texto a gris translúcido, y un `<Button variant="cei-destructive" disabled>` salía rojo sobre rojo.
 
 ## [0.39.0]
 
