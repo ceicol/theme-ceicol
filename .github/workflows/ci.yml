@@ -22,6 +22,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24 # Active LTS (EOL abr 2028); Node 20 quedó EOL en abr 2026
+          check-latest: true # sin esto usa el Node en caché del runner, que va días por detrás de los parches
           cache: npm # cachea desde package-lock.json (instalaciones más rápidas y estables)
 
       # Todas las devDeps vienen del registro público de npm → npm ci es reproducible.
