@@ -59,6 +59,20 @@ for (const [file, needles] of Object.entries(outputs)) {
   }
 }
 
+// 2b) Cada ilustración tiene su SVG para CSS / Astro y Tailwind, con el lienzo que pinta illustrations.css.
+const illNames = (await import(resolve(root, 'dist/illustrations.mjs')).catch(() => ({}))).ILLUSTRATION_NAMES ?? [];
+if (!illNames.length) errors.push('dist/illustrations.mjs no publica ILLUSTRATION_NAMES (¿corriste build?)');
+for (const name of illNames) {
+  const file = `dist/illustrations/${name}.svg`;
+  if (!existsSync(resolve(root, file))) {
+    errors.push(`Salida faltante: ${file}`);
+    continue;
+  }
+  if (!readFileSync(resolve(root, file), 'utf8').startsWith(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" class="cei-ill cei-ill-s-${name}"`)) {
+    errors.push(`${file} no es el lienzo de la escena ${name}`);
+  }
+}
+
 // 3) El texto del badge se lee sobre su velo, en claro y en oscuro.
 //
 // Se mide con lo que se publica: los valores salen de dist/tokens.css y
@@ -207,4 +221,4 @@ if (errors.length) {
   console.error('✗ Contrato de tokens ROTO:\n  - ' + errors.join('\n  - '));
   process.exit(1);
 }
-console.log('✓ Contrato de tokens OK (exports + tokens.css + semantic.css + components.css + illustrations.css + contraste del badge, del stepper, de los sellos y del lindero en claro y oscuro)');
+console.log('✓ Contrato de tokens OK (exports + tokens.css + semantic.css + components.css + illustrations.css y sus SVG + contraste del badge, del stepper, de los sellos y del lindero en claro y oscuro)');
