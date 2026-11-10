@@ -98,10 +98,12 @@ const Faces = ({
   g,
   tone,
   fill,
+  marked,
 }: {
   g: (typeof QUADS)[number];
   tone: QuadTone;
   fill: QuadFill;
+  marked?: boolean;
 }) => (
   <>
     <path className={`cei-ill-${tone}l`} d={g.l} />
@@ -111,6 +113,7 @@ const Faces = ({
     <path className={`cei-ill-${tone}e`} d={g.top} />
     {fill === 'curvas' && <path className={`cei-ill-${tone}c`} d={g.contours} />}
     {fill === 'trama' && <path className="cei-ill-nh" d={g.hatch} />}
+    {marked && <path className="cei-ill-lin" d={g.top} />}
   </>
 );
 
@@ -120,34 +123,39 @@ export const Quad = ({
   under,
   fill = 'curvas',
   motion,
+  marked,
 }: {
   i: QuadIndex;
   tone?: QuadTone;
   under?: QuadTone;
   fill?: QuadFill;
   motion?: string;
+  marked?: boolean;
 }) => (
   <g className={`cei-ill-q cei-ill-q${i}${motion ? ` cei-ill-mv-${motion}` : ''}`}>
     {under && <Faces g={QUADS[i]} tone={under} fill={fill} />}
     <g className={under ? 'cei-ill-over' : undefined}>
-      <Faces g={QUADS[i]} tone={tone} fill={fill} />
+      <Faces g={QUADS[i]} tone={tone} fill={fill} marked={marked} />
     </g>
   </g>
 );
 
-// La plancha entera; `without` deja fuera el cuadrante que la escena dibuja aparte.
+// La plancha entera; `without` deja fuera el cuadrante que la escena dibuja aparte. `marked` le traza
+// el lindero de una zona restringida, como en un plano: el borde de cada cuadrante, en ámbar y discontinuo.
 export const Plancha = ({
   tone,
   under,
   fill,
   motion,
   without,
+  marked,
 }: {
   tone?: QuadTone;
   under?: QuadTone;
   fill?: QuadFill;
   motion?: string;
   without?: QuadIndex;
+  marked?: boolean;
 }) => (
   <>
     {PAINT.filter((i) => i !== without).map((i) => (
@@ -158,6 +166,7 @@ export const Plancha = ({
         under={under}
         fill={fill}
         motion={motion}
+        marked={marked}
       />
     ))}
   </>
@@ -172,7 +181,8 @@ export const Slots = () => (
 );
 
 // El servidor: tres unidades de rack con su piloto cada una. `file` es el archivo que baja a procesarse;
-// `ghost`, la página pedida que no existe; `was` deja encima los pilotos de cuando trabajaba, que se apagan.
+// `ghost`, la página pedida que no existe; `was` deja encima los pilotos de cuando trabajaba, que se apagan;
+// `port`, el puerto donde entra el canal, que se va con él cuando sale.
 const LEDS = [
   { u: 0, cx: 56.5, cy: 107.1 },
   { u: 1, cx: 56.5, cy: 95.4 },
@@ -197,11 +207,13 @@ export const Server = ({
   was,
   file,
   ghost,
+  port,
 }: {
   led: Led;
   was?: boolean;
   file?: boolean;
   ghost?: boolean;
+  port?: boolean;
 }) => (
   <g>
     <path
@@ -232,6 +244,7 @@ export const Server = ({
       className="cei-ill-ds"
       d="M36.7 98.1L43.1 101.9L43.1 96.9L36.7 93.2ZM45 102.9L51.4 106.7L51.4 101.7L45 98ZM36.7 86.4L43.1 90.1L43.1 85.2L36.7 81.5ZM45 91.2L51.4 94.9L51.4 90L45 86.3ZM36.7 74.7L43.1 78.4L43.1 73.5L36.7 69.8ZM45 79.5L51.4 83.2L51.4 78.3L45 74.6ZM82 101.3L73.5 106.2L73.5 100.3L82 95.4Z"
     />
+    {port && <path className="cei-ill-port" d="M74 105L82.5 100.1L82.5 102.9L74 107.8Z" />}
     <Leds led={led} />
     {was && <Leds led="work" was />}
     {file && (
@@ -265,7 +278,8 @@ export const Server = ({
   </g>
 );
 
-// El canal por el que salen los datos hacia la plancha. `lit` cuando entrega; `cut` cuando se cortó.
+// El canal por el que salen los datos hacia la plancha. `lit` cuando entrega; `cut` cuando se cortó;
+// `unplugged` cuando sale del puerto del servidor, entero, y se va; `was` deja encendida la línea de antes.
 const CHANNEL = {
   whole: {
     l: 'M74.4 108.8L74.1 108.3L74.1 106.6L74.4 107.1ZM117.9 133.9L74.4 108.8L74.4 107.1L117.9 132.2ZM118.8 134.1L117.9 133.9L117.9 132.2L118.8 132.4Z',
@@ -280,25 +294,45 @@ const CHANNEL = {
     line: 'M79.6 105.2L93.5 113.2M108.3 121.7L121.2 129.2',
   },
 } as const;
-export const Channel = ({ lit, cut }: { lit?: boolean; cut?: boolean }) => {
+// El desplazamiento a lo largo del canal cuando sale del puerto: la misma pendiente que el canal.
+const UNPLUG = [10.4, 6] as const;
+export const Channel = ({
+  lit,
+  cut,
+  unplugged,
+  was,
+}: {
+  lit?: boolean;
+  cut?: boolean;
+  unplugged?: boolean;
+  was?: boolean;
+}) => {
   const c = CHANNEL[cut ? 'cut' : 'whole'];
-  return (
-    <g>
+  const body = (
+    <>
       <path className="cei-ill-cl" d={c.l} />
       <path className="cei-ill-cr" d={c.r} />
       <path className="cei-ill-ct" d={c.top} />
       <path className={lit ? 'cei-ill-clit' : 'cei-ill-cline'} d={c.line} />
+      {was && <path className="cei-ill-clit cei-ill-was" d={c.line} />}
+    </>
+  );
+  if (!unplugged) return <g>{body}</g>;
+  return (
+    <g transform={`translate(${UNPLUG[0]} ${UNPLUG[1]})`}>
+      <g className="cei-ill-mv-unplug">{body}</g>
     </g>
   );
 };
 
-// Paquetes de datos que salen del puerto: `flow` viajan hasta la plancha; `stuck` se pierden en el corte.
+// Paquetes de datos que salen del puerto: `flow` viajan hasta la plancha; `stuck` se pierden en el corte;
+// `bounce` llegan al lindero de una zona restringida y rebotan.
 const PACKETS = [0, 1, 2] as const;
 export const Packets = ({
   motion,
   count,
 }: {
-  motion: 'flow' | 'stuck';
+  motion: 'flow' | 'stuck' | 'bounce';
   count: 1 | 2 | 3;
 }) => (
   <>
@@ -313,18 +347,106 @@ export const Packets = ({
   </>
 );
 
-// Sello de conclusión, de frente para leerse a cualquier tamaño: visto, aviso o pregunta. `shadow` es la
-// elipse que proyecta sobre lo que tiene debajo.
+// Sello de conclusión, de frente para leerse a cualquier tamaño. `kind` es el color de estado y `symbol`, el
+// glifo: visto, aviso o pregunta por defecto; y para el acceso, en ámbar, prohibido, candado o entrar, con la
+// geometría de los Material Symbols (block, lock y login) y el grosor de los otros. `shadow` es la elipse que
+// proyecta sobre lo que tiene debajo.
 const p = (x: number, y: number) =>
   `${Math.round(x * 10) / 10} ${Math.round(y * 10) / 10}`;
+type BadgeKind = 'ok' | 'er' | 'in' | 'wa';
+type BadgeSymbol = 'check' | 'alert' | 'question' | 'block' | 'lock' | 'login';
+const DEFAULT_SYMBOL: Record<Exclude<BadgeKind, 'wa'>, BadgeSymbol> = {
+  ok: 'check',
+  er: 'alert',
+  in: 'question',
+};
+const Glyph = ({
+  symbol,
+  kind,
+  x,
+  y,
+  r,
+}: {
+  symbol: BadgeSymbol;
+  kind: BadgeKind;
+  x: number;
+  y: number;
+  r: number;
+}) => {
+  switch (symbol) {
+    case 'check':
+      return (
+        <path
+          className="cei-ill-sym cei-ill-mv-draw"
+          pathLength={1}
+          d={`M${p(x - r * 0.4, y + r * 0.02)}L${p(x - r * 0.1, y + r * 0.31)}L${p(x + r * 0.42, y - r * 0.3)}`}
+        />
+      );
+    case 'alert':
+      return (
+        <>
+          <path className="cei-ill-sym" d={`M${p(x, y - r * 0.44)}L${p(x, y + r * 0.1)}`} />
+          <circle className="cei-ill-symf" cx={x} cy={y + r * 0.42} r={r * 0.11} />
+        </>
+      );
+    case 'question':
+      return (
+        <>
+          <path
+            className="cei-ill-sym"
+            d={`M${p(x - r * 0.26, y - r * 0.27)}A${p(r * 0.27, r * 0.27)} 0 1 1 ${p(x + r * 0.02, y + r * 0.07)}L${p(x, y + r * 0.13)}`}
+          />
+          <circle className="cei-ill-symf" cx={x} cy={y + r * 0.42} r={r * 0.11} />
+        </>
+      );
+    case 'block': {
+      const k = r * 0.27;
+      return (
+        <>
+          <circle className="cei-ill-sym" cx={x} cy={y} r={r * 0.4} />
+          <path className="cei-ill-sym" d={`M${p(x + k, y - k)}L${p(x - k, y + k)}`} />
+        </>
+      );
+    }
+    case 'lock':
+      return (
+        <>
+          <path
+            className="cei-ill-sym cei-ill-shackle"
+            style={{ strokeWidth: r * 0.13 }}
+            d={`M${p(x - r * 0.2, y - r * 0.08)}L${p(x - r * 0.2, y - r * 0.2)}A${p(r * 0.2, r * 0.2)} 0 0 1 ${p(x + r * 0.2, y - r * 0.2)}L${p(x + r * 0.2, y - r * 0.08)}`}
+          />
+          <rect
+            className="cei-ill-symf"
+            x={x - r * 0.37}
+            y={y - r * 0.1}
+            width={r * 0.74}
+            height={r * 0.56}
+            rx={r * 0.09}
+          />
+          <circle className={`cei-ill-${kind}`} cx={x} cy={y + r * 0.16} r={r * 0.09} />
+        </>
+      );
+    case 'login':
+      return (
+        <path
+          className="cei-ill-sym"
+          style={{ strokeWidth: r * 0.15 }}
+          d={`M${p(x + r * 0.02, y - r * 0.4)}L${p(x + r * 0.3, y - r * 0.4)}Q${p(x + r * 0.4, y - r * 0.4)} ${p(x + r * 0.4, y - r * 0.3)}L${p(x + r * 0.4, y + r * 0.3)}Q${p(x + r * 0.4, y + r * 0.4)} ${p(x + r * 0.3, y + r * 0.4)}L${p(x + r * 0.02, y + r * 0.4)}M${p(x - r * 0.42, y)}L${p(x + r * 0.12, y)}M${p(x - r * 0.1, y - r * 0.22)}L${p(x + r * 0.12, y)}L${p(x - r * 0.1, y + r * 0.22)}`}
+        />
+      );
+  }
+};
 export const Badge = ({
   kind,
+  symbol,
   x,
   y,
   r = 25.6,
   shadow: [sx, sy, rx, ry],
 }: {
-  kind: 'ok' | 'er' | 'in';
+  kind: BadgeKind;
+  symbol?: BadgeSymbol;
   x: number;
   y: number;
   r?: number;
@@ -335,28 +457,13 @@ export const Badge = ({
     <g className="cei-ill-mv-pop">
       <circle className={`cei-ill-${kind}2`} cx={x} cy={y + r * 0.133} r={r} />
       <circle className={`cei-ill-${kind}`} cx={x} cy={y} r={r} />
-      {kind === 'ok' && (
-        <path
-          className="cei-ill-sym cei-ill-mv-draw"
-          pathLength={1}
-          d={`M${p(x - r * 0.4, y + r * 0.02)}L${p(x - r * 0.1, y + r * 0.31)}L${p(x + r * 0.42, y - r * 0.3)}`}
-        />
-      )}
-      {kind === 'er' && (
-        <path
-          className="cei-ill-sym"
-          d={`M${p(x, y - r * 0.44)}L${p(x, y + r * 0.1)}`}
-        />
-      )}
-      {kind === 'in' && (
-        <path
-          className="cei-ill-sym"
-          d={`M${p(x - r * 0.26, y - r * 0.27)}A${p(r * 0.27, r * 0.27)} 0 1 1 ${p(x + r * 0.02, y + r * 0.07)}L${p(x, y + r * 0.13)}`}
-        />
-      )}
-      {kind !== 'ok' && (
-        <circle className="cei-ill-symf" cx={x} cy={y + r * 0.42} r={r * 0.11} />
-      )}
+      <Glyph
+        symbol={symbol ?? (kind === 'wa' ? 'alert' : DEFAULT_SYMBOL[kind])}
+        kind={kind}
+        x={x}
+        y={y}
+        r={r}
+      />
     </g>
   </g>
 );

@@ -16,11 +16,18 @@ const TITLES: Record<Exclude<IllustrationName, 'troubleshooting'>, string> = {
   'search-empty': 'Sin resultados de búsqueda',
   'load-error': 'No se pudo cargar',
   'not-found': 'Página no encontrada',
+  forbidden: 'Sin permiso',
+  restricted: 'Registro restringido',
+  'session-closed': 'Sesión cerrada',
 };
 
 describe('AppIllustration', () => {
-  it('trae las siete, en el orden en que se documentan', () => {
-    expect(ILLUSTRATION_NAMES).toEqual(['processing', 'ok', 'troubleshooting', 'no-data', 'search-empty', 'load-error', 'not-found']);
+  it('trae las diez, en el orden en que se documentan: un proceso, los datos y el acceso', () => {
+    expect(ILLUSTRATION_NAMES).toEqual([
+      'processing', 'ok', 'troubleshooting',
+      'no-data', 'search-empty', 'load-error', 'not-found',
+      'forbidden', 'restricted', 'session-closed',
+    ]);
   });
 
   it.each(Object.entries(TITLES))('«%s» es una imagen con su título por defecto y carga su escena', async (name, title) => {

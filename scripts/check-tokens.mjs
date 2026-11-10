@@ -151,7 +151,7 @@ for (const [name, roles] of Object.entries(scheme)) {
   }
 }
 
-// 5) El sello de las ilustraciones de estado se lee, en claro y en oscuro.
+// 5) El sello de las ilustraciones de estado y el lindero se leen, en claro y en oscuro.
 //
 // El símbolo se recorta con la superficie sobre el color de estado del sello, el mismo par que el texto de
 // estado sobre la tarjeta; y el sello tiene que destacar sobre la página, como cualquier gráfico. Los
@@ -188,17 +188,23 @@ const illPairs = (name, roles, pairs, min) => {
     if (ratio < min) errors.push(`Ilustraciones, ${what} en ${name}: ${ratio.toFixed(2)}:1, bajo ${min}`);
   }
 };
-const seals = { ok: 'del visto', er: 'del aviso de error', in: 'de la pregunta' };
+const seals = { ok: 'del visto', er: 'del aviso de error', in: 'de la pregunta', wa: 'del acceso' };
 for (const [name, roles] of Object.entries(scheme)) {
   const symbol = illValue('cei-ill-sym', 'stroke', name);
   const pairs = Object.entries(seals).map(([kind, what]) => [`el símbolo ${what} sobre su sello`, symbol, illValue(`cei-ill-${kind}`, 'fill', name)]);
   illPairs(name, roles, pairs, 4.5);
   const page = Object.entries(seals).map(([kind, what]) => [`el sello ${what} sobre la página`, illValue(`cei-ill-${kind}`, 'fill', name), 'var(--cei-bg)']);
   illPairs(name, roles, page, 3);
+  // El lindero de una zona restringida, sobre la plancha sin procesar y sobre la procesada.
+  const line = illValue('cei-ill-lin', 'stroke', name);
+  illPairs(name, roles, [
+    ['el lindero sobre la plancha sin procesar', line, illValue('cei-ill-nt', 'fill', name)],
+    ['el lindero sobre la plancha procesada', line, illValue('cei-ill-bt', 'fill', name)],
+  ], 3);
 }
 
 if (errors.length) {
   console.error('✗ Contrato de tokens ROTO:\n  - ' + errors.join('\n  - '));
   process.exit(1);
 }
-console.log('✓ Contrato de tokens OK (exports + tokens.css + semantic.css + components.css + illustrations.css + contraste del badge, del stepper y de los sellos en claro y oscuro)');
+console.log('✓ Contrato de tokens OK (exports + tokens.css + semantic.css + components.css + illustrations.css + contraste del badge, del stepper, de los sellos y del lindero en claro y oscuro)');
