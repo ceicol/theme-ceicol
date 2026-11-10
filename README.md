@@ -728,6 +728,22 @@ import { AppIllustration } from 'theme-ceicol/illustrations';
 | `restricted` | Restringido | Los datos llegan y se ven, el lindero los cerca y el candado se cierra: se consulta, no se edita. |
 | `session-closed` | Sesión cerrada | El sello cae sobre la plancha y con el golpe la hunde; el canal sale del puerto y se va, y queda la huella vacía. El servidor sigue en verde. |
 
+### En CSS / Astro y Tailwind
+
+Cada escena se publica también como SVG, en `theme-ceicol/illustrations/<nombre>.svg`, pintado con el mismo componente que usa React. Se pega **en línea**, no con `<img>`: lo pinta `illustrations.css`, y una imagen externa no hereda el CSS de la página. El SVG es decorativo (`aria-hidden`), así que el nombre accesible lo pone quien lo envuelve.
+
+```astro
+---
+import 'theme-ceicol/illustrations.css';
+import sinResultados from 'theme-ceicol/illustrations/search-empty.svg?raw';
+---
+<div role="img" aria-label="Sin resultados de búsqueda" style="max-width: 384px">
+  <Fragment set:html={sinResultados} />
+</div>
+```
+
+En HTML o con Tailwind, el contenido del archivo va tal cual dentro del contenedor, y el tamaño lo pone el contenedor (`max-w-sm`, por ejemplo): el SVG ocupa su ancho y guarda la proporción de 4:3.
+
 Las tres del acceso van en ámbar, el color de estado de «atención o precaución»: el acceso no es un error del sistema ni un éxito. El sello de las tres usa la geometría de los Material Symbols `block`, `lock` y `login`. En la de sesión cerrada el sello llega primero, porque es la causa; en las demás, al final, porque concluye.
 
 ## Publicar una versión
