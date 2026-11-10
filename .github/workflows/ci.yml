@@ -50,3 +50,6 @@ jobs:
 
       - name: Sanity del theme (tipografía sin NaN)
         run: npm run check:theme
+
+      - name: Marca (peso y dibujo de los logos)
+        run: npm run check:marca

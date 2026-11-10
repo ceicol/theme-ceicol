@@ -746,6 +746,39 @@ En HTML o con Tailwind, el contenido del archivo va tal cual dentro del contened
 
 Las tres del acceso van en ámbar, el color de estado de «atención o precaución»: el acceso no es un error del sistema ni un éxito. El sello de las tres usa la geometría de los Material Symbols `block`, `lock` y `login`. En la de sesión cerrada el sello llega primero, porque es la causa; en las demás, al final, porque concluye.
 
+## Marca
+
+Los logos de CEICOL se importan del theme, no se copian: así todos los productos llevan los mismos archivos, atados a una versión. Son seis SVG en `theme-ceicol/marca/`:
+
+| Archivo | Cuándo |
+|---|---|
+| `ceicol-logo-color.svg` | Logo principal, sobre fondos claros. |
+| `ceicol-logo-blanco.svg` | Sobre fondos oscuros o fotografía. |
+| `ceicol-logo-tinta.svg` | A una tinta (`#0F172A`): impresión y escala de grises. |
+| `ceicol-isotipo-color.svg` | Avatares, favicons y espacios reducidos. |
+| `ceicol-isotipo-blanco.svg` | El isotipo sobre fondos oscuros. |
+| `ceicol-isotipo-tinta.svg` | El isotipo a una tinta. |
+
+```tsx
+// Vite y Astro devuelven la URL del archivo
+import logo from 'theme-ceicol/marca/ceicol-logo-color.svg';
+
+<img src={logo} alt="CEICOL" width={160} />
+```
+
+Sin npm, desde la etiqueta publicada, fijada como cualquier dependencia (la versión es la que use el producto):
+
+```html
+<img src="https://cdn.jsdelivr.net/gh/ceicol/theme-ceicol@v0.40.0/dist/marca/ceicol-logo-color.svg" alt="CEICOL" width="160" />
+```
+
+- **Área de respeto:** la mitad de la altura del isotipo, en los cuatro costados.
+- **Tamaño mínimo:** 120 px de ancho en pantalla. Por debajo se usa el isotipo.
+- **Sobre fotografía** va el blanco, con un degradado oscuro que garantice el contraste.
+- **No se toca:** no se deforma, no se recolorea, no lleva sombras ni contornos, y no se rehace con otra tipografía.
+
+Los originales están en `src/marca/`. Son los vectores disponibles, contornos calcados de un mapa de bits, y el build los optimiza con svgo `--multipass`: pasan de 38–179 KB a 10–56 KB. `npm run check:marca` falla si alguno pasa de 64 KB, o si, pintado al triple con resvg, difiere de su original en más del 0,1 % de la tinta.
+
 ## Publicar una versión
 
 ```bash
