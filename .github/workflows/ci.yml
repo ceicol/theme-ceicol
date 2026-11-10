@@ -36,7 +36,10 @@ jobs:
       - name: Lint CSS (tokens/roles, sin hex crudo)
         run: npm run lint:css
 
-      - name: Build (tema + tokens.css + semantic.css + components.css)
+      - name: Pruebas (Vitest)
+        run: npm run test
+
+      - name: Build (tema + tokens.css + semantic.css + components.css + ilustraciones)
         run: npm run build
 
       - name: Contrato de tokens

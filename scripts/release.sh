@@ -16,10 +16,11 @@ if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
   exit 1
 fi
 
-# 0.5 Gates de calidad: no se publica una versión que no pase tipos y lint.
-echo "▶ Validando tipos y CSS…"
+# 0.5 Gates de calidad: no se publica una versión que no pase tipos, lint y pruebas.
+echo "▶ Validando tipos, CSS y pruebas…"
 npm run typecheck
 npm run lint:css
+npm run test
 
 # 1. Sube la versión en package.json (sin crear tag automático)
 npm version "$BUMP" --no-git-tag-version

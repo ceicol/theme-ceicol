@@ -8,6 +8,11 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+### Added
+
+- **Pruebas en el CI y en el release.** `npm run test` corre Vitest con jsdom y Testing Library, y entra en `npm run ci`, en el flujo de GitHub y en las puertas de `npm run release`. Las primeras son las de las piezas de las ilustraciones de estado: el lienzo, la plancha, el servidor, el canal, los paquetes y el sello, y que toda clase que pintan tenga su regla en el CSS.
+- **El contrato mide los sellos de las ilustraciones.** `npm run check:tokens` resuelve los colores de `illustrations.css` con los roles de cada tema, también los que son un `color-mix` de dos roles, y exige 4,5:1 al símbolo sobre su sello y 3:1 al sello sobre la página, en claro y en oscuro.
+
 ## [0.39.1]
 
 ### Fixed
