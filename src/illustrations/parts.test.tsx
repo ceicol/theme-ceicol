@@ -78,6 +78,38 @@ describe('las piezas de las ilustraciones', () => {
       expect(root.querySelector('circle.cei-ill-symf')).not.toBeNull();
     }
   });
+
+  it('el sello ámbar del acceso lleva el símbolo que se le pide, con la geometría de Material Symbols', () => {
+    const sombra = [184, 151.2, 22.2, 12.8] as const;
+    const prohibido = scene(<Badge kind="wa" symbol="block" x={184} y={105.3} shadow={sombra} />);
+    expect(prohibido.querySelector('circle.cei-ill-wa')).not.toBeNull();
+    expect(prohibido.querySelector('circle.cei-ill-sym')).not.toBeNull();
+    const candado = scene(<Badge kind="wa" symbol="lock" x={184} y={105.3} shadow={sombra} />);
+    expect(candado.querySelector('.cei-ill-sym.cei-ill-shackle')).not.toBeNull();
+    expect(candado.querySelector('rect.cei-ill-symf')).not.toBeNull();
+    const entrar = scene(<Badge kind="wa" symbol="login" x={184} y={105.3} shadow={sombra} />);
+    expect(entrar.querySelector('path.cei-ill-sym')!.getAttribute('d')!.match(/M/g)).toHaveLength(3);
+    // Sin símbolo, el ámbar es un aviso, como el rojo.
+    expect(scene(<Badge kind="wa" x={184} y={105.3} shadow={sombra} />).querySelector('circle.cei-ill-symf')).not.toBeNull();
+  });
+
+  it('la plancha marcada lleva el lindero sobre la cara de cada cuadrante', () => {
+    expect(scene(<Plancha marked />).querySelectorAll('.cei-ill-q .cei-ill-lin')).toHaveLength(4);
+    expect(scene(<Plancha />).querySelector('.cei-ill-lin')).toBeNull();
+  });
+
+  it('el canal que sale del puerto se desplaza a lo largo de su eje, entero, con la línea de antes encima', () => {
+    const root = scene(<Channel unplugged was />);
+    expect(root.querySelector('g[transform="translate(10.4 6)"] > .cei-ill-mv-unplug')).not.toBeNull();
+    expect(root.querySelector('.cei-ill-clit.cei-ill-was')).not.toBeNull();
+    expect(root.querySelector('.cei-ill-cline')!.getAttribute('d')!.match(/M/g)).toHaveLength(1);
+  });
+
+  it('el servidor puede enseñar su puerto, y los paquetes pueden rebotar', () => {
+    expect(scene(<Server led="ok" port />).querySelector('.cei-ill-port')).not.toBeNull();
+    expect(scene(<Server led="ok" />).querySelector('.cei-ill-port')).toBeNull();
+    expect(scene(<Packets motion="bounce" count={2} />).querySelectorAll('.cei-ill-mv-bounce')).toHaveLength(2);
+  });
 });
 
 describe('el CSS de las ilustraciones', () => {
@@ -97,6 +129,13 @@ describe('el CSS de las ilustraciones', () => {
         <Badge kind="ok" x={0} y={0} shadow={[0, 0, 1, 1]} />
         <Badge kind="er" x={0} y={0} shadow={[0, 0, 1, 1]} />
         <Badge kind="in" x={0} y={0} shadow={[0, 0, 1, 1]} />
+        <Badge kind="wa" symbol="block" x={0} y={0} shadow={[0, 0, 1, 1]} />
+        <Badge kind="wa" symbol="lock" x={0} y={0} shadow={[0, 0, 1, 1]} />
+        <Badge kind="wa" symbol="login" x={0} y={0} shadow={[0, 0, 1, 1]} />
+        <Plancha marked motion="sink" />
+        <Channel unplugged was />
+        <Server led="ok" port />
+        <Packets motion="bounce" count={2} />
       </>,
     );
     const structural = /^cei-ill-(s-prueba|q|q[0-3]|u[0-2]|pk[0-2]|led|dot|halo)$/;

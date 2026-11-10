@@ -8,7 +8,10 @@ export type IllustrationName =
   | 'no-data'
   | 'search-empty'
   | 'load-error'
-  | 'not-found';
+  | 'not-found'
+  | 'forbidden'
+  | 'restricted'
+  | 'session-closed';
 
 export type IllustrationSize = 'large' | 'small';
 
@@ -29,9 +32,12 @@ const DEFAULT_TITLES: Record<IllustrationName, string> = {
   'search-empty': 'Sin resultados de búsqueda',
   'load-error': 'No se pudo cargar',
   'not-found': 'Página no encontrada',
+  forbidden: 'Sin permiso',
+  restricted: 'Registro restringido',
+  'session-closed': 'Sesión cerrada',
 };
 
-// Los nombres, en el orden en que se documentan.
+// Los nombres, en el orden en que se documentan: un proceso, los datos y el acceso.
 export const ILLUSTRATION_NAMES = Object.keys(DEFAULT_TITLES) as IllustrationName[];
 
 const LAZY_MAP: Record<IllustrationName, React.LazyExoticComponent<React.FC>> = {
@@ -42,6 +48,9 @@ const LAZY_MAP: Record<IllustrationName, React.LazyExoticComponent<React.FC>> = 
   'search-empty': lazy(() => import('./scenes/IllustrationSearchEmpty')),
   'load-error': lazy(() => import('./scenes/IllustrationLoadError')),
   'not-found': lazy(() => import('./scenes/IllustrationNotFound')),
+  forbidden: lazy(() => import('./scenes/IllustrationForbidden')),
+  restricted: lazy(() => import('./scenes/IllustrationRestricted')),
+  'session-closed': lazy(() => import('./scenes/IllustrationSessionClosed')),
 };
 
 interface IllustrationErrorBoundaryProps {

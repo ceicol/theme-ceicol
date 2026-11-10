@@ -724,6 +724,11 @@ import { AppIllustration } from 'theme-ceicol/illustrations';
 | `search-empty` | Sin resultados | Hay datos, y la lupa no encuentra ninguno que coincida. |
 | `load-error` | No se pudo cargar | El canal se corta y quedan las huellas de la plancha que no llegó. |
 | `not-found` | No existe | El sistema funciona, pero la página pedida es una hoja discontinua. |
+| `forbidden` | Sin permiso | El canal intenta entregar y los paquetes rebotan en el lindero de una zona restringida, que se enciende con el golpe; la plancha queda sin procesar y el sello de prohibido niega. |
+| `restricted` | Restringido | Los datos llegan y se ven, el lindero los cerca y el candado se cierra: se consulta, no se edita. |
+| `session-closed` | Sesión cerrada | El sello cae sobre la plancha y con el golpe la hunde; el canal sale del puerto y se va, y queda la huella vacía. El servidor sigue en verde. |
+
+Las tres del acceso van en ámbar, el color de estado de «atención o precaución»: el acceso no es un error del sistema ni un éxito. El sello de las tres usa la geometría de los Material Symbols `block`, `lock` y `login`. En la de sesión cerrada el sello llega primero, porque es la causa; en las demás, al final, porque concluye.
 
 ## Publicar una versión
 

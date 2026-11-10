@@ -2,12 +2,15 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import IllustrationForbidden from './scenes/IllustrationForbidden';
 import IllustrationLoadError from './scenes/IllustrationLoadError';
 import IllustrationNoData from './scenes/IllustrationNoData';
 import IllustrationNotFound from './scenes/IllustrationNotFound';
 import IllustrationOk from './scenes/IllustrationOk';
 import IllustrationProcessing from './scenes/IllustrationProcessing';
+import IllustrationRestricted from './scenes/IllustrationRestricted';
 import IllustrationSearchEmpty from './scenes/IllustrationSearchEmpty';
+import IllustrationSessionClosed from './scenes/IllustrationSessionClosed';
 import IllustrationTroubleshooting from './scenes/IllustrationTroubleshooting';
 
 // Vitest corre desde la raíz del paquete.
@@ -20,6 +23,9 @@ const SCENES = {
   'search-empty': IllustrationSearchEmpty,
   'load-error': IllustrationLoadError,
   'not-found': IllustrationNotFound,
+  forbidden: IllustrationForbidden,
+  restricted: IllustrationRestricted,
+  'session-closed': IllustrationSessionClosed,
 };
 const draw = (Scene: React.FC) => render(<Scene />).container.querySelector('svg')!;
 
@@ -72,6 +78,49 @@ describe('lo que cuenta cada escena', () => {
     const svg = draw(IllustrationNotFound);
     expect(svg.querySelector('.cei-ill-mv-ghost')).not.toBeNull();
     expect(svg.querySelector('circle.cei-ill-in')).not.toBeNull();
+  });
+
+  // El acceso es atención, no error: las tres llevan el sello ámbar, en el mismo sitio que los otros.
+  it('sin permiso: los paquetes rebotan en el lindero, el canal se apaga y el sello es el de prohibido', () => {
+    const svg = draw(IllustrationForbidden);
+    expect(svg.querySelectorAll('.cei-ill-mv-bounce')).toHaveLength(2);
+    expect(svg.querySelectorAll('.cei-ill-lin')).toHaveLength(4);
+    expect(svg.querySelector('.cei-ill-clit.cei-ill-was')).not.toBeNull();
+    expect(svg.querySelector('.cei-ill-bt')).toBeNull();
+    expect(svg.querySelector('circle.cei-ill-wa')).not.toBeNull();
+    expect(svg.querySelector('.cei-ill-mv-pop circle.cei-ill-sym')).not.toBeNull();
+  });
+
+  it('restringido: los datos llegan y se ven, el lindero los cerca y el candado se cierra', () => {
+    const svg = draw(IllustrationRestricted);
+    expect(svg.querySelectorAll('.cei-ill-mv-snap .cei-ill-over .cei-ill-bt')).toHaveLength(4);
+    expect(svg.querySelectorAll('.cei-ill-lin')).toHaveLength(4);
+    expect(svg.querySelector('.cei-ill-clit:not(.cei-ill-was)')).not.toBeNull();
+    expect(svg.querySelector('.cei-ill-mv-press')).not.toBeNull();
+    expect(svg.querySelector('circle.cei-ill-wa')).not.toBeNull();
+    expect(svg.querySelector('.cei-ill-shackle')).not.toBeNull();
+  });
+
+  it('sesión cerrada: la plancha se hunde y se va, el canal sale del puerto y queda la huella', () => {
+    const svg = draw(IllustrationSessionClosed);
+    expect(svg.querySelectorAll('.cei-ill-mv-sink')).toHaveLength(4);
+    expect(svg.querySelector('.cei-ill-mv-vanish .cei-ill-sh')).not.toBeNull();
+    expect(svg.querySelector('.cei-ill-mv-unplug')).not.toBeNull();
+    expect(svg.querySelector('.cei-ill-port')).not.toBeNull();
+    expect(svg.querySelector('.cei-ill-slot')).not.toBeNull();
+    expect(svg.querySelectorAll('.cei-ill-led-ok')).toHaveLength(3);
+    expect(svg.querySelector('circle.cei-ill-wa')).not.toBeNull();
+  });
+
+  it('el sello de sesión cerrada cae primero, porque es la causa; los de las otras dos llegan al final', () => {
+    expect(css).toMatch(/\.cei-ill-s-session-closed \.cei-ill-mv-pop \{ animation: cei-ill-fall /);
+    expect(css).toMatch(/\.cei-ill-s-forbidden \.cei-ill-mv-pop \{ animation-delay: 1150ms; \}/);
+    expect(css).toMatch(/\.cei-ill-s-restricted \.cei-ill-mv-pop \{ animation-delay: 1300ms; \}/);
+  });
+
+  it('lo que sale de la escena queda fuera también sin movimiento: el canal, el puerto y la plancha que se van', () => {
+    expect(css).toMatch(/\.cei-ill :is\(\.cei-ill-mv-sink, \.cei-ill-mv-vanish, \.cei-ill-mv-unplug, \.cei-ill-port\) \{ opacity: 0; \}/);
+    expect(css).toMatch(/\.cei-ill \.cei-ill-mv-bounce \{ opacity: 0;/);
   });
 
   it('toda clase que pintan las escenas tiene su regla, salvo las que solo ordenan', () => {

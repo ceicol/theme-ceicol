@@ -36,6 +36,9 @@
 .cei-ill :is(.cei-ill-nc, .cei-ill-bc, .cei-ill-xc, .cei-ill-nh, .cei-ill-gh) { fill: none; stroke-width: 0.95; stroke-linecap: round; stroke-linejoin: round; }
 .cei-ill :is(.cei-ill-ne, .cei-ill-be, .cei-ill-xe) { fill: none; stroke-width: 0.8; stroke-linejoin: round; }
 
+/* El lindero de una zona restringida: el borde del aviso de advertencia, discontinuo como en un plano */
+.cei-ill .cei-ill-lin { fill: none; stroke: color-mix(in srgb, var(--cei-warning) 55%, var(--cei-fg-warning)); stroke-width: 1.6; stroke-dasharray: 4 2.6; stroke-linejoin: round; }
+
 /* Huellas de lo que no llegó y la página que no existe */
 .cei-ill .cei-ill-slot { fill: color-mix(in srgb, var(--cei-fg-muted) 6%, transparent); stroke: color-mix(in srgb, var(--cei-fg-muted) 80%, var(--cei-bg-raised)); stroke-width: 1.1; stroke-dasharray: 3.5 3; }
 .cei-ill .cei-ill-gp { fill: color-mix(in srgb, var(--cei-brand) 6%, transparent); stroke: color-mix(in srgb, var(--cei-brand) 70%, var(--cei-bg-raised)); stroke-width: 1.4; stroke-dasharray: 3 2.4; stroke-linejoin: round; }
@@ -46,6 +49,7 @@
 .cei-ill .cei-ill-dr { fill: color-mix(in srgb, var(--cei-fg-strong) 94%, var(--cei-brand)); }
 .cei-ill .cei-ill-ds { fill: var(--cei-fg-strong); }
 .cei-ill .cei-ill-dsm { fill: none; stroke: var(--cei-fg-strong); stroke-width: 1.1; stroke-linejoin: round; }
+.cei-ill .cei-ill-port { fill: color-mix(in srgb, var(--cei-fg-strong) 70%, var(--cei-bg-raised)); stroke: color-mix(in srgb, var(--cei-brand) 70%, var(--cei-bg-raised)); stroke-width: 0.9; stroke-linejoin: round; }
 .cei-ill .cei-ill-de { fill: none; stroke: color-mix(in srgb, var(--cei-brand) 70%, var(--cei-bg-raised)); stroke-width: 0.9; stroke-linejoin: round; }
 .cei-ill .cei-ill-led .cei-ill-halo { opacity: 0.28; }
 .cei-ill .cei-ill-led-work :is(.cei-ill-dot, .cei-ill-halo) { fill: var(--cei-primary-lighter); }
@@ -81,6 +85,9 @@
 .cei-ill .cei-ill-er2 { fill: color-mix(in srgb, var(--cei-fg-error) 70%, var(--cei-fg-strong)); }
 .cei-ill .cei-ill-in { fill: var(--cei-brand); }
 .cei-ill .cei-ill-in2 { fill: color-mix(in srgb, var(--cei-brand) 70%, var(--cei-fg-strong)); }
+/* El acceso es atención, no error: ámbar, como el aviso de advertencia del sistema */
+.cei-ill .cei-ill-wa { fill: var(--cei-fg-warning); }
+.cei-ill .cei-ill-wa2 { fill: color-mix(in srgb, var(--cei-fg-warning) 70%, var(--cei-fg-strong)); }
 .cei-ill .cei-ill-sym { fill: none; stroke: var(--cei-bg-raised); stroke-width: 4.4; stroke-linecap: round; stroke-linejoin: round; }
 .cei-ill .cei-ill-symf { fill: var(--cei-bg-raised); }
 
@@ -130,6 +137,8 @@
 [data-theme='dark'] .cei-ill .cei-ill-ok2 { fill: color-mix(in srgb, var(--cei-fg-success) 62%, var(--cei-bg-raised)); }
 [data-theme='dark'] .cei-ill .cei-ill-er2 { fill: color-mix(in srgb, var(--cei-fg-error) 62%, var(--cei-bg-raised)); }
 [data-theme='dark'] .cei-ill .cei-ill-in2 { fill: color-mix(in srgb, var(--cei-brand) 62%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-wa2 { fill: color-mix(in srgb, var(--cei-fg-warning) 62%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-lin { stroke: var(--cei-fg-warning); }
 
 /* Procesando: los cuadrantes se procesan por turnos, en el sentido de las agujas del reloj, sin fin. Quieta,
    la plancha queda con dos cuadrantes procesados. */
@@ -218,6 +227,72 @@
 .cei-ill .cei-ill-mv-ghost { animation: cei-ill-fade 500ms linear both, cei-ill-float 2.6s var(--cei-ease-standard) 500ms 3; }
 @keyframes cei-ill-search { 0%, 70% { opacity: 1; } 35% { opacity: 0.35; } 100% { opacity: 0; } }
 @keyframes cei-ill-float { 50% { transform: translateY(-5px); } }
+
+/* Sin permiso: el canal intenta entregar, los paquetes llegan al lindero y rebotan; el lindero se enciende
+   con el golpe, como una barrera, el canal se apaga y el sello niega con la cabeza. Quieta: la plancha sin
+   procesar dentro del lindero, el canal apagado y el sello. */
+.cei-ill .cei-ill-mv-bounce { opacity: 0; animation: cei-ill-bounce 900ms linear 200ms both; }
+.cei-ill .cei-ill-pk1.cei-ill-mv-bounce { animation-delay: 420ms; }
+.cei-ill-s-forbidden .cei-ill-lin { animation: cei-ill-flash 600ms var(--cei-ease-out) 690ms both; }
+.cei-ill-s-forbidden .cei-ill-was { animation: cei-ill-gone 300ms linear 1100ms both; }
+.cei-ill-s-forbidden .cei-ill-mv-pop { animation-delay: 1150ms; }
+.cei-ill-s-forbidden .cei-ill-bdg { animation: cei-ill-fade var(--cei-duration-slow) linear 1150ms both, cei-ill-no 520ms var(--cei-ease-out) 1650ms both; }
+@keyframes cei-ill-bounce {
+  0% { transform: none; opacity: 0; }
+  12% { opacity: 1; }
+  55% { transform: translate(33px, 19px); opacity: 1; animation-timing-function: var(--cei-ease-out); }
+  100% { transform: translate(12px, 6.9px); opacity: 0; }
+}
+@keyframes cei-ill-flash { 0% { opacity: 0; stroke-width: 3.6; } 30% { opacity: 1; stroke-width: 3.2; } 100% { opacity: 1; stroke-width: 1.6; } }
+@keyframes cei-ill-no { 0%, 100% { transform: none; } 20% { transform: translateX(-3px); } 45% { transform: translateX(2.6px); } 70% { transform: translateX(-1.4px); } }
+
+/* Restringido: los datos llegan y se ven (la plancha pasa a procesada en ola, como en «Listo»); el lindero
+   la cerca cuadrante a cuadrante, en el sentido de las agujas del reloj; el candado aparece abierto y se
+   cierra con un clic que asienta el sello y la plancha. Quieta: la plancha a color, cercada y con el
+   candado cerrado. */
+.cei-ill-s-restricted .cei-ill-lin { animation: cei-ill-trace 300ms var(--cei-ease-out) 800ms both; }
+.cei-ill-s-restricted .cei-ill-q1 .cei-ill-lin { animation-delay: 900ms; }
+.cei-ill-s-restricted .cei-ill-q2 .cei-ill-lin { animation-delay: 1000ms; }
+.cei-ill-s-restricted .cei-ill-q3 .cei-ill-lin { animation-delay: 1100ms; }
+.cei-ill-s-restricted .cei-ill-mv-pop { animation-delay: 1300ms; }
+.cei-ill-s-restricted .cei-ill-bdg { transform-box: fill-box; transform-origin: 50% 100%; animation: cei-ill-fade var(--cei-duration-slow) linear 1300ms both, cei-ill-click 220ms var(--cei-ease-out) 1910ms both; }
+.cei-ill-s-restricted .cei-ill-shackle { animation: cei-ill-shut 260ms cubic-bezier(0.5, 0, 1, 1) 1650ms both; }
+.cei-ill .cei-ill-mv-press { animation: cei-ill-press 300ms var(--cei-ease-out) 1910ms both; }
+@keyframes cei-ill-trace { from { opacity: 0; stroke-dashoffset: 6.6; } to { opacity: 1; stroke-dashoffset: 0; } }
+@keyframes cei-ill-shut { from { transform: translateY(-4.5px); } to { transform: none; } }
+@keyframes cei-ill-click { 0%, 100% { transform: none; } 40% { transform: scale(1.04, 0.95); } }
+@keyframes cei-ill-press { 0%, 100% { transform: none; } 35% { transform: translateY(1.5px); } }
+
+/* Sesión cerrada: el sello aparece arriba al empezar y cae sobre la plancha. Con el golpe, la plancha se
+   hunde y desaparece, el canal se apaga, sale del puerto y se va con él, y queda la huella vacía. El servidor
+   sigue en verde, solo. Quieta, solo queda eso: el sello sobre la huella, sin canal, puerto ni plancha.
+   El golpe es a los 610 ms. */
+.cei-ill-s-session-closed .cei-ill-bdg { animation: cei-ill-fade 180ms linear both; }
+.cei-ill-s-session-closed .cei-ill-mv-pop { animation: cei-ill-fall 900ms both; }
+.cei-ill-s-session-closed .cei-ill-sh2 { transform-box: fill-box; transform-origin: center; animation: cei-ill-near 900ms both; }
+.cei-ill :is(.cei-ill-mv-sink, .cei-ill-mv-vanish, .cei-ill-mv-unplug, .cei-ill-port) { opacity: 0; }
+.cei-ill .cei-ill-mv-sink { animation: cei-ill-sink 480ms linear 610ms both; }
+.cei-ill .cei-ill-q1.cei-ill-mv-sink, .cei-ill .cei-ill-q3.cei-ill-mv-sink { animation-delay: 650ms; }
+.cei-ill .cei-ill-q2.cei-ill-mv-sink { animation-delay: 690ms; }
+.cei-ill .cei-ill-mv-vanish { animation: cei-ill-gone 300ms linear 610ms both; }
+.cei-ill-s-session-closed .cei-ill-slot { animation: cei-ill-fade 400ms linear 760ms both; }
+.cei-ill-s-session-closed .cei-ill-was { animation: cei-ill-gone 200ms linear 610ms both; }
+.cei-ill .cei-ill-mv-unplug { animation: cei-ill-unplug 380ms var(--cei-ease-out) 650ms both, cei-ill-gone 350ms linear 950ms both; }
+.cei-ill-s-session-closed .cei-ill-port { animation: cei-ill-gone 350ms linear 950ms both; }
+@keyframes cei-ill-fall {
+  0%, 30% { transform: translateY(-56px); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  68% { transform: none; animation-timing-function: var(--cei-ease-out); }
+  74% { transform: translateY(4px); animation-timing-function: var(--cei-ease-standard); }
+  86% { transform: translateY(-3px); animation-timing-function: ease-in; }
+  100% { transform: none; }
+}
+@keyframes cei-ill-near { 0%, 30% { transform: scale(0.4); opacity: 0.3; } 68%, 100% { transform: none; opacity: 1; } }
+@keyframes cei-ill-sink {
+  0% { transform: none; opacity: 1; animation-timing-function: var(--cei-ease-out); }
+  25% { transform: translateY(5px); opacity: 1; animation-timing-function: ease-in; }
+  100% { transform: translateY(14px); opacity: 0; }
+}
+@keyframes cei-ill-unplug { from { transform: translate(-10.4px, -6px); } to { transform: none; } }
 
 @media (prefers-reduced-motion: reduce) {
   .cei-ill * { animation: none !important; }
