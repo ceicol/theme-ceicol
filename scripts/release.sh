@@ -71,6 +71,7 @@ npm run build
 npm run check:tokens
 npm run check:mui-parity
 npm run check:theme
+npm run check:marca
 git add -f dist
 git commit -m "build: $TAG"
 git tag "$TAG"
