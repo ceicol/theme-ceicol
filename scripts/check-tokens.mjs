@@ -41,6 +41,7 @@ const outputs = {
   'dist/tokens.css': ['--cei-primary', '--cei-tech', '--cei-space-md', '--cei-radius-md'],
   'dist/semantic.css': ['--cei-bg', '--cei-fg', '--cei-line', '--cei-bg-glass', '--cei-fg-success', '--cei-fg-primary'],
   'dist/components.css': ['.cei-btn', '.cei-card', '.cei-glass', '.cei-badge--info'],
+  'dist/illustrations.css': ['.cei-ill .cei-ill-sym', '@media (prefers-reduced-motion: reduce)'],
   'dist/tokens.json': ['"$value"', '"color"', '"semantic"', '"$type"'],
   'dist/tailwind.cjs': ['module.exports', 'colors', 'boxShadow'],
 };
@@ -148,8 +149,54 @@ for (const [name, roles] of Object.entries(scheme)) {
   }
 }
 
+// 5) El sello de las ilustraciones de estado se lee, en claro y en oscuro.
+//
+// El símbolo se recorta con la superficie sobre el color de estado del sello, el mismo par que el texto de
+// estado sobre la tarjeta; y el sello tiene que destacar sobre la página, como cualquier gráfico. Los
+// colores salen del CSS que se publica: el valor de cada regla, resuelto con los roles de cada tema, y
+// mezclado si la regla es un `color-mix` de dos roles.
+const illCss = read('dist/illustrations.css');
+const illValue = (cls, prop, name) => {
+  const find = (selector) => {
+    const at = illCss.indexOf(selector);
+    if (at < 0) return null;
+    const body = illCss.slice(at + selector.length, illCss.indexOf('}', at));
+    const found = new RegExp(`(?:^|;)\\s*${prop}:\\s*([^;]+)`).exec(body);
+    return found ? found[1].trim() : null;
+  };
+  return (name === 'dark' && find(`[data-theme='dark'] .cei-ill .${cls} {`)) || find(`.cei-ill .${cls} {`);
+};
+const paint = (value, roles) => {
+  const mixed = /^color-mix\(in srgb, (var\([^)]+\)) (\d+)%, (var\([^)]+\))\)$/.exec(value ?? '');
+  if (mixed) {
+    const [a, b] = [paint(mixed[1], roles), paint(mixed[3], roles)];
+    return a && b ? mix(a, b, Number(mixed[2]) / 100) : null;
+  }
+  const color = resolveColor(value, roles);
+  return /^#[0-9a-f]{6}$/i.test(color ?? '') ? rgb(color) : null;
+};
+const illPairs = (name, roles, pairs, min) => {
+  for (const [what, a, b] of pairs) {
+    const [fg, bg] = [paint(a, roles), paint(b, roles)];
+    if (!fg || !bg) {
+      errors.push(`No se pudo resolver ${what} de las ilustraciones en ${name}: ${a} sobre ${b}`);
+      continue;
+    }
+    const ratio = contrast(fg, bg);
+    if (ratio < min) errors.push(`Ilustraciones, ${what} en ${name}: ${ratio.toFixed(2)}:1, bajo ${min}`);
+  }
+};
+const seals = { ok: 'del visto', er: 'del aviso de error', in: 'de la pregunta' };
+for (const [name, roles] of Object.entries(scheme)) {
+  const symbol = illValue('cei-ill-sym', 'stroke', name);
+  const pairs = Object.entries(seals).map(([kind, what]) => [`el símbolo ${what} sobre su sello`, symbol, illValue(`cei-ill-${kind}`, 'fill', name)]);
+  illPairs(name, roles, pairs, 4.5);
+  const page = Object.entries(seals).map(([kind, what]) => [`el sello ${what} sobre la página`, illValue(`cei-ill-${kind}`, 'fill', name), 'var(--cei-bg)']);
+  illPairs(name, roles, page, 3);
+}
+
 if (errors.length) {
   console.error('✗ Contrato de tokens ROTO:\n  - ' + errors.join('\n  - '));
   process.exit(1);
 }
-console.log('✓ Contrato de tokens OK (exports + tokens.css + semantic.css + components.css + contraste del badge y del stepper en claro y oscuro)');
+console.log('✓ Contrato de tokens OK (exports + tokens.css + semantic.css + components.css + illustrations.css + contraste del badge, del stepper y de los sellos en claro y oscuro)');

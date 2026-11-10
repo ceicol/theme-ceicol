@@ -1,0 +1,224 @@
+/* Ilustraciones de estado. Cada color sale de un rol del tema, mezclado con color-mix: cambia solo entre
+   claro y oscuro, y donde la luz de las caras se invierte hay una regla para el tema oscuro. Los únicos
+   primitivos son los pilotos del servidor, que brillan igual en los dos temas. El movimiento cuenta lo que
+   pasó y se detiene, salvo «Procesando», que dura lo que dure el proceso; con «reducir movimiento», cada
+   una queda en su estado final. */
+
+/* Sombras */
+.cei-ill .cei-ill-sh { fill: color-mix(in srgb, var(--cei-fg-strong) 6%, transparent); }
+.cei-ill .cei-ill-sh2, .cei-ill .cei-ill-fsh { fill: color-mix(in srgb, var(--cei-fg-strong) 9%, transparent); }
+
+/* Plancha pendiente: caras, filo, curvas y trama de «sin dato» */
+.cei-ill .cei-ill-nt { fill: color-mix(in srgb, var(--cei-fg-muted) 7%, var(--cei-bg-raised)); }
+.cei-ill :is(.cei-ill-nl, .cei-ill-cl) { fill: color-mix(in srgb, var(--cei-fg-muted) 28%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-nm { fill: color-mix(in srgb, var(--cei-fg-muted) 36%, var(--cei-bg-raised)); }
+.cei-ill :is(.cei-ill-nr, .cei-ill-cr) { fill: color-mix(in srgb, var(--cei-fg-muted) 46%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-nc { stroke: color-mix(in srgb, var(--cei-fg-muted) 34%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-nh { stroke: color-mix(in srgb, var(--cei-fg-muted) 38%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-ne { stroke: color-mix(in srgb, var(--cei-fg-muted) 30%, var(--cei-bg-raised)); }
+
+/* Plancha procesada */
+.cei-ill .cei-ill-bt { fill: color-mix(in srgb, var(--cei-brand) 11%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-bl { fill: color-mix(in srgb, var(--cei-brand) 48%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-bm { fill: color-mix(in srgb, var(--cei-brand) 62%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-br { fill: color-mix(in srgb, var(--cei-brand) 78%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-bc { stroke: color-mix(in srgb, var(--cei-brand) 58%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-be { stroke: color-mix(in srgb, var(--cei-brand) 30%, var(--cei-bg-raised)); }
+
+/* Cuadrante con error */
+.cei-ill .cei-ill-xt { fill: color-mix(in srgb, var(--cei-fg-error) 12%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-xl { fill: color-mix(in srgb, var(--cei-fg-error) 30%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-xm { fill: color-mix(in srgb, var(--cei-fg-error) 38%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-xr { fill: color-mix(in srgb, var(--cei-fg-error) 48%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-xc { stroke: color-mix(in srgb, var(--cei-fg-error) 36%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-xe { stroke: color-mix(in srgb, var(--cei-fg-error) 28%, var(--cei-bg-raised)); }
+
+.cei-ill :is(.cei-ill-nc, .cei-ill-bc, .cei-ill-xc, .cei-ill-nh, .cei-ill-gh) { fill: none; stroke-width: 0.95; stroke-linecap: round; stroke-linejoin: round; }
+.cei-ill :is(.cei-ill-ne, .cei-ill-be, .cei-ill-xe) { fill: none; stroke-width: 0.8; stroke-linejoin: round; }
+
+/* Huellas de lo que no llegó y la página que no existe */
+.cei-ill .cei-ill-slot { fill: color-mix(in srgb, var(--cei-fg-muted) 6%, transparent); stroke: color-mix(in srgb, var(--cei-fg-muted) 80%, var(--cei-bg-raised)); stroke-width: 1.1; stroke-dasharray: 3.5 3; }
+.cei-ill .cei-ill-gp { fill: color-mix(in srgb, var(--cei-brand) 6%, transparent); stroke: color-mix(in srgb, var(--cei-brand) 70%, var(--cei-bg-raised)); stroke-width: 1.4; stroke-dasharray: 3 2.4; stroke-linejoin: round; }
+
+/* Servidor */
+.cei-ill .cei-ill-dl { fill: color-mix(in srgb, var(--cei-fg-strong) 84%, var(--cei-brand)); }
+.cei-ill .cei-ill-dt { fill: color-mix(in srgb, color-mix(in srgb, var(--cei-fg-strong) 84%, var(--cei-brand)) 76%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-dr { fill: color-mix(in srgb, var(--cei-fg-strong) 94%, var(--cei-brand)); }
+.cei-ill .cei-ill-ds { fill: var(--cei-fg-strong); }
+.cei-ill .cei-ill-dsm { fill: none; stroke: var(--cei-fg-strong); stroke-width: 1.1; stroke-linejoin: round; }
+.cei-ill .cei-ill-de { fill: none; stroke: color-mix(in srgb, var(--cei-brand) 70%, var(--cei-bg-raised)); stroke-width: 0.9; stroke-linejoin: round; }
+.cei-ill .cei-ill-led .cei-ill-halo { opacity: 0.28; }
+.cei-ill .cei-ill-led-work :is(.cei-ill-dot, .cei-ill-halo) { fill: var(--cei-primary-lighter); }
+.cei-ill .cei-ill-led-ok :is(.cei-ill-dot, .cei-ill-halo) { fill: var(--cei-success); }
+.cei-ill .cei-ill-led-err :is(.cei-ill-dot, .cei-ill-halo) { fill: var(--cei-error-light); }
+
+/* El archivo */
+.cei-ill .cei-ill-ft { fill: color-mix(in srgb, var(--cei-fg-muted) 5%, var(--cei-bg-raised)); stroke: color-mix(in srgb, var(--cei-fg-muted) 30%, var(--cei-bg-raised)); stroke-width: 0.9; stroke-linejoin: round; }
+.cei-ill .cei-ill-ff { fill: color-mix(in srgb, var(--cei-fg-muted) 22%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-fl { fill: none; stroke: color-mix(in srgb, var(--cei-brand) 70%, var(--cei-bg-raised)); stroke-width: 1.5; stroke-linecap: round; }
+
+/* El canal y sus paquetes */
+.cei-ill .cei-ill-ct { fill: color-mix(in srgb, var(--cei-fg-muted) 14%, var(--cei-bg-raised)); }
+.cei-ill :is(.cei-ill-cline, .cei-ill-clit) { fill: none; stroke: color-mix(in srgb, var(--cei-fg-muted) 40%, var(--cei-bg-raised)); stroke-width: 1; stroke-linecap: round; stroke-dasharray: 2 3; }
+.cei-ill .cei-ill-clit { stroke: var(--cei-brand); stroke-width: 1.4; stroke-dasharray: none; }
+.cei-ill .cei-ill-pk { fill: var(--cei-brand); }
+
+/* La lupa */
+.cei-ill .cei-ill-st { fill: color-mix(in srgb, var(--cei-brand) 85%, var(--cei-bg-raised)); }
+.cei-ill .cei-ill-sl { fill: var(--cei-brand); }
+.cei-ill .cei-ill-sm { fill: color-mix(in srgb, var(--cei-brand) 82%, var(--cei-fg-strong)); }
+.cei-ill .cei-ill-sr { fill: color-mix(in srgb, var(--cei-brand) 75%, var(--cei-fg-strong)); }
+.cei-ill .cei-ill-ht { fill: var(--cei-brand); }
+.cei-ill .cei-ill-hl { fill: color-mix(in srgb, var(--cei-brand) 75%, var(--cei-fg-strong)); }
+.cei-ill .cei-ill-hr { fill: color-mix(in srgb, var(--cei-brand) 55%, var(--cei-fg-strong)); }
+.cei-ill .cei-ill-lens { fill: color-mix(in srgb, var(--cei-bg-raised) 88%, transparent); }
+.cei-ill .cei-ill-gh { stroke: color-mix(in srgb, var(--cei-fg-muted) 50%, var(--cei-bg-raised)); }
+
+/* Sellos: la misma pareja que el texto de estado sobre la tarjeta */
+.cei-ill .cei-ill-ok { fill: var(--cei-fg-success); }
+.cei-ill .cei-ill-ok2 { fill: color-mix(in srgb, var(--cei-fg-success) 70%, var(--cei-fg-strong)); }
+.cei-ill .cei-ill-er { fill: var(--cei-fg-error); }
+.cei-ill .cei-ill-er2 { fill: color-mix(in srgb, var(--cei-fg-error) 70%, var(--cei-fg-strong)); }
+.cei-ill .cei-ill-in { fill: var(--cei-brand); }
+.cei-ill .cei-ill-in2 { fill: color-mix(in srgb, var(--cei-brand) 70%, var(--cei-fg-strong)); }
+.cei-ill .cei-ill-sym { fill: none; stroke: var(--cei-bg-raised); stroke-width: 4.4; stroke-linecap: round; stroke-linejoin: round; }
+.cei-ill .cei-ill-symf { fill: var(--cei-bg-raised); }
+
+/* Tema oscuro: la luz viene de arriba, así que la cara superior es la más clara y no la más neutra */
+[data-theme='dark'] .cei-ill .cei-ill-sh { fill: color-mix(in srgb, var(--cei-bg) 32%, transparent); }
+[data-theme='dark'] .cei-ill :is(.cei-ill-sh2, .cei-ill-fsh) { fill: color-mix(in srgb, var(--cei-bg) 42%, transparent); }
+[data-theme='dark'] .cei-ill .cei-ill-nt { fill: color-mix(in srgb, var(--cei-fg-muted) 24%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill :is(.cei-ill-nl, .cei-ill-cl) { fill: color-mix(in srgb, var(--cei-fg-muted) 15%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-nm { fill: color-mix(in srgb, var(--cei-fg-muted) 12%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill :is(.cei-ill-nr, .cei-ill-cr) { fill: color-mix(in srgb, var(--cei-fg-muted) 9%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-nc { stroke: color-mix(in srgb, var(--cei-fg-muted) 44%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-nh { stroke: color-mix(in srgb, var(--cei-fg-muted) 46%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill :is(.cei-ill-ne, .cei-ill-ft) { stroke: color-mix(in srgb, var(--cei-fg-muted) 44%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-bt { fill: color-mix(in srgb, var(--cei-brand) 26%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-bl { fill: color-mix(in srgb, var(--cei-brand) 17%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-bm { fill: color-mix(in srgb, var(--cei-brand) 14%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-br { fill: color-mix(in srgb, var(--cei-brand) 11%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-bc { stroke: color-mix(in srgb, var(--cei-brand) 66%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-be { stroke: color-mix(in srgb, var(--cei-brand) 48%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-xt { fill: color-mix(in srgb, var(--cei-fg-error) 34%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-xl { fill: color-mix(in srgb, var(--cei-fg-error) 24%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-xm { fill: color-mix(in srgb, var(--cei-fg-error) 20%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-xr { fill: color-mix(in srgb, var(--cei-fg-error) 16%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-xc { stroke: color-mix(in srgb, var(--cei-fg-error) 70%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-xe { stroke: color-mix(in srgb, var(--cei-fg-error) 60%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-slot { stroke: color-mix(in srgb, var(--cei-fg-muted) 62%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-dt { fill: color-mix(in srgb, var(--cei-fg-muted) 40%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-dl { fill: color-mix(in srgb, var(--cei-fg-muted) 27%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-dr { fill: color-mix(in srgb, var(--cei-fg-muted) 17%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-ds { fill: var(--cei-bg); }
+[data-theme='dark'] .cei-ill .cei-ill-dsm { stroke: var(--cei-bg); }
+[data-theme='dark'] .cei-ill .cei-ill-ft { fill: color-mix(in srgb, var(--cei-fg-muted) 78%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-ff { fill: color-mix(in srgb, var(--cei-fg-muted) 34%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-fl { stroke: var(--cei-bg-raised); }
+[data-theme='dark'] .cei-ill .cei-ill-ct { fill: color-mix(in srgb, var(--cei-fg-muted) 16%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill :is(.cei-ill-cline, .cei-ill-clit) { stroke: color-mix(in srgb, var(--cei-fg-muted) 40%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-clit { stroke: var(--cei-brand); }
+[data-theme='dark'] .cei-ill .cei-ill-st { fill: var(--cei-brand); }
+[data-theme='dark'] .cei-ill .cei-ill-sl { fill: color-mix(in srgb, var(--cei-brand) 75%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-sm { fill: color-mix(in srgb, var(--cei-brand) 62%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-sr { fill: color-mix(in srgb, var(--cei-brand) 55%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-ht { fill: color-mix(in srgb, var(--cei-brand) 75%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-hl { fill: color-mix(in srgb, var(--cei-brand) 55%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-hr { fill: color-mix(in srgb, var(--cei-brand) 40%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-lens { fill: color-mix(in srgb, var(--cei-bg-raised) 80%, transparent); }
+[data-theme='dark'] .cei-ill .cei-ill-gh { stroke: color-mix(in srgb, var(--cei-fg-muted) 55%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-ok2 { fill: color-mix(in srgb, var(--cei-fg-success) 62%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-er2 { fill: color-mix(in srgb, var(--cei-fg-error) 62%, var(--cei-bg-raised)); }
+[data-theme='dark'] .cei-ill .cei-ill-in2 { fill: color-mix(in srgb, var(--cei-brand) 62%, var(--cei-bg-raised)); }
+
+/* Procesando: los cuadrantes se procesan por turnos, en el sentido de las agujas del reloj, sin fin. Quieta,
+   la plancha queda con dos cuadrantes procesados. */
+.cei-ill .cei-ill-mv-proc { animation: cei-ill-lift 4.8s var(--cei-ease-standard) infinite; }
+.cei-ill .cei-ill-mv-proc .cei-ill-over { opacity: 0; animation: cei-ill-glow 4.8s linear infinite; }
+.cei-ill :is(.cei-ill-q0, .cei-ill-q1).cei-ill-mv-proc .cei-ill-over { opacity: 1; }
+.cei-ill .cei-ill-q1.cei-ill-mv-proc, .cei-ill .cei-ill-q1.cei-ill-mv-proc .cei-ill-over { animation-delay: -3.6s; }
+.cei-ill .cei-ill-q2.cei-ill-mv-proc, .cei-ill .cei-ill-q2.cei-ill-mv-proc .cei-ill-over { animation-delay: -2.4s; }
+.cei-ill .cei-ill-q3.cei-ill-mv-proc, .cei-ill .cei-ill-q3.cei-ill-mv-proc .cei-ill-over { animation-delay: -1.2s; }
+@keyframes cei-ill-lift { 0% { transform: none; } 6% { transform: translateY(-5px); } 18%, 100% { transform: none; } }
+@keyframes cei-ill-glow { 0%, 60%, 100% { opacity: 0; } 8%, 45% { opacity: 1; } }
+
+/* El archivo baja al servidor, los paquetes salen por el canal y los pilotos laten en cascada. */
+.cei-ill .cei-ill-mv-feed { animation: cei-ill-feed 2.4s var(--cei-ease-standard) infinite; }
+.cei-ill :is(.cei-ill-mv-flow, .cei-ill-mv-stuck) { opacity: 0; }
+.cei-ill .cei-ill-mv-flow { animation: cei-ill-flow 1.8s linear infinite; }
+.cei-ill .cei-ill-pk1.cei-ill-mv-flow { animation-delay: -0.6s; }
+.cei-ill .cei-ill-pk2.cei-ill-mv-flow { animation-delay: -1.2s; }
+.cei-ill-s-processing .cei-ill-led { animation: cei-ill-led 1.2s var(--cei-ease-standard) infinite; }
+.cei-ill-s-processing .cei-ill-led.cei-ill-u1 { animation-delay: -0.4s; }
+.cei-ill-s-processing .cei-ill-led.cei-ill-u2 { animation-delay: -0.8s; }
+@keyframes cei-ill-feed { 0% { transform: translateY(-8px); opacity: 0; } 20% { opacity: 1; } 72% { transform: translateY(9px); opacity: 1; } 100% { transform: translateY(16px); opacity: 0; } }
+@keyframes cei-ill-flow { 0% { transform: none; opacity: 0; } 12%, 88% { opacity: 1; } 100% { transform: translate(37.9px, 21.9px); opacity: 0; } }
+@keyframes cei-ill-led { 50% { opacity: 0.35; } }
+
+/* Los pilotos vienen del estado anterior: estaban trabajando y se apagan cuando aparece el sello. */
+.cei-ill .cei-ill-was { opacity: 0; }
+.cei-ill-s-ok .cei-ill-was { animation: cei-ill-gone 260ms linear 620ms both; }
+.cei-ill-s-troubleshooting .cei-ill-was { animation: cei-ill-gone 260ms linear 1100ms both; }
+@keyframes cei-ill-gone { from { opacity: 1; } to { opacity: 0; } }
+
+/* Listo y error: los cuadrantes pasan de pendientes a procesados en una ola, una sola vez. */
+.cei-ill :is(.cei-ill-mv-snap, .cei-ill-mv-pass) { animation: cei-ill-snap 420ms var(--cei-ease-out) both; }
+.cei-ill :is(.cei-ill-mv-snap, .cei-ill-mv-pass) .cei-ill-over { animation: cei-ill-fade 420ms linear both; }
+.cei-ill .cei-ill-q1:is(.cei-ill-mv-snap, .cei-ill-mv-pass), .cei-ill .cei-ill-q1:is(.cei-ill-mv-snap, .cei-ill-mv-pass) .cei-ill-over { animation-delay: 110ms; }
+.cei-ill .cei-ill-q3:is(.cei-ill-mv-snap, .cei-ill-mv-pass), .cei-ill .cei-ill-q3:is(.cei-ill-mv-snap, .cei-ill-mv-pass) .cei-ill-over { animation-delay: 220ms; }
+.cei-ill .cei-ill-q2.cei-ill-mv-snap, .cei-ill .cei-ill-q2.cei-ill-mv-snap .cei-ill-over { animation-delay: 330ms; }
+@keyframes cei-ill-snap { from { transform: translateY(-6px); } to { transform: none; } }
+@keyframes cei-ill-fade { from { opacity: 0; } }
+/* El cuadrante que no pasa se sale de su sitio con una sacudida corta, la de un campo rechazado. */
+.cei-ill .cei-ill-mv-reject { animation: cei-ill-reject 820ms var(--cei-ease-out) 380ms both; }
+.cei-ill .cei-ill-mv-reject .cei-ill-over { animation: cei-ill-fade 420ms linear 380ms both; }
+@keyframes cei-ill-reject {
+  0% { transform: translateY(-5.4px); }
+  35% { transform: none; }
+  52% { transform: translateX(-2.6px); }
+  68% { transform: translateX(2.2px); }
+  84% { transform: translateX(-1px); }
+  100% { transform: none; }
+}
+
+/* Sellos: aparecen al final de lo que cuentan; el visto se dibuja. */
+.cei-ill .cei-ill-bdg { animation: cei-ill-fade var(--cei-duration-slow) linear both; }
+.cei-ill .cei-ill-mv-pop { transform-box: fill-box; transform-origin: 50% 70%; animation: cei-ill-pop 480ms var(--cei-ease-out) both; }
+.cei-ill .cei-ill-mv-draw { stroke-dasharray: 1; animation: cei-ill-draw 380ms var(--cei-ease-out) both; }
+.cei-ill-s-ok :is(.cei-ill-bdg, .cei-ill-mv-pop) { animation-delay: 620ms; }
+.cei-ill-s-ok .cei-ill-mv-draw { animation-delay: 900ms; }
+.cei-ill-s-troubleshooting :is(.cei-ill-bdg, .cei-ill-mv-pop) { animation-delay: 1100ms; }
+.cei-ill-s-load-error :is(.cei-ill-bdg, .cei-ill-mv-pop) { animation-delay: 1500ms; }
+.cei-ill-s-not-found :is(.cei-ill-bdg, .cei-ill-mv-pop) { animation-delay: 1300ms; }
+@keyframes cei-ill-pop { 0% { transform: scale(0.4); } 65% { transform: scale(1.08); } 100% { transform: none; } }
+@keyframes cei-ill-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+/* Sin datos: la plancha se asienta vacía, una vez. */
+.cei-ill .cei-ill-mv-drop { animation: cei-ill-drop 520ms var(--cei-ease-out) both; }
+.cei-ill .cei-ill-q1.cei-ill-mv-drop { animation-delay: 80ms; }
+.cei-ill .cei-ill-q3.cei-ill-mv-drop { animation-delay: 160ms; }
+.cei-ill .cei-ill-q2.cei-ill-mv-drop { animation-delay: 240ms; }
+@keyframes cei-ill-drop { from { transform: translateY(-10px); opacity: 0; } }
+
+/* Sin resultados: la lupa recorre la plancha dos veces y se detiene. */
+.cei-ill .cei-ill-mv-sweep { animation: cei-ill-sweep 3s var(--cei-ease-standard) 250ms 2 both; }
+@keyframes cei-ill-sweep { 0%, 100% { transform: none; } 25% { transform: translate(16px, 9px); } 50% { transform: translate(0, 18px); } 75% { transform: translate(-16px, 9px); } }
+
+/* No se pudo cargar: dos paquetes salen y se pierden en el corte; los pilotos avisan. */
+.cei-ill .cei-ill-mv-stuck { animation: cei-ill-stuck 1.1s var(--cei-ease-standard) 2 both; }
+.cei-ill .cei-ill-pk1.cei-ill-mv-stuck { animation-delay: 0.35s; }
+.cei-ill-s-load-error .cei-ill-led { animation: cei-ill-led 900ms var(--cei-ease-standard) 3; }
+@keyframes cei-ill-stuck { 0% { transform: none; opacity: 0; } 15% { opacity: 1; } 70% { transform: translate(12px, 6.9px); opacity: 1; } 100% { transform: translate(12px, 6.9px); opacity: 0; } }
+
+/* Página no encontrada: los pilotos buscan un instante y quedan en verde; la hoja que no existe aparece y
+   duda; el sello pregunta al final. */
+.cei-ill-s-not-found .cei-ill-was { animation: cei-ill-search 1.2s linear both; }
+.cei-ill-s-not-found .cei-ill-was.cei-ill-u1 { animation-delay: var(--cei-duration-fast); }
+.cei-ill-s-not-found .cei-ill-was.cei-ill-u2 { animation-delay: var(--cei-duration-slow); }
+.cei-ill .cei-ill-mv-ghost { animation: cei-ill-fade 500ms linear both, cei-ill-float 2.6s var(--cei-ease-standard) 500ms 3; }
+@keyframes cei-ill-search { 0%, 70% { opacity: 1; } 35% { opacity: 0.35; } 100% { opacity: 0; } }
+@keyframes cei-ill-float { 50% { transform: translateY(-5px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .cei-ill * { animation: none !important; }
+}

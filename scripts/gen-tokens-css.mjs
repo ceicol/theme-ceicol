@@ -65,6 +65,13 @@ copyFileSync(
 );
 console.log('✓ dist/components.css copiado');
 
+// Y el de las ilustraciones de estado, que se importa aparte del de componentes
+copyFileSync(
+  new URL('../src/illustrations.css', import.meta.url),
+  new URL('../dist/illustrations.css', import.meta.url),
+);
+console.log('✓ dist/illustrations.css copiado');
+
 // Generar la capa semántica (roles claro/oscuro) desde semanticRoles (TS).
 function genSemanticCss() {
   const out = [
