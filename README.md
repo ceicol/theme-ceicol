@@ -696,6 +696,35 @@ Avatar: `--sm`, `--lg`. Skeleton: `--text`, `--circle`.
 
 Toast: `--success`, `--warning`, `--error`, `--info`. Tabs/paginación: estado activo con `--active`. Stepper: `--active`, `--done` y `--error`; el tramo que sigue a un paso hecho va en marca, y en React `<Stepper>` pinta lo mismo.
 
+## Ilustraciones de estado
+
+Escenas para los estados de una pantalla: un proceso, los datos que faltan y el acceso. Todas comparten un lienzo de 320 × 240 y un elenco cartográfico: la plancha en cuadrantes con curvas de nivel, el servidor con sus pilotos, el canal de datos y un sello que concluye. Entre una y otra nada cambia de sitio; cambia lo que le pasa a cada pieza. Los colores salen de los roles, así que cambian solas con `data-theme`, y con «reducir movimiento» quedan en su estado final.
+
+### En React
+
+```tsx
+import 'theme-ceicol/illustrations.css'; // aparte, como components.css; requiere semantic.css
+import { AppIllustration } from 'theme-ceicol/illustrations';
+
+<AppIllustration name="search-empty" />
+<AppIllustration name="ok" size="small" title="Validación sin errores" />
+```
+
+- `name`: la escena (tabla de abajo). `ILLUSTRATION_NAMES` las trae en orden.
+- `size`: `large` (por defecto, hasta 264 px de alto) para una página o un estado vacío; `small` (132 px) para un diálogo o una tarjeta.
+- `title`: el nombre accesible. Hay uno genérico por escena; cada pantalla pasa el suyo.
+- Cada escena carga aparte, cuando se pide, y si su trozo falla la página sigue sin ella.
+
+| `name` | El estado | Lo que cuenta |
+|---|---|---|
+| `processing` | Procesando | El archivo baja al servidor, salen paquetes y la plancha se procesa por cuadrantes. Es la única que no se detiene. |
+| `ok` | Listo | La plancha pasa a procesada en ola y el visto se dibuja. |
+| `troubleshooting` | Error en el proceso | Tres cuadrantes pasan y el cuarto no encaja; el servidor en rojo. |
+| `no-data` | Sin datos | Todo funciona, pero la plancha llega con la trama de «sin dato». |
+| `search-empty` | Sin resultados | Hay datos, y la lupa no encuentra ninguno que coincida. |
+| `load-error` | No se pudo cargar | El canal se corta y quedan las huellas de la plancha que no llegó. |
+| `not-found` | No existe | El sistema funciona, pero la página pedida es una hoja discontinua. |
+
 ## Publicar una versión
 
 ```bash

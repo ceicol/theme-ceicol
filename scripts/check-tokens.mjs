@@ -42,6 +42,8 @@ const outputs = {
   'dist/semantic.css': ['--cei-bg', '--cei-fg', '--cei-line', '--cei-bg-glass', '--cei-fg-success', '--cei-fg-primary'],
   'dist/components.css': ['.cei-btn', '.cei-card', '.cei-glass', '.cei-badge--info'],
   'dist/illustrations.css': ['.cei-ill .cei-ill-sym', '@media (prefers-reduced-motion: reduce)'],
+  'dist/illustrations.mjs': ['AppIllustration', 'ILLUSTRATION_NAMES'],
+  'dist/illustrations.d.ts': ['AppIllustrationProps', 'IllustrationName'],
   'dist/tokens.json': ['"$value"', '"color"', '"semantic"', '"$type"'],
   'dist/tailwind.cjs': ['module.exports', 'colors', 'boxShadow'],
 };
