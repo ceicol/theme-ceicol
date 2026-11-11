@@ -777,7 +777,11 @@ Sin npm, desde la etiqueta publicada, fijada como cualquier dependencia (la vers
 - **Sobre fotografía** va el blanco, con un degradado oscuro que garantice el contraste.
 - **No se toca:** no se deforma, no se recolorea, no lleva sombras ni contornos, y no se rehace con otra tipografía.
 
-Los originales están en `src/marca/`. Son los vectores disponibles, contornos calcados de un mapa de bits, y el build los optimiza con svgo `--multipass`: pasan de 38–179 KB a 10–56 KB. `npm run check:marca` falla si alguno pasa de 64 KB, o si, pintado al triple con resvg, difiere de su original en más del 0,1 % de la tinta.
+Están dibujados en vector limpio, en `src/marca/`:
+- **el isotipo es geometría exacta:** el recuadro con esquinas de radio 12,75, los cuatro cuadrantes, la costura y la C, un anillo abierto 90° con los extremos redondeados;
+- **la palabra y el lema** se vectorizaron de nuevo a partir del calco de un mapa de bits que circulaba, sin sus escalones ni las rendijas que abría dentro de «eicol».
+
+Se separan de aquel calco como mucho 0,69 unidades del lienzo: 0,14 px con el logo a 160 px de ancho. El build los optimiza con svgo y los publica en `dist/marca/`: 0,7 KB el isotipo y 15,9 KB el logo. `npm run check:marca` falla si alguno pasa de 20 KB, si pierde el `role="img"` o su nombre, o si, pintado a cuatro anchos, se ve distinto de su fuente en más del 0,05 % de la tinta.
 
 ## Publicar una versión
 
