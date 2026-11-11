@@ -8,6 +8,8 @@ Ver la política de versionado y deprecación en [CONTRIBUTING.md](./CONTRIBUTIN
 
 ## [Unreleased]
 
+## [0.40.0]
+
 ### Added
 
 - **Ilustraciones de estado: `theme-ceicol/illustrations` y `theme-ceicol/illustrations.css`.** `<AppIllustration name size title />` pinta siete escenas: `processing`, `ok`, `troubleshooting`, `no-data`, `search-empty`, `load-error` y `not-found`. Comparten lienzo y elenco, los colores salen de los roles y el movimiento se detiene, salvo «Procesando»; con «reducir movimiento», cada una queda en su estado final. Cada escena carga aparte, y si su trozo falla la página sigue sin ella. El CSS se importa aparte, como `components.css`, y el tema no carga nada de esto si no se pide. Ver «Ilustraciones de estado» en el README.
@@ -373,7 +375,8 @@ La única forma que no distingue las dos puertas es `sx={{ typography: 'body2' }
 > Historial consolidado: las versiones previas a `0.13.0` se agrupan por hitos.
 > A partir de aquí, cada versión se documenta individualmente bajo `[Unreleased]`.
 
-[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.39.1...HEAD
+[Unreleased]: https://github.com/ceicol/theme-ceicol/compare/v0.40.0...HEAD
+[0.40.0]: https://github.com/ceicol/theme-ceicol/compare/v0.39.1...v0.40.0
 [0.39.1]: https://github.com/ceicol/theme-ceicol/compare/v0.39.0...v0.39.1
 [0.39.0]: https://github.com/ceicol/theme-ceicol/compare/v0.38.0...v0.39.0
 [0.38.0]: https://github.com/ceicol/theme-ceicol/compare/v0.37.0...v0.38.0
